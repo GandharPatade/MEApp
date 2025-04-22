@@ -30,11 +30,15 @@ namespace MEApp.Admin
             cmd.Parameters.AddWithValue("@Password", txtPassword.Text);
             cmd.Parameters.AddWithValue("@Role", ddlRole.SelectedValue);
 
+            Session["Fullname"] = txtName.Text;
+            Session["Email"] = txtEmail.Text;
+            Session["Role"] = ddlRole.SelectedValue;
+
             int result = cmd.ExecuteNonQuery();
 
             if (result > 0)
             {
-                Response.Write("<script>alert('User Registered Successfully');</script>");
+                Response.Redirect("AddEmployee.aspx");
             }
             else
             {

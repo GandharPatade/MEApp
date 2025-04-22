@@ -39,6 +39,9 @@
 
     <asp:Button ID="btnAddEmployee" runat="server" Text="Add Employee" CssClass="btn btn-primary" OnClick="btnAddEmployee_Click" />
     <asp:Label ID="lblMessage" runat="server" CssClass="text-success mt-3 d-block"></asp:Label>
+    <asp:GridView ID="GridView1" runat="server">
+    </asp:GridView>
+    <br />
     </div>
 
 </asp:Content>
