@@ -71,22 +71,15 @@
     <Content Include="Admin\AddDocument.aspx" />
     <Content Include="Admin\AddEmployee.aspx" />
     <Content Include="Admin\AdminDashboard.aspx" />
-    <Content Include="Admin\AppraisalForm.aspx" />
     <Content Include="Admin\EventPage.aspx" />
-    <Content Include="Admin\LeaveApprovals.aspx" />
-    <Content Include="Admin\LeavePolicy.aspx" />
-    <Content Include="Admin\LeaveReport.aspx" />
-    <Content Include="Admin\PayslipUpload.aspx" />
+    <Content Include="Admin\LeaveAprrovals.aspx" />
     <Content Include="Admin\PerformancePage.aspx" />
     <Content Include="Admin\ProjectPage.aspx" />
     <Content Include="Admin\SalaryStructure.aspx" />
     <Content Include="Admin\TrainingSection.aspx" />
-    <Content Include="Admin\UploadForm16.aspx" />
     <Content Include="Admin\UserList.aspx" />
     <Content Include="Admin\UserRegister.aspx" />
     <Content Include="Admin\ViewEmployees.aspx" />
-    <Content Include="Admin\ViewForm16.aspx" />
-    <Content Include="Admin\ViewPayslips.aspx" />
     <Content Include="lib\bootstrap\css\bootstrap-grid.css" />
     <Content Include="lib\bootstrap\css\bootstrap-grid.min.css" />
     <Content Include="lib\bootstrap\css\bootstrap-grid.rtl.css" />
@@ -141,13 +134,6 @@
     <Compile Include="Admin\AdminDashboard.aspx.designer.cs">
       <DependentUpon>AdminDashboard.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\AppraisalForm.aspx.cs">
-      <DependentUpon>AppraisalForm.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\AppraisalForm.aspx.designer.cs">
-      <DependentUpon>AppraisalForm.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\EmailHelper.cs" />
     <Compile Include="Admin\EventPage.aspx.cs">
       <DependentUpon>EventPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -155,29 +141,11 @@
     <Compile Include="Admin\EventPage.aspx.designer.cs">
       <DependentUpon>EventPage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\LeaveApprovals.aspx.cs">
-      <DependentUpon>LeaveApprovals.aspx</DependentUpon>
+    <Compile Include="Admin\LeaveAprrovals.aspx.cs">
+      <DependentUpon>LeaveAprrovals.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\LeaveApprovals.aspx.designer.cs">
-      <DependentUpon>LeaveApprovals.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\LeavePolicy.aspx.cs">
-      <DependentUpon>LeavePolicy.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\LeavePolicy.aspx.designer.cs">
-      <DependentUpon>LeavePolicy.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\LeaveReport.aspx.cs">
-      <DependentUpon>LeaveReport.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\LeaveReport.aspx.designer.cs">
-      <DependentUpon>LeaveReport.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\PayslipUpload.aspx.cs">
-      <DependentUpon>PayslipUpload.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\PayslipUpload.aspx.designer.cs">
-      <DependentUpon>PayslipUpload.aspx</DependentUpon>
+    <Compile Include="Admin\LeaveAprrovals.aspx.designer.cs">
+      <DependentUpon>LeaveAprrovals.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\PerformancePage.aspx.cs">
       <DependentUpon>PerformancePage.aspx</DependentUpon>
@@ -207,12 +175,6 @@
     <Compile Include="Admin\TrainingSection.aspx.designer.cs">
       <DependentUpon>TrainingSection.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\UploadForm16.aspx.cs">
-      <DependentUpon>UploadForm16.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\UploadForm16.aspx.designer.cs">
-      <DependentUpon>UploadForm16.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Admin\UserList.aspx.cs">
       <DependentUpon>UserList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -233,18 +195,6 @@
     </Compile>
     <Compile Include="Admin\ViewEmployees.aspx.designer.cs">
       <DependentUpon>ViewEmployees.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\ViewForm16.aspx.cs">
-      <DependentUpon>ViewForm16.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\ViewForm16.aspx.designer.cs">
-      <DependentUpon>ViewForm16.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\ViewPayslips.aspx.cs">
-      <DependentUpon>ViewPayslips.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\ViewPayslips.aspx.designer.cs">
-      <DependentUpon>ViewPayslips.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterPages\AccountMasterPage.Master.cs">
       <DependentUpon>AccountMasterPage.Master</DependentUpon>
