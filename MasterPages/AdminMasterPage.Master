@@ -66,9 +66,6 @@
                     <a class="nav-link" href="../Admin/LeavePolicy.aspx">Leave Policy</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../Admin/LeaveApprovals.aspx">Leave Approvals</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="../Admin/LeaveReport.aspx">Leave Report</a>
                 </li>
                 <li class="nav-item">
