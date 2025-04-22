@@ -1,479 +1,446 @@
 ﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>
-    </ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{891C17F3-9CD5-4F98-A5B9-AF65422E61E6}</ProjectGuid>
-    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MEApp</RootNamespace>
-    <AssemblyName>MEApp</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
-    <IISExpressSSLPort>44393</IISExpressSSLPort>
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
-    <UseGlobalApplicationHostFile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Account\LogIn.aspx" />
-    <Content Include="Admin\AddDocument.aspx" />
-    <Content Include="Admin\AddEmployee.aspx" />
-    <Content Include="Admin\AdminDashboard.aspx" />
-    <Content Include="Admin\EventPage.aspx" />
-    <Content Include="Admin\LeaveAprrovals.aspx" />
-    <Content Include="Admin\PerformancePage.aspx" />
-    <Content Include="Admin\ProjectPage.aspx" />
-    <Content Include="Admin\SalaryStructure.aspx" />
-    <Content Include="Admin\TrainingSection.aspx" />
-    <Content Include="Admin\UserList.aspx" />
-    <Content Include="Admin\UserRegister.aspx" />
-    <Content Include="Admin\ViewEmployees.aspx" />
-    <Content Include="lib\bootstrap\css\bootstrap-grid.css" />
-    <Content Include="lib\bootstrap\css\bootstrap-grid.min.css" />
-    <Content Include="lib\bootstrap\css\bootstrap-grid.rtl.css" />
-    <Content Include="lib\bootstrap\css\bootstrap-grid.rtl.min.css" />
-    <Content Include="lib\bootstrap\css\bootstrap-reboot.css" />
-    <Content Include="lib\bootstrap\css\bootstrap-reboot.min.css" />
-    <Content Include="lib\bootstrap\css\bootstrap-reboot.rtl.css" />
-    <Content Include="lib\bootstrap\css\bootstrap-reboot.rtl.min.css" />
-    <Content Include="lib\bootstrap\css\bootstrap-utilities.css" />
-    <Content Include="lib\bootstrap\css\bootstrap-utilities.min.css" />
-    <Content Include="lib\bootstrap\css\bootstrap-utilities.rtl.css" />
-    <Content Include="lib\bootstrap\css\bootstrap-utilities.rtl.min.css" />
-    <Content Include="lib\bootstrap\css\bootstrap.css" />
-    <Content Include="lib\bootstrap\css\bootstrap.min.css" />
-    <Content Include="lib\bootstrap\css\bootstrap.rtl.css" />
-    <Content Include="lib\bootstrap\css\bootstrap.rtl.min.css" />
-    <Content Include="lib\bootstrap\js\bootstrap.bundle.js" />
-    <Content Include="lib\bootstrap\js\bootstrap.bundle.min.js" />
-    <Content Include="lib\bootstrap\js\bootstrap.esm.js" />
-    <Content Include="lib\bootstrap\js\bootstrap.esm.min.js" />
-    <Content Include="lib\bootstrap\js\bootstrap.js" />
-    <Content Include="lib\bootstrap\js\bootstrap.min.js" />
-    <Content Include="User\UserDashboard.aspx" />
-    <Content Include="Web.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Account\LogIn.aspx.cs">
-      <DependentUpon>LogIn.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Account\LogIn.aspx.designer.cs">
-      <DependentUpon>LogIn.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\AddDocument.aspx.cs">
-      <DependentUpon>AddDocument.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\AddDocument.aspx.designer.cs">
-      <DependentUpon>AddDocument.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\AddEmployee.aspx.cs">
-      <DependentUpon>AddEmployee.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\AddEmployee.aspx.designer.cs">
-      <DependentUpon>AddEmployee.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\AdminDashboard.aspx.cs">
-      <DependentUpon>AdminDashboard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\AdminDashboard.aspx.designer.cs">
-      <DependentUpon>AdminDashboard.aspx</DependentUpon>
-    </Compile>
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <Compile Include="Admin\AppraisalForm.aspx.cs">
-      <DependentUpon>AppraisalForm.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\AppraisalForm.aspx.designer.cs">
-      <DependentUpon>AppraisalForm.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\EmailHelper.cs" />
-=======
->>>>>>> b7d76bfc0459857849a4a48f8d685b7a6e7bd111
-=======
->>>>>>> b7d76bfc0459857849a4a48f8d685b7a6e7bd111
-    <Compile Include="Admin\EventPage.aspx.cs">
-      <DependentUpon>EventPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\EventPage.aspx.designer.cs">
-      <DependentUpon>EventPage.aspx</DependentUpon>
-    </Compile>
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <Compile Include="Admin\LeaveApprovals.aspx.cs">
-      <DependentUpon>LeaveApprovals.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\LeaveApprovals.aspx.designer.cs">
-      <DependentUpon>LeaveApprovals.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\LeavePolicy.aspx.cs">
-      <DependentUpon>LeavePolicy.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\LeavePolicy.aspx.designer.cs">
-      <DependentUpon>LeavePolicy.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\LeaveReport.aspx.cs">
-      <DependentUpon>LeaveReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\LeaveReport.aspx.designer.cs">
-      <DependentUpon>LeaveReport.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\PayslipUpload.aspx.cs">
-      <DependentUpon>PayslipUpload.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\PayslipUpload.aspx.designer.cs">
-      <DependentUpon>PayslipUpload.aspx</DependentUpon>
-=======
-    <Compile Include="Admin\LeaveAprrovals.aspx.cs">
-      <DependentUpon>LeaveAprrovals.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\LeaveAprrovals.aspx.designer.cs">
-      <DependentUpon>LeaveAprrovals.aspx</DependentUpon>
->>>>>>> b7d76bfc0459857849a4a48f8d685b7a6e7bd111
-=======
-    <Compile Include="Admin\LeaveAprrovals.aspx.cs">
-      <DependentUpon>LeaveAprrovals.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\LeaveAprrovals.aspx.designer.cs">
-      <DependentUpon>LeaveAprrovals.aspx</DependentUpon>
->>>>>>> b7d76bfc0459857849a4a48f8d685b7a6e7bd111
-    </Compile>
-    <Compile Include="Admin\PerformancePage.aspx.cs">
-      <DependentUpon>PerformancePage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\PerformancePage.aspx.designer.cs">
-      <DependentUpon>PerformancePage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\ProjectPage.aspx.cs">
-      <DependentUpon>ProjectPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\ProjectPage.aspx.designer.cs">
-      <DependentUpon>ProjectPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\SalaryStructure.aspx.cs">
-      <DependentUpon>SalaryStructure.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\SalaryStructure.aspx.designer.cs">
-      <DependentUpon>SalaryStructure.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\TrainingSection.aspx.cs">
-      <DependentUpon>TrainingSection.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\TrainingSection.aspx.designer.cs">
-      <DependentUpon>TrainingSection.aspx</DependentUpon>
-    </Compile>
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <Compile Include="Admin\UploadForm16.aspx.cs">
-      <DependentUpon>UploadForm16.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\UploadForm16.aspx.designer.cs">
-      <DependentUpon>UploadForm16.aspx</DependentUpon>
-    </Compile>
-=======
->>>>>>> b7d76bfc0459857849a4a48f8d685b7a6e7bd111
-=======
->>>>>>> b7d76bfc0459857849a4a48f8d685b7a6e7bd111
-    <Compile Include="Admin\UserList.aspx.cs">
-      <DependentUpon>UserList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\UserList.aspx.designer.cs">
-      <DependentUpon>UserList.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\UserRegister.aspx.cs">
-      <DependentUpon>UserRegister.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\UserRegister.aspx.designer.cs">
-      <DependentUpon>UserRegister.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\ViewEmployees.aspx.cs">
-      <DependentUpon>ViewEmployees.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\ViewEmployees.aspx.designer.cs">
-      <DependentUpon>ViewEmployees.aspx</DependentUpon>
-    </Compile>
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <Compile Include="Admin\ViewForm16.aspx.cs">
-      <DependentUpon>ViewForm16.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\ViewForm16.aspx.designer.cs">
-      <DependentUpon>ViewForm16.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Admin\ViewPayslips.aspx.cs">
-      <DependentUpon>ViewPayslips.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin\ViewPayslips.aspx.designer.cs">
-      <DependentUpon>ViewPayslips.aspx</DependentUpon>
-    </Compile>
-=======
->>>>>>> b7d76bfc0459857849a4a48f8d685b7a6e7bd111
-=======
->>>>>>> b7d76bfc0459857849a4a48f8d685b7a6e7bd111
-    <Compile Include="MasterPages\AccountMasterPage.Master.cs">
-      <DependentUpon>AccountMasterPage.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MasterPages\AccountMasterPage.Master.designer.cs">
-      <DependentUpon>AccountMasterPage.Master</DependentUpon>
-    </Compile>
-    <Compile Include="MasterPages\AdminMasterPage.Master.cs">
-      <DependentUpon>AdminMasterPage.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MasterPages\AdminMasterPage.Master.designer.cs">
-      <DependentUpon>AdminMasterPage.Master</DependentUpon>
-    </Compile>
-    <Compile Include="MasterPages\UserMasterPage.Master.cs">
-      <DependentUpon>UserMasterPage.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MasterPages\UserMasterPage.Master.designer.cs">
-      <DependentUpon>UserMasterPage.Master</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User\UserDashboard.aspx.cs">
-      <DependentUpon>UserDashboard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="User\UserDashboard.aspx.designer.cs">
-      <DependentUpon>UserDashboard.aspx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="MasterPages\AdminMasterPage.Master" />
-    <Content Include="MasterPages\UserMasterPage.Master" />
-    <Content Include="MasterPages\AccountMasterPage.Master" />
-    <Content Include="libman.json" />
-    <Content Include="lib\bootstrap\css\bootstrap-grid.css.map" />
-    <Content Include="lib\bootstrap\css\bootstrap-grid.min.css.map" />
-    <Content Include="lib\bootstrap\css\bootstrap-grid.rtl.css.map" />
-    <Content Include="lib\bootstrap\css\bootstrap-grid.rtl.min.css.map" />
-    <Content Include="lib\bootstrap\css\bootstrap-reboot.css.map" />
-    <Content Include="lib\bootstrap\css\bootstrap-reboot.min.css.map" />
-    <Content Include="lib\bootstrap\css\bootstrap-reboot.rtl.css.map" />
-    <Content Include="lib\bootstrap\css\bootstrap-reboot.rtl.min.css.map" />
-    <Content Include="lib\bootstrap\css\bootstrap-utilities.css.map" />
-    <Content Include="lib\bootstrap\css\bootstrap-utilities.min.css.map" />
-    <Content Include="lib\bootstrap\css\bootstrap-utilities.rtl.css.map" />
-    <Content Include="lib\bootstrap\css\bootstrap-utilities.rtl.min.css.map" />
-    <Content Include="lib\bootstrap\css\bootstrap.css.map" />
-    <Content Include="lib\bootstrap\css\bootstrap.min.css.map" />
-    <Content Include="lib\bootstrap\css\bootstrap.rtl.css.map" />
-    <Content Include="lib\bootstrap\css\bootstrap.rtl.min.css.map" />
-    <Content Include="lib\bootstrap\js\bootstrap.bundle.js.map" />
-    <Content Include="lib\bootstrap\js\bootstrap.bundle.min.js.map" />
-    <Content Include="lib\bootstrap\js\bootstrap.esm.js.map" />
-    <Content Include="lib\bootstrap\js\bootstrap.esm.min.js.map" />
-    <Content Include="lib\bootstrap\js\bootstrap.js.map" />
-    <Content Include="lib\bootstrap\js\bootstrap.min.js.map" />
-    <Content Include="lib\bootstrap\scss\bootstrap-grid.scss" />
-    <Content Include="lib\bootstrap\scss\bootstrap-reboot.scss" />
-    <Content Include="lib\bootstrap\scss\bootstrap-utilities.scss" />
-    <Content Include="lib\bootstrap\scss\bootstrap.scss" />
-    <Content Include="lib\bootstrap\scss\forms\_floating-labels.scss" />
-    <Content Include="lib\bootstrap\scss\forms\_form-check.scss" />
-    <Content Include="lib\bootstrap\scss\forms\_form-control.scss" />
-    <Content Include="lib\bootstrap\scss\forms\_form-range.scss" />
-    <Content Include="lib\bootstrap\scss\forms\_form-select.scss" />
-    <Content Include="lib\bootstrap\scss\forms\_form-text.scss" />
-    <Content Include="lib\bootstrap\scss\forms\_input-group.scss" />
-    <Content Include="lib\bootstrap\scss\forms\_labels.scss" />
-    <Content Include="lib\bootstrap\scss\forms\_validation.scss" />
-    <Content Include="lib\bootstrap\scss\helpers\_clearfix.scss" />
-    <Content Include="lib\bootstrap\scss\helpers\_color-bg.scss" />
-    <Content Include="lib\bootstrap\scss\helpers\_colored-links.scss" />
-    <Content Include="lib\bootstrap\scss\helpers\_focus-ring.scss" />
-    <Content Include="lib\bootstrap\scss\helpers\_icon-link.scss" />
-    <Content Include="lib\bootstrap\scss\helpers\_position.scss" />
-    <Content Include="lib\bootstrap\scss\helpers\_ratio.scss" />
-    <Content Include="lib\bootstrap\scss\helpers\_stacks.scss" />
-    <Content Include="lib\bootstrap\scss\helpers\_stretched-link.scss" />
-    <Content Include="lib\bootstrap\scss\helpers\_text-truncation.scss" />
-    <Content Include="lib\bootstrap\scss\helpers\_visually-hidden.scss" />
-    <Content Include="lib\bootstrap\scss\helpers\_vr.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_alert.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_backdrop.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_banner.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_border-radius.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_box-shadow.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_breakpoints.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_buttons.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_caret.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_clearfix.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_color-mode.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_color-scheme.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_container.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_deprecate.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_forms.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_gradients.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_grid.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_image.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_list-group.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_lists.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_pagination.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_reset-text.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_resize.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_table-variants.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_text-truncate.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_transition.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_utilities.scss" />
-    <Content Include="lib\bootstrap\scss\mixins\_visually-hidden.scss" />
-    <Content Include="lib\bootstrap\scss\utilities\_api.scss" />
-    <Content Include="lib\bootstrap\scss\vendor\_rfs.scss" />
-    <Content Include="lib\bootstrap\scss\_accordion.scss" />
-    <Content Include="lib\bootstrap\scss\_alert.scss" />
-    <Content Include="lib\bootstrap\scss\_badge.scss" />
-    <Content Include="lib\bootstrap\scss\_breadcrumb.scss" />
-    <Content Include="lib\bootstrap\scss\_button-group.scss" />
-    <Content Include="lib\bootstrap\scss\_buttons.scss" />
-    <Content Include="lib\bootstrap\scss\_card.scss" />
-    <Content Include="lib\bootstrap\scss\_carousel.scss" />
-    <Content Include="lib\bootstrap\scss\_close.scss" />
-    <Content Include="lib\bootstrap\scss\_containers.scss" />
-    <Content Include="lib\bootstrap\scss\_dropdown.scss" />
-    <Content Include="lib\bootstrap\scss\_forms.scss" />
-    <Content Include="lib\bootstrap\scss\_functions.scss" />
-    <Content Include="lib\bootstrap\scss\_grid.scss" />
-    <Content Include="lib\bootstrap\scss\_helpers.scss" />
-    <Content Include="lib\bootstrap\scss\_images.scss" />
-    <Content Include="lib\bootstrap\scss\_list-group.scss" />
-    <Content Include="lib\bootstrap\scss\_maps.scss" />
-    <Content Include="lib\bootstrap\scss\_mixins.scss" />
-    <Content Include="lib\bootstrap\scss\_modal.scss" />
-    <Content Include="lib\bootstrap\scss\_nav.scss" />
-    <Content Include="lib\bootstrap\scss\_navbar.scss" />
-    <Content Include="lib\bootstrap\scss\_offcanvas.scss" />
-    <Content Include="lib\bootstrap\scss\_pagination.scss" />
-    <Content Include="lib\bootstrap\scss\_placeholders.scss" />
-    <Content Include="lib\bootstrap\scss\_popover.scss" />
-    <Content Include="lib\bootstrap\scss\_progress.scss" />
-    <Content Include="lib\bootstrap\scss\_reboot.scss" />
-    <Content Include="lib\bootstrap\scss\_root.scss" />
-    <Content Include="lib\bootstrap\scss\_spinners.scss" />
-    <Content Include="lib\bootstrap\scss\_tables.scss" />
-    <Content Include="lib\bootstrap\scss\_toasts.scss" />
-    <Content Include="lib\bootstrap\scss\_tooltip.scss" />
-    <Content Include="lib\bootstrap\scss\_transitions.scss" />
-    <Content Include="lib\bootstrap\scss\_type.scss" />
-    <Content Include="lib\bootstrap\scss\_utilities.scss" />
-    <Content Include="lib\bootstrap\scss\_variables-dark.scss" />
-    <Content Include="lib\bootstrap\scss\_variables.scss" />
-    <Content Include=".gitignore" />
-    <None Include="packages.config" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Documents\" />
-  </ItemGroup>
-  <PropertyGroup>
-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
-  </PropertyGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
-  <ProjectExtensions>
-    <VisualStudio>
-      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
-        <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>51325</DevelopmentServerPort>
-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44393/</IISUrl>
-          <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
-        </WebProjectProperties>
-      </FlavorProperties>
-    </VisualStudio>
-  </ProjectExtensions>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-  </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+	<Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+	<Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+	<PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+		<ProductVersion>
+		</ProductVersion>
+		<SchemaVersion>2.0</SchemaVersion>
+		<ProjectGuid>{891C17F3-9CD5-4F98-A5B9-AF65422E61E6}</ProjectGuid>
+		<ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+		<OutputType>Library</OutputType>
+		<AppDesignerFolder>Properties</AppDesignerFolder>
+		<RootNamespace>MEApp</RootNamespace>
+		<AssemblyName>MEApp</AssemblyName>
+		<TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+		<UseIISExpress>true</UseIISExpress>
+		<Use64BitIISExpress />
+		<IISExpressSSLPort>44393</IISExpressSSLPort>
+		<IISExpressAnonymousAuthentication />
+		<IISExpressWindowsAuthentication />
+		<IISExpressUseClassicPipelineMode />
+		<UseGlobalApplicationHostFile />
+		<NuGetPackageImportStamp>
+		</NuGetPackageImportStamp>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>bin\</OutputPath>
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>pdbonly</DebugType>
+		<Optimize>true</Optimize>
+		<OutputPath>bin\</OutputPath>
+		<DefineConstants>TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+	</PropertyGroup>
+	<ItemGroup>
+		<Reference Include="Microsoft.CSharp" />
+		<Reference Include="System.Web.DynamicData" />
+		<Reference Include="System.Web.Entity" />
+		<Reference Include="System.Web.ApplicationServices" />
+		<Reference Include="System.ComponentModel.DataAnnotations" />
+		<Reference Include="System" />
+		<Reference Include="System.Data" />
+		<Reference Include="System.Core" />
+		<Reference Include="System.Data.DataSetExtensions" />
+		<Reference Include="System.Web.Extensions" />
+		<Reference Include="System.Xml.Linq" />
+		<Reference Include="System.Drawing" />
+		<Reference Include="System.Web" />
+		<Reference Include="System.Xml" />
+		<Reference Include="System.Configuration" />
+		<Reference Include="System.Web.Services" />
+		<Reference Include="System.EnterpriseServices" />
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+			<HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="Account\LogIn.aspx" />
+		<Content Include="Admin\AddDocument.aspx" />
+		<Content Include="Admin\AddEmployee.aspx" />
+		<Content Include="Admin\AdminDashboard.aspx" />
+		<Content Include="Admin\EventPage.aspx" />
+		<Content Include="Admin\LeaveAprrovals.aspx" />
+		<Content Include="Admin\PerformancePage.aspx" />
+		<Content Include="Admin\ProjectPage.aspx" />
+		<Content Include="Admin\SalaryStructure.aspx" />
+		<Content Include="Admin\TrainingSection.aspx" />
+		<Content Include="Admin\UserList.aspx" />
+		<Content Include="Admin\UserRegister.aspx" />
+		<Content Include="Admin\ViewEmployees.aspx" />
+		<Content Include="lib\bootstrap\css\bootstrap-grid.css" />
+		<Content Include="lib\bootstrap\css\bootstrap-grid.min.css" />
+		<Content Include="lib\bootstrap\css\bootstrap-grid.rtl.css" />
+		<Content Include="lib\bootstrap\css\bootstrap-grid.rtl.min.css" />
+		<Content Include="lib\bootstrap\css\bootstrap-reboot.css" />
+		<Content Include="lib\bootstrap\css\bootstrap-reboot.min.css" />
+		<Content Include="lib\bootstrap\css\bootstrap-reboot.rtl.css" />
+		<Content Include="lib\bootstrap\css\bootstrap-reboot.rtl.min.css" />
+		<Content Include="lib\bootstrap\css\bootstrap-utilities.css" />
+		<Content Include="lib\bootstrap\css\bootstrap-utilities.min.css" />
+		<Content Include="lib\bootstrap\css\bootstrap-utilities.rtl.css" />
+		<Content Include="lib\bootstrap\css\bootstrap-utilities.rtl.min.css" />
+		<Content Include="lib\bootstrap\css\bootstrap.css" />
+		<Content Include="lib\bootstrap\css\bootstrap.min.css" />
+		<Content Include="lib\bootstrap\css\bootstrap.rtl.css" />
+		<Content Include="lib\bootstrap\css\bootstrap.rtl.min.css" />
+		<Content Include="lib\bootstrap\js\bootstrap.bundle.js" />
+		<Content Include="lib\bootstrap\js\bootstrap.bundle.min.js" />
+		<Content Include="lib\bootstrap\js\bootstrap.esm.js" />
+		<Content Include="lib\bootstrap\js\bootstrap.esm.min.js" />
+		<Content Include="lib\bootstrap\js\bootstrap.js" />
+		<Content Include="lib\bootstrap\js\bootstrap.min.js" />
+		<Content Include="User\UserDashboard.aspx" />
+		<Content Include="Web.config" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="Account\LogIn.aspx.cs">
+			<DependentUpon>LogIn.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Account\LogIn.aspx.designer.cs">
+			<DependentUpon>LogIn.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin\AddDocument.aspx.cs">
+			<DependentUpon>AddDocument.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin\AddDocument.aspx.designer.cs">
+			<DependentUpon>AddDocument.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin\AddEmployee.aspx.cs">
+			<DependentUpon>AddEmployee.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin\AddEmployee.aspx.designer.cs">
+			<DependentUpon>AddEmployee.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin\AdminDashboard.aspx.cs">
+			<DependentUpon>AdminDashboard.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin\AdminDashboard.aspx.designer.cs">
+			<DependentUpon>AdminDashboard.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin\AppraisalForm.aspx.cs">
+			<DependentUpon>AppraisalForm.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin\AppraisalForm.aspx.designer.cs">
+			<DependentUpon>AppraisalForm.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin\EmailHelper.cs" />
+		<Compile Include="Admin\EventPage.aspx.cs">
+			<DependentUpon>EventPage.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin\EventPage.aspx.designer.cs">
+			<DependentUpon>EventPage.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin\LeaveApprovals.aspx.cs">
+			<DependentUpon>LeaveApprovals.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin\LeaveApprovals.aspx.designer.cs">
+			<DependentUpon>LeaveApprovals.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin\LeavePolicy.aspx.cs">
+			<DependentUpon>LeavePolicy.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin\LeavePolicy.aspx.designer.cs">
+			<DependentUpon>LeavePolicy.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin\LeaveReport.aspx.cs">
+			<DependentUpon>LeaveReport.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin\LeaveReport.aspx.designer.cs">
+			<DependentUpon>LeaveReport.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin\PayslipUpload.aspx.cs">
+			<DependentUpon>PayslipUpload.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin\PayslipUpload.aspx.designer.cs">
+			<DependentUpon>PayslipUpload.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin\PerformancePage.aspx.cs">
+			<DependentUpon>PerformancePage.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin\PerformancePage.aspx.designer.cs">
+			<DependentUpon>PerformancePage.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin\ProjectPage.aspx.cs">
+			<DependentUpon>ProjectPage.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin\ProjectPage.aspx.designer.cs">
+			<DependentUpon>ProjectPage.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin\SalaryStructure.aspx.cs">
+			<DependentUpon>SalaryStructure.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin\SalaryStructure.aspx.designer.cs">
+			<DependentUpon>SalaryStructure.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin\TrainingSection.aspx.cs">
+			<DependentUpon>TrainingSection.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin\TrainingSection.aspx.designer.cs">
+			<DependentUpon>TrainingSection.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin\UploadForm16.aspx.cs">
+			<DependentUpon>UploadForm16.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin\UploadForm16.aspx.designer.cs">
+			<DependentUpon>UploadForm16.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin\UserList.aspx.cs">
+			<DependentUpon>UserList.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin\UserList.aspx.designer.cs">
+			<DependentUpon>UserList.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin\UserRegister.aspx.cs">
+			<DependentUpon>UserRegister.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin\UserRegister.aspx.designer.cs">
+			<DependentUpon>UserRegister.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin\ViewEmployees.aspx.cs">
+			<DependentUpon>ViewEmployees.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin\ViewEmployees.aspx.designer.cs">
+			<DependentUpon>ViewEmployees.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin\ViewForm16.aspx.cs">
+			<DependentUpon>ViewForm16.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin\ViewForm16.aspx.designer.cs">
+			<DependentUpon>ViewForm16.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="Admin\ViewPayslips.aspx.cs">
+			<DependentUpon>ViewPayslips.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="Admin\ViewPayslips.aspx.designer.cs">
+			<DependentUpon>ViewPayslips.aspx</DependentUpon>
+		</Compile>
+		<Compile Include="MasterPages\AccountMasterPage.Master.cs">
+			<DependentUpon>AccountMasterPage.Master</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="MasterPages\AccountMasterPage.Master.designer.cs">
+			<DependentUpon>AccountMasterPage.Master</DependentUpon>
+		</Compile>
+		<Compile Include="MasterPages\AdminMasterPage.Master.cs">
+			<DependentUpon>AdminMasterPage.Master</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="MasterPages\AdminMasterPage.Master.designer.cs">
+			<DependentUpon>AdminMasterPage.Master</DependentUpon>
+		</Compile>
+		<Compile Include="MasterPages\UserMasterPage.Master.cs">
+			<DependentUpon>UserMasterPage.Master</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="MasterPages\UserMasterPage.Master.designer.cs">
+			<DependentUpon>UserMasterPage.Master</DependentUpon>
+		</Compile>
+		<Compile Include="Properties\AssemblyInfo.cs" />
+		<Compile Include="User\UserDashboard.aspx.cs">
+			<DependentUpon>UserDashboard.aspx</DependentUpon>
+			<SubType>ASPXCodeBehind</SubType>
+		</Compile>
+		<Compile Include="User\UserDashboard.aspx.designer.cs">
+			<DependentUpon>UserDashboard.aspx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="MasterPages\AdminMasterPage.Master" />
+		<Content Include="MasterPages\UserMasterPage.Master" />
+		<Content Include="MasterPages\AccountMasterPage.Master" />
+		<Content Include="libman.json" />
+		<Content Include="lib\bootstrap\css\bootstrap-grid.css.map" />
+		<Content Include="lib\bootstrap\css\bootstrap-grid.min.css.map" />
+		<Content Include="lib\bootstrap\css\bootstrap-grid.rtl.css.map" />
+		<Content Include="lib\bootstrap\css\bootstrap-grid.rtl.min.css.map" />
+		<Content Include="lib\bootstrap\css\bootstrap-reboot.css.map" />
+		<Content Include="lib\bootstrap\css\bootstrap-reboot.min.css.map" />
+		<Content Include="lib\bootstrap\css\bootstrap-reboot.rtl.css.map" />
+		<Content Include="lib\bootstrap\css\bootstrap-reboot.rtl.min.css.map" />
+		<Content Include="lib\bootstrap\css\bootstrap-utilities.css.map" />
+		<Content Include="lib\bootstrap\css\bootstrap-utilities.min.css.map" />
+		<Content Include="lib\bootstrap\css\bootstrap-utilities.rtl.css.map" />
+		<Content Include="lib\bootstrap\css\bootstrap-utilities.rtl.min.css.map" />
+		<Content Include="lib\bootstrap\css\bootstrap.css.map" />
+		<Content Include="lib\bootstrap\css\bootstrap.min.css.map" />
+		<Content Include="lib\bootstrap\css\bootstrap.rtl.css.map" />
+		<Content Include="lib\bootstrap\css\bootstrap.rtl.min.css.map" />
+		<Content Include="lib\bootstrap\js\bootstrap.bundle.js.map" />
+		<Content Include="lib\bootstrap\js\bootstrap.bundle.min.js.map" />
+		<Content Include="lib\bootstrap\js\bootstrap.esm.js.map" />
+		<Content Include="lib\bootstrap\js\bootstrap.esm.min.js.map" />
+		<Content Include="lib\bootstrap\js\bootstrap.js.map" />
+		<Content Include="lib\bootstrap\js\bootstrap.min.js.map" />
+		<Content Include="lib\bootstrap\scss\bootstrap-grid.scss" />
+		<Content Include="lib\bootstrap\scss\bootstrap-reboot.scss" />
+		<Content Include="lib\bootstrap\scss\bootstrap-utilities.scss" />
+		<Content Include="lib\bootstrap\scss\bootstrap.scss" />
+		<Content Include="lib\bootstrap\scss\forms\_floating-labels.scss" />
+		<Content Include="lib\bootstrap\scss\forms\_form-check.scss" />
+		<Content Include="lib\bootstrap\scss\forms\_form-control.scss" />
+		<Content Include="lib\bootstrap\scss\forms\_form-range.scss" />
+		<Content Include="lib\bootstrap\scss\forms\_form-select.scss" />
+		<Content Include="lib\bootstrap\scss\forms\_form-text.scss" />
+		<Content Include="lib\bootstrap\scss\forms\_input-group.scss" />
+		<Content Include="lib\bootstrap\scss\forms\_labels.scss" />
+		<Content Include="lib\bootstrap\scss\forms\_validation.scss" />
+		<Content Include="lib\bootstrap\scss\helpers\_clearfix.scss" />
+		<Content Include="lib\bootstrap\scss\helpers\_color-bg.scss" />
+		<Content Include="lib\bootstrap\scss\helpers\_colored-links.scss" />
+		<Content Include="lib\bootstrap\scss\helpers\_focus-ring.scss" />
+		<Content Include="lib\bootstrap\scss\helpers\_icon-link.scss" />
+		<Content Include="lib\bootstrap\scss\helpers\_position.scss" />
+		<Content Include="lib\bootstrap\scss\helpers\_ratio.scss" />
+		<Content Include="lib\bootstrap\scss\helpers\_stacks.scss" />
+		<Content Include="lib\bootstrap\scss\helpers\_stretched-link.scss" />
+		<Content Include="lib\bootstrap\scss\helpers\_text-truncation.scss" />
+		<Content Include="lib\bootstrap\scss\helpers\_visually-hidden.scss" />
+		<Content Include="lib\bootstrap\scss\helpers\_vr.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_alert.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_backdrop.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_banner.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_border-radius.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_box-shadow.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_breakpoints.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_buttons.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_caret.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_clearfix.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_color-mode.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_color-scheme.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_container.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_deprecate.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_forms.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_gradients.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_grid.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_image.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_list-group.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_lists.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_pagination.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_reset-text.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_resize.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_table-variants.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_text-truncate.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_transition.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_utilities.scss" />
+		<Content Include="lib\bootstrap\scss\mixins\_visually-hidden.scss" />
+		<Content Include="lib\bootstrap\scss\utilities\_api.scss" />
+		<Content Include="lib\bootstrap\scss\vendor\_rfs.scss" />
+		<Content Include="lib\bootstrap\scss\_accordion.scss" />
+		<Content Include="lib\bootstrap\scss\_alert.scss" />
+		<Content Include="lib\bootstrap\scss\_badge.scss" />
+		<Content Include="lib\bootstrap\scss\_breadcrumb.scss" />
+		<Content Include="lib\bootstrap\scss\_button-group.scss" />
+		<Content Include="lib\bootstrap\scss\_buttons.scss" />
+		<Content Include="lib\bootstrap\scss\_card.scss" />
+		<Content Include="lib\bootstrap\scss\_carousel.scss" />
+		<Content Include="lib\bootstrap\scss\_close.scss" />
+		<Content Include="lib\bootstrap\scss\_containers.scss" />
+		<Content Include="lib\bootstrap\scss\_dropdown.scss" />
+		<Content Include="lib\bootstrap\scss\_forms.scss" />
+		<Content Include="lib\bootstrap\scss\_functions.scss" />
+		<Content Include="lib\bootstrap\scss\_grid.scss" />
+		<Content Include="lib\bootstrap\scss\_helpers.scss" />
+		<Content Include="lib\bootstrap\scss\_images.scss" />
+		<Content Include="lib\bootstrap\scss\_list-group.scss" />
+		<Content Include="lib\bootstrap\scss\_maps.scss" />
+		<Content Include="lib\bootstrap\scss\_mixins.scss" />
+		<Content Include="lib\bootstrap\scss\_modal.scss" />
+		<Content Include="lib\bootstrap\scss\_nav.scss" />
+		<Content Include="lib\bootstrap\scss\_navbar.scss" />
+		<Content Include="lib\bootstrap\scss\_offcanvas.scss" />
+		<Content Include="lib\bootstrap\scss\_pagination.scss" />
+		<Content Include="lib\bootstrap\scss\_placeholders.scss" />
+		<Content Include="lib\bootstrap\scss\_popover.scss" />
+		<Content Include="lib\bootstrap\scss\_progress.scss" />
+		<Content Include="lib\bootstrap\scss\_reboot.scss" />
+		<Content Include="lib\bootstrap\scss\_root.scss" />
+		<Content Include="lib\bootstrap\scss\_spinners.scss" />
+		<Content Include="lib\bootstrap\scss\_tables.scss" />
+		<Content Include="lib\bootstrap\scss\_toasts.scss" />
+		<Content Include="lib\bootstrap\scss\_tooltip.scss" />
+		<Content Include="lib\bootstrap\scss\_transitions.scss" />
+		<Content Include="lib\bootstrap\scss\_type.scss" />
+		<Content Include="lib\bootstrap\scss\_utilities.scss" />
+		<Content Include="lib\bootstrap\scss\_variables-dark.scss" />
+		<Content Include="lib\bootstrap\scss\_variables.scss" />
+		<Content Include=".gitignore" />
+		<None Include="packages.config" />
+		<None Include="Web.Debug.config">
+			<DependentUpon>Web.config</DependentUpon>
+		</None>
+		<None Include="Web.Release.config">
+			<DependentUpon>Web.config</DependentUpon>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Documents\" />
+	</ItemGroup>
+	<PropertyGroup>
+		<VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+		<VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+	</PropertyGroup>
+	<Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+	<Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+	<Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+	<ProjectExtensions>
+		<VisualStudio>
+			<FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+				<WebProjectProperties>
+					<UseIIS>True</UseIIS>
+					<AutoAssignPort>True</AutoAssignPort>
+					<DevelopmentServerPort>51325</DevelopmentServerPort>
+					<DevelopmentServerVPath>/</DevelopmentServerVPath>
+					<IISUrl>https://localhost:44393/</IISUrl>
+					<NTLMAuthentication>False</NTLMAuthentication>
+					<UseCustomServer>False</UseCustomServer>
+					<CustomServerUrl>
+					</CustomServerUrl>
+					<SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+				</WebProjectProperties>
+			</FlavorProperties>
+		</VisualStudio>
+	</ProjectExtensions>
+	<Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+		<PropertyGroup>
+			<ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+		</PropertyGroup>
+		<Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+	</Target>
+	<!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
