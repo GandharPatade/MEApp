@@ -71,7 +71,12 @@
     <Content Include="Admin\AddDocument.aspx" />
     <Content Include="Admin\AddEmployee.aspx" />
     <Content Include="Admin\AdminDashboard.aspx" />
+    <Content Include="Admin\EventPage.aspx" />
+    <Content Include="Admin\LeaveAprrovals.aspx" />
+    <Content Include="Admin\PerformancePage.aspx" />
+    <Content Include="Admin\ProjectPage.aspx" />
     <Content Include="Admin\SalaryStructure.aspx" />
+    <Content Include="Admin\TrainingSection.aspx" />
     <Content Include="Admin\UserList.aspx" />
     <Content Include="Admin\UserRegister.aspx" />
     <Content Include="Admin\ViewEmployees.aspx" />
@@ -129,12 +134,47 @@
     <Compile Include="Admin\AdminDashboard.aspx.designer.cs">
       <DependentUpon>AdminDashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\EventPage.aspx.cs">
+      <DependentUpon>EventPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\EventPage.aspx.designer.cs">
+      <DependentUpon>EventPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\LeaveAprrovals.aspx.cs">
+      <DependentUpon>LeaveAprrovals.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\LeaveAprrovals.aspx.designer.cs">
+      <DependentUpon>LeaveAprrovals.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\PerformancePage.aspx.cs">
+      <DependentUpon>PerformancePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\PerformancePage.aspx.designer.cs">
+      <DependentUpon>PerformancePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ProjectPage.aspx.cs">
+      <DependentUpon>ProjectPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ProjectPage.aspx.designer.cs">
+      <DependentUpon>ProjectPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\SalaryStructure.aspx.cs">
       <DependentUpon>SalaryStructure.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\SalaryStructure.aspx.designer.cs">
       <DependentUpon>SalaryStructure.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\TrainingSection.aspx.cs">
+      <DependentUpon>TrainingSection.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\TrainingSection.aspx.designer.cs">
+      <DependentUpon>TrainingSection.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\UserList.aspx.cs">
       <DependentUpon>UserList.aspx</DependentUpon>
