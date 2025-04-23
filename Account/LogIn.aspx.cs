@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -13,7 +14,8 @@ namespace MEApp.Account
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
-            
+            //Session.Clear();
+            //Session.Abandon();
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -23,10 +25,20 @@ namespace MEApp.Account
 
             string email = txtEmail.Text;
             string password = txtPassword.Text;
-         
+
             SqlCommand cmd = new SqlCommand("exec sp_Login @Email, @Password", conn);
             cmd.Parameters.AddWithValue("@Email", email);
             cmd.Parameters.AddWithValue("@Password", password);
+
+
+            SqlCommand dmc = new SqlCommand("SELECT * FROM Users WHERE Email = @Email AND Password = @Password", conn);
+            dmc.Parameters.AddWithValue("@Email", email);
+            dmc.Parameters.AddWithValue("@Password", password);
+
+            SqlDataAdapter da = new SqlDataAdapter(dmc);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+
 
             SqlDataReader dr = cmd.ExecuteReader();
             if (dr.HasRows)
@@ -35,6 +47,7 @@ namespace MEApp.Account
                 Session["UserID"] = dr["UserID"].ToString();
                 Session["FullName"] = dr["FullName"].ToString();
                 Session["Role"] = dr["Role"].ToString();
+                Session["Email12"] = ds.Tables[0].Rows[0][2].ToString(); 
 
                 string role = dr["Role"].ToString().ToLower();
                 conn.Close();
