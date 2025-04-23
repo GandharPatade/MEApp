@@ -39,6 +39,12 @@ namespace MEApp.Account
             DataSet ds = new DataSet();
             da.Fill(ds);
 
+            SqlCommand dd = new SqlCommand("select * from EmployeeProfiles where Email='"+txtEmail.Text.Trim()+"'", conn);
+            SqlDataAdapter dda = new SqlDataAdapter(dd);
+            DataSet dds = new DataSet();
+            dda.Fill(dds);
+
+
 
             SqlDataReader dr = cmd.ExecuteReader();
             if (dr.HasRows)
@@ -58,6 +64,7 @@ namespace MEApp.Account
                 }
                 else if (role == "user")
                 {
+                    Session["EmpCode"] = dds.Tables[0].Rows[0][1].ToString();
                     Response.Redirect("~/User/UserDashboard.aspx");
                 }
                 else

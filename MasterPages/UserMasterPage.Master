@@ -1377,8 +1377,10 @@
 									</a>
 									<ul>
 										
-										<li><a href="attendance-admin.html">Leave Application</a></li>
-										<li><a href="attendance-employee.html">Leave Balance</a></li>
+										
+										<li>
+											<asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/User/LeaveApplication.aspx">Leave Application</asp:HyperLink></li>
+										<%--<li><a href="attendance-employee.html">Leave Balance</a></li>--%>
 										<li><a href="attendance-employee.html">Leave Calender</a></li>
 										
 									</ul>
@@ -1393,9 +1395,12 @@
 									</a>
 									<ul>
 										
-										<li><a href="payslip.html">Payslip Access</a></li>
+										
+										<li>
+											<asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/User/PayslipAccess.aspx">Payslip Access</asp:HyperLink></li>
+
 										<li><a href="payslip.html">Form 16 Access</a></li>
-										<li><a href="payslip.html">Investment Declaration</a></li>
+										<%--<li><a href="payslip.html">Investment Declaration</a></li>--%>
 										
 									</ul>
 								</li>
