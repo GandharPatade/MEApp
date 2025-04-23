@@ -32,7 +32,6 @@ namespace MEApp.Admin
 
             Session["Fullname"] = txtName.Text;
             Session["Email"] = txtEmail.Text;
-            Session["Role"] = ddlRole.SelectedValue;
 
             int result = cmd.ExecuteNonQuery();
 
