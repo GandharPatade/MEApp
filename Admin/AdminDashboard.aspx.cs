@@ -11,7 +11,17 @@ namespace MEApp.Admin
 	{
 		protected void Page_Load(object sender, EventArgs e)
 		{
+            if (Session["FullName"] != null)
+            {
+                Label1.Text = Session["FullName"].ToString();
+            }
+            else
+            {
+               
+                Response.Redirect("../Account/LogIn.aspx");
+              
+            }
 
-		}
+        }
 	}
 }

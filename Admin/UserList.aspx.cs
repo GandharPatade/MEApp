@@ -7,6 +7,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
+using System.Drawing.Printing;
+using System.IO;
+using System.Xml.Linq;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
 
 namespace MEApp.Admin
 {
@@ -85,5 +90,34 @@ namespace MEApp.Admin
             LoadUsers();
         }
 
+       
+        
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Response.ContentType = "application/pdf";
+            Response.AddHeader("content-disposition", "attachment;filename=FileList.pdf");
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+
+
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter hw = new HtmlTextWriter(sw);
+            gvUsers.RenderControl(hw);
+            StringReader sr = new StringReader(sw.ToString());
+
+
+            iTextSharp.text.Document pdfDoc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 10f, 10f, 10f, 10f);
+            PdfWriter writer = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
+            pdfDoc.Open();
+            XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+            pdfDoc.Close();
+
+
+            Response.End();
+        }
+        public override void VerifyRenderingInServerForm(Control control)
+        {
+            // Required for Export to work
+        }
     }
 }

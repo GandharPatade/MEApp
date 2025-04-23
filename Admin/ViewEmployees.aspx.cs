@@ -54,7 +54,8 @@ namespace MEApp.Admin
             string dept = ((TextBox)row.Cells[4].Controls[0]).Text;
             string desig = ((TextBox)row.Cells[5].Controls[0]).Text;
 
-            SqlCommand cmd = new SqlCommand("EXEC sp_UpdateEmployee @EmployeeID, @FullName, @Email, @ContactNo, @Department, @Designation", con);
+            string query = $"exec sp_UpdateEmployee @EmployeeID, @FullName, @Email, @ContactNo, @Department, @Designation";
+            SqlCommand cmd = new SqlCommand(query, con);
             cmd.Parameters.AddWithValue("@EmployeeID", empID);
             cmd.Parameters.AddWithValue("@FullName", fullName);
             cmd.Parameters.AddWithValue("@Email", email);
