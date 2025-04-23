@@ -65,7 +65,6 @@
                    class="btn btn-sm btn-primary" 
                    target="_blank">
                    Download
-
                 </a>
             </ItemTemplate>
         </asp:TemplateField>

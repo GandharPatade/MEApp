@@ -68,8 +68,9 @@
                 <asp:BoundField DataField="SalaryAmount" HeaderText="Salary" />
                 <asp:TemplateField HeaderText="Download">
                     <ItemTemplate>
-                        <a class="btn btn-primary btn-sm" href='<%# ResolveUrl(Eval("PayslipFile").ToString()) %>' target="_blank">
-                            <i class="bi bi-download"></i>Download
+                        <a href='<%# ResolveUrl(Eval("PayslipFile").ToString()) %>'
+                            class="btn btn-sm btn-primary"
+                            target="_blank">Download
                         </a>
                     </ItemTemplate>
                 </asp:TemplateField>

@@ -3968,7 +3968,7 @@
     <Content Include="lib\bootstrap\js\bootstrap.esm.min.js" />
     <Content Include="lib\bootstrap\js\bootstrap.js" />
     <Content Include="lib\bootstrap\js\bootstrap.min.js" />
-    <Content Include="Payslip\Picsart_24-01-26_21-21-18-101.jpg" />
+    <Content Include="Admin\Payslip\Picsart_24-01-26_21-21-18-101.jpg" />
     <Content Include="pulse180.png" />
     <Content Include="User\assets\css\animate.css" />
     <Content Include="User\assets\css\bootstrap-datetimepicker.min.css" />
@@ -25366,8 +25366,8 @@
     <Content Include="Admin\assets\scss\vendors\_rangepicker-plugin.scss" />
     <Content Include="Admin\assets\scss\vendors\_select2.scss" />
     <None Include="packages.config" />
-    <Content Include="Payslip\Sarvesh New CV_1.pdf" />
-    <Content Include="Payslip\Sarvesh Vardekar Resume.docx" />
+    <Content Include="Admin\Payslip\Sarvesh New CV_1.pdf" />
+    <Content Include="Admin\Payslip\Sarvesh Vardekar Resume.docx" />
     <Content Include="User\assets\css\bootstrap.min.css.map" />
     <Content Include="User\assets\css\bootstrap.rtl.min.css.map" />
     <Content Include="User\assets\css\style.css.map" />

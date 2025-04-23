@@ -46,7 +46,7 @@ namespace MEApp.Admin
         {
             if (fuPayslip.HasFile)
             {
-                string saveDir = Server.MapPath("~/Payslip/");
+                string saveDir = Server.MapPath("~/Admin/Payslip/");
                 if (!Directory.Exists(saveDir))
                 {
                     Directory.CreateDirectory(saveDir);
