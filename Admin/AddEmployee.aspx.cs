@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -16,11 +17,19 @@ namespace MEApp.Admin
         {
             if (!IsPostBack)
             {
-                string naam = Request.QueryString["name"];
-                string email12 = Request.QueryString["email"];
+                string name = Session["fullname"].ToString();
+                string email = Session["email"].ToString();
 
-                txtEmail.Text = email12;
-                txtFullName.Text = naam;
+                txtEmail.Text = email;
+                txtFullName.Text = name;
+
+                LoadUsers();
+
+                //string naam = Request.QueryString["name"];
+                //string email12 = Request.QueryString["email"];
+
+                //txtEmail.Text = email12;
+                //txtFullName.Text = naam;
             }
             if (Session["UserID"] == null || Session["Role"] == null)
             {
@@ -45,6 +54,18 @@ namespace MEApp.Admin
 
             lblMessage.Text = "Employee added successfully!";
             ClearFields();
+        }
+
+        private void LoadUsers()
+        {
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("exec sp_GetAllEmployeesDesc", conn);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+            conn.Close();
         }
 
         private void ClearFields()

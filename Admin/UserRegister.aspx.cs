@@ -24,6 +24,9 @@ namespace MEApp.Admin
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString);
             conn.Open();
 
+            Session["fullname"] = txtName.Text;
+            Session["email"] = txtEmail.Text;
+
             SqlCommand cmd = new SqlCommand("exec sp_AddUserByAdmin @FullName, @Email, @Password, @Role", conn);
             cmd.Parameters.AddWithValue("@FullName", txtName.Text);
             cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
