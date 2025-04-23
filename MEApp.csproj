@@ -2001,6 +2001,7 @@
     <Content Include="Account\assets\plugins\twitter-bootstrap-wizard\jquery.bootstrap.wizard.min.js" />
     <Content Include="Account\assets\plugins\twitter-bootstrap-wizard\prettify.js" />
     <Content Include="Account\LogIn.aspx" />
+    <Content Include="Account\pulse180.png" />
     <Content Include="Admin\AddDocument.aspx" />
     <Content Include="Admin\AddEmployee.aspx" />
     <Content Include="Admin\AdminDashboard.aspx" />
@@ -3938,6 +3939,7 @@
     <Content Include="Admin\PayslipUpload.aspx" />
     <Content Include="Admin\PerformancePage.aspx" />
     <Content Include="Admin\ProjectPage.aspx" />
+    <Content Include="Admin\pulse180.png" />
     <Content Include="Admin\SalaryStructure.aspx" />
     <Content Include="Admin\TrainingSection.aspx" />
     <Content Include="Admin\UploadForm16.aspx" />
@@ -3969,6 +3971,7 @@
     <Content Include="lib\bootstrap\js\bootstrap.js" />
     <Content Include="lib\bootstrap\js\bootstrap.min.js" />
     <Content Include="Admin\Payslip\Picsart_24-01-26_21-21-18-101.jpg" />
+    <Content Include="pul.svg" />
     <Content Include="pulse180.png" />
     <Content Include="User\assets\css\animate.css" />
     <Content Include="User\assets\css\bootstrap-datetimepicker.min.css" />

@@ -1262,7 +1262,7 @@
 			<div class="sidebar-logo">
 				<a href="#" class="logo logo-normal">
 					<%--<img src="assets/img/logo.svg" alt="Logo">--%>
-					<img src="pulse180.png" alt="Logo" />
+					<img src="./pulse180.png" alt="Logo" />
 				</a>
 				<a href="index.html" class="logo-small">
 					<img src="assets/img/logo-small.svg" alt="Logo">
