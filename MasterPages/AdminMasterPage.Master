@@ -96,7 +96,7 @@
 				</a>
 
 				<div class="header-user">
-					<div class="nav user-menu nav-list">
+					<%--<div class="nav user-menu nav-list">
 
 						<div class="me-auto d-flex align-items-center" id="header-search">
 							<a id="toggle_btn" href="javascript:void(0);" class="btn btn-menubar me-1">
@@ -1235,7 +1235,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div>--%>
 				</div>
 
 				<!-- Mobile Menu -->
@@ -1336,6 +1336,9 @@
 			<div class="sidebar-inner slimscroll">
 				<div id="sidebar-menu" class="sidebar-menu">
 					<ul>
+						<br />
+<br />
+<br />
 						<li class="menu-title"><span>MAIN MENU</span></li>
 						<li>
 							<ul>
@@ -1380,7 +1383,7 @@
 										<span class="menu-arrow"></span>
 									</a>
 									<ul>
-										<li><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="../Admin/AddEmployee.aspx">Add Employee</asp:HyperLink></li>
+										<%--<li><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="../Admin/AddEmployee.aspx">Add Employee</asp:HyperLink></li>--%>
 										<li><asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="../Admin/ViewEmployees.aspx">View Employees</asp:HyperLink></li>
 										
 									</ul>
@@ -1401,30 +1404,32 @@
 
 
 
-								<%--<li class="submenu">
+								<li class="submenu">
 									<a href="javascript:void(0);">
 										<i class="ti ti-cash"></i><span>Events</span>
 										<span class="menu-arrow"></span>
 									</a>
 									<ul>
 										
-										
+										<li>
+											<asp:HyperLink ID="HyperLink15" runat="server" NavigateUrl="~/Admin/EventPage.aspx">Event Management</asp:HyperLink></li>
 										
 									</ul>
-								</li>--%>
+								</li>
 
 
-								<%--<li class="submenu">
+								<li class="submenu">
 									<a href="javascript:void(0);">
 										<i class="ti ti-external-link"></i><span>Projects</span>
 										<span class="menu-arrow"></span>
 									</a>
 									<ul>
 										
-										
+										<li>
+											<asp:HyperLink ID="HyperLink16" runat="server" NavigateUrl="~/Admin/ProjectPage.aspx">Project Management</asp:HyperLink></li>
 										
 									</ul>
-								</li>--%>
+								</li>
 
 								<li class="submenu">
 									<a href="javascript:void(0);">
@@ -1468,15 +1473,16 @@
 
 
 
-								<%--<li class="submenu">
+								<li class="submenu">
 									<a href="javascript:void(0);">
 										<i class="ti ti-ticket"></i><span>Training And Development</span>
 										<span class="menu-arrow"></span>
 									</a>
 									<ul>
-										
+										<li>
+											<asp:HyperLink ID="HyperLink17" runat="server" NavigateUrl="~/Admin/TrainingSection.aspx">Traning And Development</asp:HyperLink></li>
 									</ul>
-								</li>--%>
+								</li>
 														
 
 								<li class="submenu">

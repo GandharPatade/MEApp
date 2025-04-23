@@ -85,9 +85,16 @@
             <asp:TextBox ID="txtDesignation" runat="server" CssClass="form-control" />
         </div>
     </div>
-
+	<div>
     <asp:Button ID="btnAddEmployee" runat="server" Text="Add Employee" CssClass="btn btn-primary" OnClick="btnAddEmployee_Click" />
     <asp:Label ID="lblMessage" runat="server" CssClass="text-success mt-3 d-block"></asp:Label>
     </div>
-	<asp:GridView ID="GridView1" runat="server"></asp:GridView>
+
+	<div>
+
+	<asp:GridView ID="GridView1" runat="server" 
+        class="table table-bordered display" HeaderStyle-CssClass="table-header"></asp:GridView>
+	</div>
+	<br />
+
 </asp:Content>

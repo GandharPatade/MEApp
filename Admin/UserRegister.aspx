@@ -72,6 +72,7 @@
                 <asp:ListItem Text="Admin" Value="Admin" />
                 <asp:ListItem Text="User" Value="User" />
             </asp:DropDownList>
+			<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Select Role" ControlToValidate="ddlRole"></asp:RequiredFieldValidator>
         </div><br />
         <br />
         <asp:Button ID="btnRegister" runat="server" class="btn btn-primary w-100" Text="Add User" OnClick="btnRegister_Click"  />

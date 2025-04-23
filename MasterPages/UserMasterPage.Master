@@ -89,7 +89,7 @@
 				</a>
 
 				<div class="header-user">
-					<div class="nav user-menu nav-list">
+					<%--<div class="nav user-menu nav-list">
 
 						<div class="me-auto d-flex align-items-center" id="header-search">
 							<a id="toggle_btn" href="javascript:void(0);" class="btn btn-menubar me-1">
@@ -1228,7 +1228,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div>--%>
 				</div>
 
 				<!-- Mobile Menu -->
@@ -1253,11 +1253,12 @@
 		<div class="sidebar" id="sidebar">
 			<!-- Logo -->
 			<div class="sidebar-logo">
-				<a href="index.html" class="logo logo-normal">
-					<img src="assets/img/logo.svg" alt="Logo">
+				<a href="#" class="logo logo-normal">
+					
+					<img src="pulse180.png" alt="Logo" />
 				</a>
-				<a href="index.html" class="logo-small">
-					<img src="assets/img/logo-small.svg" alt="Logo">
+				<a href="#" class="logo-small">
+					<img src="pulse180.png" alt="Logo" />
 				</a>
 				<a href="index.html" class="dark-logo">
 					<img src="assets/img/logo-white.svg" alt="Logo">
@@ -1281,6 +1282,8 @@
 					</ul>
 				</div>
 			</div>
+
+			
 			<div class="sidebar-header p-3 pb-0 pt-2">
 				<div class="text-center rounded bg-light p-2 mb-4 sidebar-profile d-flex align-items-center">
 					<div class="avatar avatar-md onlin">
@@ -1328,6 +1331,9 @@
 			<div class="sidebar-inner slimscroll">
 				<div id="sidebar-menu" class="sidebar-menu">
 					<ul>
+						<br />
+<br />
+<br />
 						<li class="menu-title"><span>MAIN MENU</span></li>
 						<li>
 							<ul>

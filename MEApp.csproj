@@ -5899,6 +5899,7 @@
     <Content Include="User\assets\plugins\twitter-bootstrap-wizard\form-wizard.js" />
     <Content Include="User\assets\plugins\twitter-bootstrap-wizard\jquery.bootstrap.wizard.min.js" />
     <Content Include="User\assets\plugins\twitter-bootstrap-wizard\prettify.js" />
+    <Content Include="User\pulse180.png" />
     <Content Include="User\UserDashboard.aspx" />
     <Content Include="User\UserDocumentAccess.aspx" />
     <Content Include="User\UserUpdateProfile.aspx" />
