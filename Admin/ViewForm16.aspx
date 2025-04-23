@@ -66,6 +66,7 @@
                    target="_blank">
                    Download
                 </a>
+				<br />
             </ItemTemplate>
         </asp:TemplateField>
     </Columns>
