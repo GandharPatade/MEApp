@@ -1399,7 +1399,10 @@
 										<li>
 											<asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/User/PayslipAccess.aspx">Payslip Access</asp:HyperLink></li>
 
-										<li><a href="payslip.html">Form 16 Access</a></li>
+										
+										<li>
+											<asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/User/Form16access.aspx">Form 16 Access</asp:HyperLink></li>
+
 										<%--<li><a href="payslip.html">Investment Declaration</a></li>--%>
 										
 									</ul>

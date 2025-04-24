@@ -31,7 +31,10 @@
 									
 
 									
-									<a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-xls me-1"></i>Export as PDF </a>
+									
+
+									<asp:Button ID="btnExportPdf" runat="server" class="dropdown-item rounded-1" Text="Export to PDF" OnClick="btnExportPdf_Click" />
+
 								</li>
 								<li>
 									<a href="javascript:void(0);" class="dropdown-item rounded-1"><i class="ti ti-file-type-xls me-1"></i>Export as Excel </a>

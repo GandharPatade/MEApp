@@ -12,6 +12,7 @@ using System.IO;
 using System.Xml.Linq;
 using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
+using iTextSharp.text;
 
 namespace MEApp.Admin
 {
@@ -93,31 +94,42 @@ namespace MEApp.Admin
        
         
 
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            Response.ContentType = "application/pdf";
-            Response.AddHeader("content-disposition", "attachment;filename=FileList.pdf");
-            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+        
 
+       protected void btnExportPdf_Click(object sender, EventArgs e)
+{
+    GridView gvExport = new GridView();
+    conn.Open();
+    SqlCommand cmd = new SqlCommand("exec sp_GetAllUsers", conn);
+    SqlDataAdapter da = new SqlDataAdapter(cmd);
+    DataTable dt = new DataTable();
+    da.Fill(dt);
+    conn.Close();
+    
+    gvExport.DataSource = dt;
+    gvExport.DataBind();
 
-            StringWriter sw = new StringWriter();
-            HtmlTextWriter hw = new HtmlTextWriter(sw);
-            gvUsers.RenderControl(hw);
-            StringReader sr = new StringReader(sw.ToString());
+    Response.ContentType = "application/pdf";
+    Response.AddHeader("content-disposition", "attachment;filename=UserList.pdf");
+    Response.Cache.SetCacheability(HttpCacheability.NoCache);
 
+    StringWriter sw = new StringWriter();
+    HtmlTextWriter hw = new HtmlTextWriter(sw);
+    gvExport.RenderControl(hw);
+    StringReader sr = new StringReader(sw.ToString());
 
-            iTextSharp.text.Document pdfDoc = new iTextSharp.text.Document(iTextSharp.text.PageSize.A4, 10f, 10f, 10f, 10f);
-            PdfWriter writer = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
-            pdfDoc.Open();
-            XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
-            pdfDoc.Close();
-
-
-            Response.End();
-        }
+    Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 10f);
+    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
+    pdfDoc.Open();
+    XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+    pdfDoc.Close();
+    Response.End();
+}
         public override void VerifyRenderingInServerForm(Control control)
         {
-            // Required for Export to work
+            // Confirms that an ASP.NET server control is rendered for the HtmlForm control at run time.
         }
+
+
     }
 }

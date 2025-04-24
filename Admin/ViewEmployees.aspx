@@ -1,6 +1,73 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPages/AdminMasterPage.Master" AutoEventWireup="true" CodeBehind="ViewEmployees.aspx.cs" Inherits="MEApp.Admin.ViewEmployees" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <style>
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_paginate {
+    display: block !important;
+}
+</style>
+
+     <!-- ✅ Load jQuery FIRST -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+<!-- ✅ Then load DataTables core and Bootstrap5 integration -->
+<link href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- ✅ Then load Bootstrap Bundle -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script type="text/javascript">
+        function initializeDataTable() {
+            var table = $('#<%= GridViewEmployees.ClientID %>');
+            console.log("Initializing table: " + table.length);
+
+            if (!table.find('thead').length) {
+                console.log("No <thead> found. Injecting...");
+                var headerRow = table.find('tr').first().clone();
+                var thead = $('<thead></thead>').append(headerRow);
+                table.find('tr').first().remove();
+                table.prepend(thead);
+            }
+
+            if (!$.fn.DataTable) {
+                console.log("🚨 DataTable function is undefined! Check if JS is loaded.");
+                return;
+            }
+
+            if (!$.fn.DataTable.isDataTable(table)) {
+                console.log("✅ DataTable function exists, initializing...");
+                table.DataTable({
+                    paging: true,
+                    searching: true,
+                    lengthChange: true,
+                    info: true,
+                    language: {
+                        lengthMenu: "Rows per page: _MENU_",
+                        emptyTable: "No records found."
+                    },
+                    drawCallback: function () {
+                        console.log("✅ DataTable draw callback hit!");
+                    }
+                });
+            } else {
+                console.log("🟡 Table already initialized.");
+            }
+        }
+
+        $(document).ready(function () {
+            initializeDataTable();
+        });
+    </script>
+
+
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
@@ -55,12 +122,16 @@
 
 
     <asp:GridView ID="GridViewEmployees" runat="server" AutoGenerateColumns="False"
-        CssClass="table table-bordered display" DataKeyNames="EmployeeID"
-        OnRowEditing="GridViewEmployees_RowEditing"
+        CssClass="table table-striped table-bordered" DataKeyNames="EmployeeID"
+        OnRowEditing="GridViewEmployees_RowEditing" 		
         OnRowUpdating="GridViewEmployees_RowUpdating"
         OnRowCancelingEdit="GridViewEmployees_RowCancelingEdit"
         OnRowDeleting="GridViewEmployees_RowDeleting"
-        UseAccessibleHeader="true" HeaderStyle-CssClass="table-header">
+        UseAccessibleHeader="true" HeaderStyle-CssClass="table-header" GridLines="None">
+
+		   <HeaderStyle CssClass="table-dark" />
+    <RowStyle CssClass="table-body" />
+
         <Columns>
             <asp:BoundField DataField="EmployeeCode" HeaderText="Employee Code" ReadOnly="True" />
             <asp:BoundField DataField="FullName" HeaderText="Full Name" />
