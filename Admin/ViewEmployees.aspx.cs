@@ -33,7 +33,7 @@ namespace MEApp.Admin
 
         protected void GridViewEmployees_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            GridViewEmployees.EditIndex = e.NewEditIndex;
+            GridViewEmployees.EditIndex = e.NewEditIndex; 
             LoadEmployees();
         }
 
