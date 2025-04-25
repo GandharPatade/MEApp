@@ -39,12 +39,8 @@ namespace MEApp.Admin
                 int result = cmd.ExecuteNonQuery();
 
                 if (result > 0)
-                {
-                    Response.Write("<script>alert('User Registered Successfully');</script>");
-                    if (ddlRole.SelectedIndex == 2)
-                    {
-                        Response.Redirect($"../Admin/AddEmployee.aspx?name={txtName.Text.Trim()}&email={txtEmail.Text.Trim()}");
-                    }
+                { 
+                    Response.Redirect($"../Admin/AddEmployee.aspx?name={txtName.Text.Trim()}&email={txtEmail.Text.Trim()}");
                 }
                 else
                 {
@@ -53,7 +49,7 @@ namespace MEApp.Admin
 
                 conn.Close();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Response.Write($"<script>alert('{ex.Message}')</script>");
             }

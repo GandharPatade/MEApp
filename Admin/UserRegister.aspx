@@ -71,6 +71,7 @@
                 <asp:ListItem Text="Select Role" Value="" />
                 <asp:ListItem Text="Admin" Value="Admin" />
                 <asp:ListItem Text="User" Value="User" />
+				<asp:ListItem Text="HR" Value="HR" />
             </asp:DropDownList>
 			<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*Select Role" ControlToValidate="ddlRole"></asp:RequiredFieldValidator>
         </div><br />

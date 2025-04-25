@@ -58,6 +58,7 @@ namespace MEApp.Admin
 
                 lblMessage.Text = "Employee added successfully!";
                 ClearFields();
+                LoadUsers();
             }
             catch (Exception ex)
             {
