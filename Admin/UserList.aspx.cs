@@ -86,9 +86,9 @@ namespace MEApp.Admin
         {
             int userID = Convert.ToInt32(gvUsers.DataKeys[e.RowIndex].Value);
 
-            conn.Open();
             SqlCommand cmd = new SqlCommand($"exec sp_DeleteUser '{userID}'", conn);
 
+            conn.Open();
             cmd.ExecuteNonQuery();
             conn.Close();
 
