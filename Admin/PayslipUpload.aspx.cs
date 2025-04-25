@@ -56,7 +56,7 @@ namespace MEApp.Admin
                 string savePath = Path.Combine(saveDir, fileName);
                 fuPayslip.SaveAs(savePath);
 
-                SqlCommand cmd = new SqlCommand("exec sp_InsertPayslip @EmployeeCode, @MonthYear, @SalaryAmount, @PayslipFile", con);
+                SqlCommand cmd = new SqlCommand($"exec sp_InsertPayslip '{}', @MonthYear, @SalaryAmount, @PayslipFile", con);
                 cmd.Parameters.AddWithValue("@EmployeeCode", ddlEmpCode.SelectedValue);
                 cmd.Parameters.AddWithValue("@MonthYear", txtMonthYear.Text);
                 cmd.Parameters.AddWithValue("@SalaryAmount", txtAmount.Text);

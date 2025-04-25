@@ -18,15 +18,22 @@ namespace MEApp
 
         private void LoadLeaveRequests()
         {
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString);
-            SqlCommand cmd = new SqlCommand("sp_GetAllLeaveRequests", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
+            try
+            {
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString);
+                SqlCommand cmd = new SqlCommand("exec sp_GetAllLeaveRequests", con);
 
-            GvLeaveRequest.DataSource = dt;
-            GvLeaveRequest.DataBind();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                GvLeaveRequest.DataSource = dt;
+                GvLeaveRequest.DataBind();
+            }
+            catch (Exception ex) 
+            {
+                Response.Write($"<script>alert('{ex.Message}')</script>");
+            }
         }
 
         protected void GvLeaveRequests_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -36,18 +43,22 @@ namespace MEApp
                 int requestId = Convert.ToInt32(e.CommandArgument);
                 string newStatus = e.CommandName == "Approve" ? "Approved" : "Rejected";
 
-                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString);
-                SqlCommand cmd = new SqlCommand("sp_UpdateLeaveStatus", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@RequestID", requestId);
-                cmd.Parameters.AddWithValue("@Status", newStatus);
+                try
+                {
+                    SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString);
+                    SqlCommand cmd = new SqlCommand($"exec sp_UpdateLeaveStatus '{requestId}', '{newStatus}'", con);
 
-                con.Open();
-                cmd.ExecuteNonQuery();
-                con.Close();
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
 
-                lblMessage.Text = $"Leave request was {newStatus.ToLower()} successfully.";
-                LoadLeaveRequests();
+                    lblMessage.Text = $"Leave request was {newStatus.ToLower()} successfully.";
+                    LoadLeaveRequests();
+                }
+                catch(Exception ex)
+                {
+                    Response.Write($"<script>alert('{ex.Message}')</script>");
+                }
             }
         }
     }

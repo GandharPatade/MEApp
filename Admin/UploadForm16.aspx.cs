@@ -60,15 +60,22 @@ namespace MEApp.Admin
                 string relativePath = "~/Form16/" + fileName;
 
                 string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
-                using (SqlConnection con = new SqlConnection(cs))
+                SqlConnection con = new SqlConnection(cs);
                 {
-                    SqlCommand cmd = new SqlCommand("exec sp_InsertForm16 @EmployeeCode, @FinancialYear, @Form16Path", con);
-                    cmd.Parameters.AddWithValue("@EmployeeCode", ddlEmpCode.SelectedValue);
-                    cmd.Parameters.AddWithValue("@FinancialYear", txtFinancialYear.Text);
-                    cmd.Parameters.AddWithValue("@Form16Path", relativePath);
+                    try
+                    {
+                        SqlCommand cmd = new SqlCommand("exec sp_InsertForm16 @EmployeeCode, @FinancialYear, @Form16Path", con);
+                        cmd.Parameters.AddWithValue("@EmployeeCode", ddlEmpCode.SelectedValue);
+                        cmd.Parameters.AddWithValue("@FinancialYear", txtFinancialYear.Text);
+                        cmd.Parameters.AddWithValue("@Form16Path", relativePath);
 
-                    con.Open();
-                    cmd.ExecuteNonQuery();
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex) 
+                    {
+                        Response.Write($"<script>alert('{ex.Message}')</script>");
+                    }
                 }
 
                 //lblMessage.Text = "Form 16 uploaded successfully.";

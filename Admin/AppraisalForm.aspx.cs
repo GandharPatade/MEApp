@@ -41,8 +41,8 @@ namespace MEApp.Admin
             LoadAppraisals();
 
             string to = "";
-            SqlCommand emailCmd = new SqlCommand("SELECT Email FROM EmployeeProfiles WHERE EmployeeCode = @EmpCode", con);
-            emailCmd.Parameters.AddWithValue("@EmpCode", empCode);
+            SqlCommand emailCmd = new SqlCommand($"exec sp_GetEmail '{empCode}'", con);
+            emailCmd.ExecuteNonQuery();
 
             con.Open();
             SqlDataReader reader = emailCmd.ExecuteReader();
@@ -71,7 +71,7 @@ namespace MEApp.Admin
         private void LoadEmployeeCodes()
         {
             SqlConnection con = new SqlConnection(conStr);
-            SqlCommand cmd = new SqlCommand("SELECT EmployeeCode FROM EmployeeProfiles ORDER BY EmployeeCode", con);
+            SqlCommand cmd = new SqlCommand("exec sp_GetEmpcode", con);
 
             con.Open();
             SqlDataReader reader = cmd.ExecuteReader();

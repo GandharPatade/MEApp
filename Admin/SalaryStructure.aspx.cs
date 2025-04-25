@@ -33,20 +33,27 @@ namespace MEApp.Admin
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString);
-            SqlCommand cmd = new SqlCommand("SP_InsertUpdateSalaryStructure", con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@StructureID", string.IsNullOrEmpty(hfStructureID.Value) ? (object)DBNull.Value : hfStructureID.Value);
-            cmd.Parameters.AddWithValue("@Role", txtRole.Text);
-            cmd.Parameters.AddWithValue("@BasicSalary", txtBasic.Text);
-            cmd.Parameters.AddWithValue("@HRA", txtHRA.Text);
-            cmd.Parameters.AddWithValue("@Allowances", txtAllowances.Text);
-            cmd.Parameters.AddWithValue("@Deductions", txtDeductions.Text);
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
-            ClearFields();
-            LoadStructures();
+            try
+            {
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString);
+                SqlCommand cmd = new SqlCommand("SP_InsertUpdateSalaryStructure", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@StructureID", string.IsNullOrEmpty(hfStructureID.Value) ? (object)DBNull.Value : hfStructureID.Value);
+                cmd.Parameters.AddWithValue("@Role", txtRole.Text);
+                cmd.Parameters.AddWithValue("@BasicSalary", txtBasic.Text);
+                cmd.Parameters.AddWithValue("@HRA", txtHRA.Text);
+                cmd.Parameters.AddWithValue("@Allowances", txtAllowances.Text);
+                cmd.Parameters.AddWithValue("@Deductions", txtDeductions.Text);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+                ClearFields();
+                LoadStructures();
+            }
+            catch(Exception ex)
+            {
+                Response.Write($"<script>alert('{ex.Message}')</script>");
+            }
         }
 
         protected void gvStructure_RowCommand(object sender, GridViewCommandEventArgs e)

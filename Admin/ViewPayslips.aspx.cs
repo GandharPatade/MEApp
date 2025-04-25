@@ -24,9 +24,8 @@ namespace MEApp.Admin
         {
             SqlCommand cmd;
 
-            // Check if Admin
-            string role = Session["Role"]?.ToString();
-            string empCode = Session["EmpCode"]?.ToString();
+            string role = Session["Role"].ToString();
+            string empCode = Session["EmpCode"].ToString();
 
             if (role == "Admin")
             {
@@ -34,8 +33,7 @@ namespace MEApp.Admin
             }
             else
             {
-                cmd = new SqlCommand("exec sp_GetPayslipsByEmp @EmployeeCode", con);
-                cmd.Parameters.AddWithValue("@EmployeeCode", empCode);
+                cmd = new SqlCommand($"exec sp_GetPayslipsByEmp '{empCode}'", con);
             }
 
             SqlDataAdapter da = new SqlDataAdapter(cmd);

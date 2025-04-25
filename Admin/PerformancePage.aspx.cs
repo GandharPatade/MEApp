@@ -51,12 +51,19 @@ namespace MEApp.Admin
         private void SavePerformance(int userId, int points, string remark)
         {
             string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
-            using (SqlConnection conn = new SqlConnection(cs))
+            SqlConnection conn = new SqlConnection(cs);
             {
-                SqlCommand cmd = new SqlCommand($"exec sp_savePerformance '{userId}', '{points}', '{remark}' ", conn);
+                try
+                {
+                    SqlCommand cmd = new SqlCommand($"exec sp_savePerformance '{userId}', '{points}', '{remark}' ", conn);
 
-                conn.Open();
-                cmd.ExecuteNonQuery();
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Response.Write($"<script>alert('{ex.Message}')</script>");
+                }
             }
         }
 

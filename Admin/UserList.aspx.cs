@@ -66,16 +66,20 @@ namespace MEApp.Admin
             string role = ((DropDownList)row.FindControl("ddlRole")).SelectedValue;
 
             conn.Open();
-            SqlCommand cmd = new SqlCommand("exec sp_UpdateUserByAdmin @UserID, @FullName, @Email, @Role", conn);
-            cmd.Parameters.AddWithValue("@UserID", userID);
-            cmd.Parameters.AddWithValue("@FullName", fullName);
-            cmd.Parameters.AddWithValue("@Email", email);
-            cmd.Parameters.AddWithValue("@Role", role);
-            cmd.ExecuteNonQuery();
-            conn.Close();
+            try
+            {
+                SqlCommand cmd = new SqlCommand($"exec sp_UpdateUserByAdmin '{userID}', '{fullName}', '{email}', '{role}'", conn);
 
-            gvUsers.EditIndex = -1;
-            LoadUsers();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+
+                gvUsers.EditIndex = -1;
+                LoadUsers();
+            }
+            catch (Exception ex)
+            {
+                Response.Write($"<script>alert('{ex.Message}')</script>");
+            }
         }
 
         protected void gvUsers_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -83,48 +87,44 @@ namespace MEApp.Admin
             int userID = Convert.ToInt32(gvUsers.DataKeys[e.RowIndex].Value);
 
             conn.Open();
-            SqlCommand cmd = new SqlCommand("exec sp_DeleteUser @UserID", conn);
-            cmd.Parameters.AddWithValue("@UserID", userID);
+            SqlCommand cmd = new SqlCommand($"exec sp_DeleteUser '{userID}'", conn);
+
             cmd.ExecuteNonQuery();
             conn.Close();
 
             LoadUsers();
         }
 
-       
-        
 
-        
+        protected void btnExportPdf_Click(object sender, EventArgs e)
+        {
+            GridView gvExport = new GridView();
+            conn.Open();
+            SqlCommand cmd = new SqlCommand("exec sp_GetAllUsers", conn);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            conn.Close();
 
-       protected void btnExportPdf_Click(object sender, EventArgs e)
-{
-    GridView gvExport = new GridView();
-    conn.Open();
-    SqlCommand cmd = new SqlCommand("exec sp_GetAllUsers", conn);
-    SqlDataAdapter da = new SqlDataAdapter(cmd);
-    DataTable dt = new DataTable();
-    da.Fill(dt);
-    conn.Close();
-    
-    gvExport.DataSource = dt;
-    gvExport.DataBind();
+            gvExport.DataSource = dt;
+            gvExport.DataBind();
 
-    Response.ContentType = "application/pdf";
-    Response.AddHeader("content-disposition", "attachment;filename=UserList.pdf");
-    Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.ContentType = "application/pdf";
+            Response.AddHeader("content-disposition", "attachment;filename=UserList.pdf");
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
 
-    StringWriter sw = new StringWriter();
-    HtmlTextWriter hw = new HtmlTextWriter(sw);
-    gvExport.RenderControl(hw);
-    StringReader sr = new StringReader(sw.ToString());
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter hw = new HtmlTextWriter(sw);
+            gvExport.RenderControl(hw);
+            StringReader sr = new StringReader(sw.ToString());
 
-    Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 10f);
-    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
-    pdfDoc.Open();
-    XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
-    pdfDoc.Close();
-    Response.End();
-}
+            Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 10f);
+            PdfWriter writer = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
+            pdfDoc.Open();
+            XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+            pdfDoc.Close();
+            Response.End();
+        }
         public override void VerifyRenderingInServerForm(Control control)
         {
             // Confirms that an ASP.NET server control is rendered for the HtmlForm control at run time.

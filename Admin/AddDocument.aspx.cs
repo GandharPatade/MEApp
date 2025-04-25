@@ -24,7 +24,6 @@ namespace MEApp.Admin
 
         private void LoadEmployeeCodes()
         {
-            //SqlConnection conn = new SqlConnection(conn);
             SqlDataAdapter da = new SqlDataAdapter("SELECT EmployeeCode FROM EmployeeProfiles", conn);
             DataTable dt = new DataTable();
             da.Fill(dt);
@@ -41,26 +40,26 @@ namespace MEApp.Admin
         {
             if (fileUpload.HasFile)
             {
-                string filePath = "~/Documents/" + fileUpload.FileName;
-                fileUpload.SaveAs(Server.MapPath(filePath));
+                try
+                {
+                    string filePath = "~/Documents/" + fileUpload.FileName;
+                    fileUpload.SaveAs(Server.MapPath(filePath));
 
-                string employeeCode = ddlEmployeeCode.SelectedValue;
-                string documentType = txtDocumentType.Text;
+                    string employeeCode = ddlEmployeeCode.SelectedValue;
+                    string documentType = txtDocumentType.Text;
 
-                // Call Stored Procedure to Add Document
-                //SqlConnection conn = new SqlConnection(conn);
-                SqlCommand cmd = new SqlCommand("sp_AddDocument", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@EmployeeCode", employeeCode);
-                cmd.Parameters.AddWithValue("@DocumentType", documentType);
-                cmd.Parameters.AddWithValue("@FilePath", filePath);
+                    SqlCommand cmd = new SqlCommand($"exec sp_AddDocument '{employeeCode}', '{documentType}', '{filePath}'", conn);
 
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                conn.Close();
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    conn.Close();
 
-                // Optional: Display success message or redirect
-                Response.Write("<script>alert('Document added successfully!');</script>");
+                    Response.Write("<script>alert('Document added successfully!');</script>");
+                }
+                catch (Exception ex)
+                {
+                    Response.Write($"<script>alert('{ex.Message}');</script>");
+                }
             }
         }
     }

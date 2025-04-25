@@ -54,36 +54,44 @@ namespace MEApp.Admin
             string dept = ((TextBox)row.Cells[4].Controls[0]).Text;
             string desig = ((TextBox)row.Cells[5].Controls[0]).Text;
 
-            string query = $"exec sp_UpdateEmployee @EmployeeID, @FullName, @Email, @ContactNo, @Department, @Designation";
-            SqlCommand cmd = new SqlCommand(query, con);
-            cmd.Parameters.AddWithValue("@EmployeeID", empID);
-            cmd.Parameters.AddWithValue("@FullName", fullName);
-            cmd.Parameters.AddWithValue("@Email", email);
-            cmd.Parameters.AddWithValue("@ContactNo", contact);
-            cmd.Parameters.AddWithValue("@Department", dept);
-            cmd.Parameters.AddWithValue("@Designation", desig);
+            try
+            {
+                string query = $"exec sp_UpdateEmployee '{empID}', '{fullName}', '{email}', '{contact}', '{dept}', '{desig}'";
+                SqlCommand cmd = new SqlCommand(query, con);
 
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
 
-            lblMessage.Text = "Employee updated successfully.";
-            GridViewEmployees.EditIndex = -1;
-            LoadEmployees();
+                lblMessage.Text = "Employee updated successfully.";
+                GridViewEmployees.EditIndex = -1;
+                LoadEmployees();
+            }
+            catch (Exception ex) 
+            {
+                Response.Write($"<script>alert('{ex.Message}')</script>");
+            }
+
         }
 
         protected void GridViewEmployees_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            int empID = Convert.ToInt32(GridViewEmployees.DataKeys[e.RowIndex].Value);
-            SqlCommand cmd = new SqlCommand("EXEC sp_DeleteEmployee @EmployeeID", con);
-            cmd.Parameters.AddWithValue("@EmployeeID", empID);
+            try
+            {
+                int empID = Convert.ToInt32(GridViewEmployees.DataKeys[e.RowIndex].Value);
+                SqlCommand cmd = new SqlCommand($"EXEC sp_DeleteEmployee '{empID}'", con);
 
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
 
-            lblMessage.Text = "Employee deleted.";
-            LoadEmployees();
+                lblMessage.Text = "Employee deleted.";
+                LoadEmployees();
+            }
+            catch (Exception ex) 
+            {
+                Response.Write($"<script>alert('{ex.Message}')</script>");
+            }   
         }
 
     }

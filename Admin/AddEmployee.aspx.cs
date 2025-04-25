@@ -39,21 +39,30 @@ namespace MEApp.Admin
 
         protected void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString);
-            SqlCommand cmd = new SqlCommand("exec sp_AddEmployee @EmployeeCode, @FullName, @Email, @ContactNo, @Department, @Designation", con);
-            cmd.Parameters.AddWithValue("@EmployeeCode", txtEmployeeCode.Text);
-            cmd.Parameters.AddWithValue("@FullName", txtFullName.Text);
-            cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
-            cmd.Parameters.AddWithValue("@ContactNo", txtContactNo.Text);
-            cmd.Parameters.AddWithValue("@Department", txtDepartment.Text);
-            cmd.Parameters.AddWithValue("@Designation", txtDesignation.Text);
+            string name = Session["fullname"].ToString();
+            string email = Session["email"].ToString();
+            txtEmail.Text = email;
+            txtFullName.Text = name;
+            string empcode = txtEmployeeCode.Text;
+            double contact = double.Parse(txtContactNo.Text);
+            string dept = txtDepartment.Text;
+            string designation =  txtDesignation.Text;
+            try
+            {
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString);
+                SqlCommand cmd = new SqlCommand($"exec sp_AddEmployee '{empcode}', '{name}', '{email}', '{contact}', '{dept}', '{designation}'", con);
+             
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
 
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
-
-            lblMessage.Text = "Employee added successfully!";
-            ClearFields();
+                lblMessage.Text = "Employee added successfully!";
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                Response.Write($"<script>alert('{ex.Message}');</script>");
+            }
         }
 
         private void LoadUsers()

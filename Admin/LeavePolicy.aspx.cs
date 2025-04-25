@@ -35,34 +35,40 @@ namespace MEApp.Admin
         {
             SqlConnection con = new SqlConnection(conStr);
             SqlCommand cmd;
+            string policyName = txtPolicyName.Text.Trim();
+            string leaveType = txtLeaveType.Text.Trim();
+            int totalLeaves = int.Parse(txtMaxLeaves.Text.Trim());
+            string description = txtDescription.Text.Trim();
+            int policyId = int.Parse(hfPolicyID.Value);
 
-            if (string.IsNullOrEmpty(hfPolicyID.Value))
+            try
             {
-                cmd = new SqlCommand("sp_InsertLeavePolicy", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@PolicyName", txtPolicyName.Text.Trim());
-                cmd.Parameters.AddWithValue("@LeaveType", txtLeaveType.Text.Trim());
-                cmd.Parameters.AddWithValue("@TotalLeaves", Convert.ToInt32(txtMaxLeaves.Text.Trim()));
-                cmd.Parameters.AddWithValue("@Description", txtDescription.Text.Trim());
+                if (string.IsNullOrEmpty(hfPolicyID.Value))
+                {
+
+                    cmd = new SqlCommand($"exec sp_InsertLeavePolicy '{policyName}', '{leaveType}', '{totalLeaves}', '{description}'", con);
+
+                }
+                else
+                {
+                    
+                    cmd = new SqlCommand($"exec sp_UpdateLeavePolicy '{policyId}', '{policyName}', '{leaveType}', '{totalLeaves}', '{description}'", con);
+
+                }
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+                lblMessage.Text = "Policy saved successfully.";
+                ClearFields();
+                LoadPolicies();
+
             }
-            else
+            catch (Exception ex) 
             {
-                cmd = new SqlCommand("sp_UpdateLeavePolicy", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@PolicyID", Convert.ToInt32(hfPolicyID.Value));
-                cmd.Parameters.AddWithValue("@PolicyName", txtPolicyName.Text.Trim());
-                cmd.Parameters.AddWithValue("@LeaveType", txtLeaveType.Text.Trim());
-                cmd.Parameters.AddWithValue("@TotalLeaves", Convert.ToInt32(txtMaxLeaves.Text.Trim()));
-                cmd.Parameters.AddWithValue("@Description", txtDescription.Text.Trim());
+                Response.Write($"<script>alert('{ex.Message}')</script>");
             }
-
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
-
-            lblMessage.Text = "Policy saved successfully.";
-            ClearFields();
-            LoadPolicies();
         }
 
         protected void gvPolicies_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
@@ -90,17 +96,22 @@ namespace MEApp.Admin
             }
             else if (e.CommandName == "DeletePolicy")
             {
-                SqlConnection con = new SqlConnection(conStr);
-                SqlCommand cmd = new SqlCommand("sp_DeleteLeavePolicy", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@PolicyID", policyId);
+                try
+                {
+                    SqlConnection con = new SqlConnection(conStr);
+                    SqlCommand cmd = new SqlCommand($"exec sp_DeleteLeavePolicy '{policyId}'", con);
 
-                con.Open();
-                cmd.ExecuteNonQuery();
-                con.Close();
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
 
-                lblMessage.Text = "Policy deleted successfully.";
-                LoadPolicies();
+                    lblMessage.Text = "Policy deleted successfully.";
+                    LoadPolicies();
+                }
+                catch (Exception ex)
+                {
+                    Response.Write($"<script>alert('{ex.Message}')</script>");
+                }
             }
         }
 

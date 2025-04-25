@@ -27,28 +27,36 @@ namespace MEApp.Admin
             Session["fullname"] = txtName.Text;
             Session["email"] = txtEmail.Text;
 
-            SqlCommand cmd = new SqlCommand("exec sp_AddUserByAdmin @FullName, @Email, @Password, @Role", conn);
-            cmd.Parameters.AddWithValue("@FullName", txtName.Text);
-            cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
-            cmd.Parameters.AddWithValue("@Password", txtPassword.Text);
-            cmd.Parameters.AddWithValue("@Role", ddlRole.SelectedValue);
+            string fullname = txtName.Text;
+            string email = txtEmail.Text;
+            string password = txtPassword.Text;
+            string role = ddlRole.SelectedValue;
 
-            int result = cmd.ExecuteNonQuery();
-
-            if (result > 0)
+            try
             {
-                Response.Write("<script>alert('User Registered Successfully');</script>");
-                if (ddlRole.SelectedIndex == 2)
+                SqlCommand cmd = new SqlCommand($"exec sp_AddUserByAdmin '{fullname}', '{email}', '{password}', '{role}'", conn);
+
+                int result = cmd.ExecuteNonQuery();
+
+                if (result > 0)
                 {
-                    Response.Redirect($"../Admin/AddEmployee.aspx?name={txtName.Text.Trim()}&email={txtEmail.Text.Trim()}");
+                    Response.Write("<script>alert('User Registered Successfully');</script>");
+                    if (ddlRole.SelectedIndex == 2)
+                    {
+                        Response.Redirect($"../Admin/AddEmployee.aspx?name={txtName.Text.Trim()}&email={txtEmail.Text.Trim()}");
+                    }
                 }
-            }
-            else
-            {
-                Response.Write("<script>alert('Error: User not registered.');</script>");
-            }
+                else
+                {
+                    Response.Write("<script>alert('Error: User not registered.');</script>");
+                }
 
-            conn.Close();
+                conn.Close();
+            }
+            catch (Exception ex) 
+            {
+                Response.Write($"<script>alert('{ex.Message}')</script>");
+            }
         }
     }
 }

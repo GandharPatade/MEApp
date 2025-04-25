@@ -36,7 +36,6 @@ namespace MEApp.Admin
             string technology = Technology.Text;
             string status = Status.SelectedValue;
 
-            // Validation
             if (string.IsNullOrEmpty(projectName) || deadline == DateTime.MinValue ||
                 string.IsNullOrEmpty(description) || string.IsNullOrEmpty(technology) || string.IsNullOrEmpty(status))
             {
@@ -53,24 +52,15 @@ namespace MEApp.Admin
             try
             {
                 string connStr = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
-                using (SqlConnection conn = new SqlConnection(connStr))
+                SqlConnection conn = new SqlConnection(connStr);
                 {
-                    SqlCommand cmd = new SqlCommand("sp_insertProject", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.AddWithValue("@ProjectName", projectName);
-                    cmd.Parameters.AddWithValue("@Deadline", deadline);
-                    cmd.Parameters.AddWithValue("@Description", description);
-                    cmd.Parameters.AddWithValue("@Technology", technology);
-                    cmd.Parameters.AddWithValue("@Status", status);
-
+                    SqlCommand cmd = new SqlCommand($"exec sp_insertProject '{projectName}', '{deadline}', '{description}', '{technology}', '{status}'", conn);
                     conn.Open();
                     cmd.ExecuteNonQuery();
                 }
 
                 Response.Write("<script>alert('Project created successfully!');</script>");
 
-                // Clear form fields
                 ProjectName.Text = "";
                 Description.Text = "";
                 Technology.Text = "";
@@ -131,19 +121,20 @@ namespace MEApp.Admin
             string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
             SqlConnection conn = new SqlConnection(cs);
             {
-                SqlCommand cmd = new SqlCommand("sp_updateProjects", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@ProjectID", projectId);
-                cmd.Parameters.AddWithValue("@ProjectName", projectName);
-                cmd.Parameters.AddWithValue("@Deadline", deadline);
-                cmd.Parameters.AddWithValue("@Description", description);
-                cmd.Parameters.AddWithValue("@Technology", technology);
-                cmd.Parameters.AddWithValue("@Status", status);
+                try
+                {
+                    SqlCommand cmd = new SqlCommand($"exec sp_updateProjects '{projectId}', '{projectName}', '{deadline}', '{description}', '{technology}', '{status}'", conn);
 
-                conn.Open();
-                cmd.ExecuteNonQuery();
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    Response.Write("<script>alert ('Update Successful')</script>");
+
+                }
+                catch (Exception ex) 
+                {
+                    Response.Write($"<script>alert('{ex.Message}')</script>");
+                }
             }
-            Response.Write("<script>alert ('Update Successful')</script>");
             ProjectsGridView.EditIndex = -1;
             BindGrid();
         }
@@ -155,12 +146,19 @@ namespace MEApp.Admin
             string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
             SqlConnection conn = new SqlConnection(cs);
             {
-                SqlCommand cmd = new SqlCommand($"sp_deleteProject '{projectId}'", conn);
+                try
+                {
+                    SqlCommand cmd = new SqlCommand($"sp_deleteProject '{projectId}'", conn);
 
-                conn.Open();
-                cmd.ExecuteNonQuery();
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    Response.Write("<script>alert('Deleted project successfully!')</script>");
+                }
+                catch(Exception ex)
+                {
+                    Response.Write($"<script>alert('{ex.Message}')</script>");
+                }
             }
-            Response.Write("<script>alert('Deleted project successfully!')</script>");
             BindGrid();
         }
 

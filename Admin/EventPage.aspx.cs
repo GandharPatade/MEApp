@@ -85,16 +85,18 @@ namespace MEApp.Admin
 
             SqlConnection conn = new SqlConnection(connectionString);
             {
-                SqlCommand cmd = new SqlCommand("sp_insertEvent", conn);
+                try
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@EventName", eventName);
-                    cmd.Parameters.AddWithValue("@EventDate", eventDate);
-                    cmd.Parameters.AddWithValue("@EventDescription", eventDescription);
-
-                    conn.Open();
-                    cmd.ExecuteNonQuery();
-                    conn.Close();
+                    SqlCommand cmd = new SqlCommand($"exec sp_insertEvent '{eventName}', '{eventDate}', '{eventDescription}'", conn);
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                    }
+                }
+                catch (Exception ex) 
+                {
+                    Response.Write($"<script>alert('{ex.Message}');</script>");
                 }
             }
         }
@@ -150,14 +152,7 @@ namespace MEApp.Admin
                 string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
                 SqlConnection conn = new SqlConnection(cs);
                 {
-                    SqlCommand cmd = new SqlCommand("sp_updateEvent", conn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    cmd.Parameters.AddWithValue("@EventID", eventId);
-                    cmd.Parameters.AddWithValue("@EventName", updatedEventName);
-                    cmd.Parameters.AddWithValue("@EventDate", updatedEventDate);
-                    cmd.Parameters.AddWithValue("@EventDescription", updatedEventDescription);
-
+                    SqlCommand cmd = new SqlCommand($"exec sp_updateEvent '{eventId}', '{updatedEventName}', '{updatedEventDate}', '{updatedEventDescription}'", conn);
                     conn.Open();
                     cmd.ExecuteNonQuery();
                 }
@@ -192,7 +187,7 @@ namespace MEApp.Admin
                 SqlCommand cmd = new SqlCommand("exec sp_getEvents", conn);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
 
-                System.Data.DataTable dt = new System.Data.DataTable();
+                DataTable dt = new DataTable();
                  
                 da.Fill(dt);
                 GridView1.DataSource = dt;

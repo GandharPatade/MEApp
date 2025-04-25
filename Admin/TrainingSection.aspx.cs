@@ -53,19 +53,19 @@ namespace MEApp.Admin
             string url = ((TextBox)TrainingGridView.Rows[e.RowIndex].FindControl("EditURLTextBox")).Text;
 
             string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
-            using (SqlConnection conn = new SqlConnection(cs))
+            SqlConnection conn = new SqlConnection(cs);
             {
-                SqlCommand cmd = new SqlCommand("sp_updateTraining", conn);
-                cmd.CommandType = CommandType.StoredProcedure;
+                try
+                {
+                    SqlCommand cmd = new SqlCommand($"exec sp_updateTraining '{trainingId}', '{title}', '{description}', '{status}', '{url}'", conn);
 
-                cmd.Parameters.AddWithValue("@TrainingID", trainingId);
-                cmd.Parameters.AddWithValue("@Title", title);
-                cmd.Parameters.AddWithValue("@Description", description);
-                cmd.Parameters.AddWithValue("@Status", status);
-                cmd.Parameters.AddWithValue("@URL", url);
-
-                conn.Open();
-                cmd.ExecuteNonQuery();
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex) 
+                {
+                    Response.Write($"<script>alert('{ex.Message}')</script>");
+                }
             }
 
             TrainingGridView.EditIndex = -1;
@@ -77,12 +77,19 @@ namespace MEApp.Admin
             int trainingId = Convert.ToInt32(TrainingGridView.DataKeys[e.RowIndex].Value);
 
             string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
-            using (SqlConnection conn = new SqlConnection(cs))
+            SqlConnection conn = new SqlConnection(cs);
             {
-                SqlCommand cmd = new SqlCommand("DELETE FROM Training WHERE TrainingID = @TrainingID", conn);
-                cmd.Parameters.AddWithValue("@TrainingID", trainingId);
-                conn.Open();
-                cmd.ExecuteNonQuery();
+                try
+                {
+                    SqlCommand cmd = new SqlCommand("DELETE FROM Training WHERE TrainingID = @TrainingID", conn);
+                    cmd.Parameters.AddWithValue("@TrainingID", trainingId);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Response.Write($"<script>alert('{ex.Message}')</script>");
+                }
             }
 
             BindGrid();
@@ -112,20 +119,25 @@ namespace MEApp.Admin
             string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
             SqlConnection conn = new SqlConnection(cs);
             {
-                SqlCommand cmd = new SqlCommand($"exec sp_insertTraining '{title}', '{description}', '{status}', '{url}' ", conn);
+                try
+                {
+                    SqlCommand cmd = new SqlCommand($"exec sp_insertTraining '{title}', '{description}', '{status}', '{url}' ", conn);
 
-
-                conn.Open();
-                cmd.ExecuteNonQuery();
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Response.Write($"<script>alert('{ex.Message}')</script>");
+                }
             }
 
-            // Clear inputs
+            
             TitleTextBox.Text = "";
             DescriptionTextBox.Text = "";
             URLTextBox.Text = "";
             StatusDropDown.SelectedIndex = 0;
 
-            // Refresh grid
             BindGrid();
         }
 
