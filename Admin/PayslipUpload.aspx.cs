@@ -55,11 +55,12 @@ namespace MEApp.Admin
                 string fileName = Path.GetFileName(fuPayslip.FileName);
                 string savePath = Path.Combine(saveDir, fileName);
                 fuPayslip.SaveAs(savePath);
+                string empCode = ddlEmpCode.SelectedValue;
+                string monthYear = txtMonthYear.Text;
+                string salaryAmount = txtAmount.Text;
 
-                SqlCommand cmd = new SqlCommand($"exec sp_InsertPayslip '{}', @MonthYear, @SalaryAmount, @PayslipFile", con);
-                cmd.Parameters.AddWithValue("@EmployeeCode", ddlEmpCode.SelectedValue);
-                cmd.Parameters.AddWithValue("@MonthYear", txtMonthYear.Text);
-                cmd.Parameters.AddWithValue("@SalaryAmount", txtAmount.Text);
+                SqlCommand cmd = new SqlCommand($"exec sp_InsertPayslip '{empCode}', '{monthYear}','{salaryAmount}', @PayslipFile", con);
+                
                 cmd.Parameters.AddWithValue("@PayslipFile", "Payslip/" + fileName);
 
                 con.Open();
