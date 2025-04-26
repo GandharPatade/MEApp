@@ -5990,6 +5990,7 @@
     <Compile Include="Admin\PayslipUpload.aspx.designer.cs">
       <DependentUpon>PayslipUpload.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\PDFgen.cs" />
     <Compile Include="Admin\PerformancePage.aspx.cs">
       <DependentUpon>PerformancePage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
