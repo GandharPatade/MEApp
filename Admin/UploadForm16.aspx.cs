@@ -8,6 +8,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using iTextSharp.tool.xml;
 
 
 namespace MEApp.Admin
@@ -38,7 +41,7 @@ namespace MEApp.Admin
                 ddlEmpCode.DataTextField = "EmployeeCode";
                 ddlEmpCode.DataValueField = "EmployeeCode";
                 ddlEmpCode.DataBind();
-                ddlEmpCode.Items.Insert(0, new ListItem("--Select--", ""));
+                ddlEmpCode.Items.Insert(0, new System.Web.UI.WebControls.ListItem("--Select--", ""));
 
 
             }
@@ -46,49 +49,71 @@ namespace MEApp.Admin
 
         protected void btnUpload_Click(object sender, EventArgs e)
         {
-            Session["EmpCode"]= ddlEmpCode;
-            if (fuForm16.HasFile)
+            try
             {
+                
+                string empCode = ddlEmpCode.SelectedValue;
+                string financialYear = txtFinancialYear.Text;
+                decimal salary = decimal.Parse(txtSalary.Text);
+
+                
+                decimal pf = salary * 0.12m;
+
+               
+                string htmlContent = $@"
+            <h1>Form 16</h1>
+            <p>Employee Code: {empCode}</p>
+            <p>Financial Year: {financialYear}</p>
+            <p>Salary: ₹{salary:N2}</p>
+            <p>Provident Fund (12%): ₹{pf:N2}</p>
+            <p>Date Generated: {DateTime.Now.ToShortDateString()}</p>
+        ";
+
+                byte[] pdfBytes = GeneratePdfFromHtml(htmlContent);
+
+                string fileName = $"Form16_{empCode}_{financialYear}.pdf";
                 string folderPath = Server.MapPath("~/Form16/");
                 if (!Directory.Exists(folderPath))
                     Directory.CreateDirectory(folderPath);
 
-                string fileName = Path.GetFileName(fuForm16.FileName);
-                string filePath = folderPath + fileName;
-                fuForm16.SaveAs(filePath);
+                string filePath = Path.Combine(folderPath, fileName);
+                File.WriteAllBytes(filePath, pdfBytes);
 
                 string relativePath = "~/Form16/" + fileName;
 
                 string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
                 SqlConnection con = new SqlConnection(cs);
                 {
-                    try
-                    {
-                        SqlCommand cmd = new SqlCommand("exec sp_InsertForm16 @EmployeeCode, @FinancialYear, @Form16Path", con);
-                        cmd.Parameters.AddWithValue("@EmployeeCode", ddlEmpCode.SelectedValue);
-                        cmd.Parameters.AddWithValue("@FinancialYear", txtFinancialYear.Text);
-                        cmd.Parameters.AddWithValue("@Form16Path", relativePath);
+                    SqlCommand cmd = new SqlCommand($"exec sp_InsertForm16 '{empCode}', '{financialYear}', '{salary}', '{pf}', '{relativePath}'", con);
 
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch (Exception ex) 
-                    {
-                        Response.Write($"<script>alert('{ex.Message}')</script>");
-                    }
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
                 }
 
-                //lblMessage.Text = "Form 16 uploaded successfully.";
-                //lblMessage.ForeColor = System.Drawing.Color.Green;
-                ScriptManager.RegisterStartupScript(this, GetType(), "SuccessAlert", "alert('Form 16 uploaded successfully!');", true);
-
+                ScriptManager.RegisterStartupScript(this, GetType(), "SuccessAlert", "alert('Form 16 generated and uploaded successfully!');", true);
             }
-            else
+            catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "FileError", "alert('Please select a PDF to upload.');", true);
+                Response.Write($"<script>alert('{ex.Message}')</script>");
+            }
+        }
 
-                //    lblMessage.Text = "Please select a file to upload.";
-                //    lblMessage.ForeColor = System.Drawing.Color.Red;
+        private byte[] GeneratePdfFromHtml(string htmlContent)
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            {
+                Document document = new Document(PageSize.A4, 10f, 10f, 10f, 10f);
+                PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+                document.Open();
+
+                StringReader stringReader = new StringReader(htmlContent);
+                {
+                    XMLWorkerHelper.GetInstance().ParseXHtml(writer, document, stringReader);
+                }
+
+                document.Close();
+                return memoryStream.ToArray();
             }
         }
 

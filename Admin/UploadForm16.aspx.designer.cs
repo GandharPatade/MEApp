@@ -33,21 +33,21 @@ namespace MEApp.Admin
         protected global::System.Web.UI.WebControls.TextBox txtFinancialYear;
 
         /// <summary>
-        /// fuForm16 control.
+        /// txtSalary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fuForm16;
+        protected global::System.Web.UI.WebControls.TextBox txtSalary;
 
         /// <summary>
-        /// Button1 control.
+        /// btnUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button btnUpload;
     }
 }
