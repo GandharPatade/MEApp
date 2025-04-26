@@ -38,11 +38,15 @@ namespace MEApp.Admin
 
                 int result = cmd.ExecuteNonQuery();
 
-                if (result > 0)
+                if (result > 0 && role == "User" || role == "HR")
                 { 
                     Response.Redirect($"../Admin/AddEmployee.aspx?name={txtName.Text.Trim()}&email={txtEmail.Text.Trim()}");
                 }
-                else
+                else if(result > 0 && role == "Admin")
+                {
+                    Response.Redirect("AdminDashboard.aspx");
+                }
+                else 
                 {
                     Response.Write("<script>alert('Error: User not registered.');</script>");
                 }
