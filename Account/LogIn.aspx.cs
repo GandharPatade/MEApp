@@ -67,6 +67,10 @@ namespace MEApp.Account
                     Session["EmpCode"] = dds.Tables[0].Rows[0][1].ToString();
                     Response.Redirect("~/User/UserDashboard.aspx");
                 }
+                else if (role == "hr")
+                {
+                    Response.Redirect("~/Hr/hrdashboard.aspx");
+                }
                 else
                 {
                     Response.Write("<script>alert('Unknown Role');</script>");

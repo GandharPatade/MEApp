@@ -13,5 +13,11 @@ namespace MEApp.MasterPages
         {
 
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Response.Redirect("../Account/LogIn.aspx");
+        }
     }
 }
