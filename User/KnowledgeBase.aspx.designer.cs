@@ -13,5 +13,40 @@ namespace MEApp.User
 
     public partial class KnowledgeBase
     {
+          /// <summary>
+  /// form1 control.
+  /// </summary>
+  /// <remarks>
+  /// Auto-generated field.
+  /// To modify move field declaration from designer file to code-behind file.
+  /// </remarks>
+  protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+
+  /// <summary>
+  /// ddlCategory control.
+  /// </summary>
+  /// <remarks>
+  /// Auto-generated field.
+  /// To modify move field declaration from designer file to code-behind file.
+  /// </remarks>
+  protected global::System.Web.UI.WebControls.DropDownList ddlCategory;
+
+  /// <summary>
+  /// pnlContent control.
+  /// </summary>
+  /// <remarks>
+  /// Auto-generated field.
+  /// To modify move field declaration from designer file to code-behind file.
+  /// </remarks>
+  protected global::System.Web.UI.WebControls.Panel pnlContent;
+
+  /// <summary>
+  /// ltlContent control.
+  /// </summary>
+  /// <remarks>
+  /// Auto-generated field.
+  /// To modify move field declaration from designer file to code-behind file.
+  /// </remarks>
+  protected global::System.Web.UI.WebControls.Literal ltlContent;
     }
 }
