@@ -61,7 +61,7 @@ namespace MEApp.User
                 return;
             }
 
-            string connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
 
             // Fetch Support Staff FullName based on selected UserID
             using (SqlConnection conn = new SqlConnection(connectionString))
