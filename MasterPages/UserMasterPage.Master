@@ -1455,8 +1455,17 @@
 										<span class="menu-arrow"></span>
 									</a>
 									<ul>
-										<li><a href="knowledgebase.html">Support Request</a></li>
-										<li><a href="activity.html">Knowledge Base</a></li>
+										<%--<li><a href="knowledgebase.html">Support Request</a></li>--%>
+										<li>
+
+										<asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/User/SupportRequest.aspx">Support Request</asp:HyperLink>
+										</li>
+										<%--<li><a href="activity.html">Knowledge Base</a></li>--%>
+										<li>
+
+											<asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/User/KnowledgeBase.aspx">Knowledge Base</asp:HyperLink>
+
+										</li>
 									</ul>
 								</li>
 

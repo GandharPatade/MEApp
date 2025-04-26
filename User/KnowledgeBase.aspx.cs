@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,37 +11,53 @@ namespace MEApp.User
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-        }
-        protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string selected = ddlCategory.SelectedValue;
-            pnlContent.Visible = true;
-
-            if (selected == "FAQ")
-            {
-                ltlContent.Text = @"
-                    <h3>Frequently Asked Questions</h3>
-                    <ul>
-                        <li><strong>Q:</strong> How do I reset my password?<br/><strong>A:</strong> Use the 'Forgot Password' link on login.</li>
-                        <li><strong>Q:</strong> Where can I view my attendance?<br/><strong>A:</strong> In the Employee Portal under 'My Attendance'.</li>
-                    </ul>
-                ";
-            }
-            else if (selected == "HR")
-            {
-                ltlContent.Text = @"
-                    <h3>HR Policies</h3>
-                    <ul>
-                        <li>Leave Policy: 20 paid leaves per year.</li>
-                        <li>Work From Home Policy: Allowed up to 5 days/month.</li>
-                        <li>Code of Conduct: Professional behavior is mandatory at all times.</li>
-                    </ul>
-                ";
-            }
-            else
+            if (!IsPostBack)
             {
                 pnlContent.Visible = false;
+            }
+        }
+
+        protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selected = ddlCategory.SelectedValue.Trim();
+
+            if (string.IsNullOrEmpty(selected))
+            {
+                pnlContent.Visible = false;
+                return;
+            }
+
+            pnlContent.Visible = true;
+
+            // Clear old data first
+            lblHeader.Text = "";
+            lblQ1.Text = lblA1.Text = lblQ2.Text = lblA2.Text = lblQ3.Text = lblA3.Text = "";
+
+            if (selected == "FAQs")
+            {
+                lblHeader.Text = "Frequently Asked Questions";
+
+                lblQ1.Text = "Q: How do I reset my password?";
+                lblA1.Text = "A: Use the 'Forgot Password' link on the login page.";
+
+                lblQ2.Text = "Q: Where can I view my attendance?";
+                lblA2.Text = "A: In the Employee Portal under 'My Attendance'.";
+
+                lblQ3.Text = ""; // No 3rd FAQ for now
+                lblA3.Text = "";
+            }
+            else if (selected == "HR Policies")
+            {
+                lblHeader.Text = "HR Policies";
+
+                lblQ1.Text = "Leave Policy:";
+                lblA1.Text = "20 paid leaves per year.";
+
+                lblQ2.Text = "Work From Home Policy:";
+                lblA2.Text = "Allowed up to 5 days/month.";
+
+                lblQ3.Text = "Code of Conduct:";
+                lblA3.Text = "Professional behavior is mandatory at all times.";
             }
         }
     }
