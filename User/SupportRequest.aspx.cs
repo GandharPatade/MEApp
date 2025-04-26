@@ -23,7 +23,7 @@ namespace MEApp.User
 
         private void PopulateSupportStaffDropdown()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["dbconn"].ConnectionString;
+            string connectionString = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
             string query = "SELECT UserID, FullName FROM Users WHERE Role = 'Support'";
 
             using (SqlConnection con = new SqlConnection(connectionString))
