@@ -28,7 +28,7 @@ namespace MEApp.User
         {
             using (SqlConnection con = new SqlConnection(connStr))
             {
-                string query = "SELECT * FROM Form16Documents where EmployeeCode='"+ Session["EmpCode"].ToString()+ "'";
+                string query = "SELECT * FROM Form16Documents where EmployeeCode='" + Session["EmpCode"].ToString() + "'";
                 SqlDataAdapter da = new SqlDataAdapter(query, con);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
