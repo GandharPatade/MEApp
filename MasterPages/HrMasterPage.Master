@@ -1411,7 +1411,7 @@
 									<ul>
 										
 										<li>
-											<asp:HyperLink ID="HyperLink15" runat="server" NavigateUrl="~/Admin/EventPage.aspx">Event Management</asp:HyperLink></li>
+											<asp:HyperLink ID="HyperLink15" runat="server" NavigateUrl="~/Hr/AddEvents.aspx">Add Event</asp:HyperLink></li>
 										
 									</ul>
 								</li>

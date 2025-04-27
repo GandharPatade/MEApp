@@ -13,52 +13,22 @@ namespace MEApp.User
         {
             if (!IsPostBack)
             {
-                pnlContent.Visible = false;
+                // FAQs
+                lblFAQ1Question.Text = "Q1: How can I reset my company password?";
+                lblFAQ1Answer.Text = "A1: You can reset your password using the self-service portal or contact IT support.";
+
+                lblFAQ2Question.Text = "Q2: Where can I find the holiday list?";
+                lblFAQ2Answer.Text = "A2: The holiday list is available on the company intranet under HR section.";
+
+                // HR Policies
+                lblPolicy1Title.Text = "Policy 1: Work From Home Policy";
+                lblPolicy1Content.Text = "Employees are allowed to work from home up to 2 days a week with manager approval.";
+
+                lblPolicy2Title.Text = "Policy 2: Leave Policy";
+                lblPolicy2Content.Text = "Employees are entitled to 20 days of paid leave per year, excluding public holidays.";
             }
         }
 
-        protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string selected = ddlCategory.SelectedValue.Trim();
-
-            if (string.IsNullOrEmpty(selected))
-            {
-                pnlContent.Visible = false;
-                return;
-            }
-
-            pnlContent.Visible = true;
-
-            // Clear old data first
-            lblHeader.Text = "";
-            lblQ1.Text = lblA1.Text = lblQ2.Text = lblA2.Text = lblQ3.Text = lblA3.Text = "";
-
-            if (selected == "FAQs")
-            {
-                lblHeader.Text = "Frequently Asked Questions";
-
-                lblQ1.Text = "Q: How do I reset my password?";
-                lblA1.Text = "A: Use the 'Forgot Password' link on the login page.";
-
-                lblQ2.Text = "Q: Where can I view my attendance?";
-                lblA2.Text = "A: In the Employee Portal under 'My Attendance'.";
-
-                lblQ3.Text = ""; // No 3rd FAQ for now
-                lblA3.Text = "";
-            }
-            else if (selected == "HR Policies")
-            {
-                lblHeader.Text = "HR Policies";
-
-                lblQ1.Text = "Leave Policy:";
-                lblA1.Text = "20 paid leaves per year.";
-
-                lblQ2.Text = "Work From Home Policy:";
-                lblA2.Text = "Allowed up to 5 days/month.";
-
-                lblQ3.Text = "Code of Conduct:";
-                lblA3.Text = "Professional behavior is mandatory at all times.";
-            }
-        }
+       
     }
 }

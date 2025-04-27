@@ -3948,6 +3948,7 @@
     <Content Include="Admin\ViewEmployees.aspx" />
     <Content Include="Admin\ViewForm16.aspx" />
     <Content Include="Admin\ViewPayslips.aspx" />
+    <Content Include="Hr\AddEvents.aspx" />
     <Content Include="Hr\assets\css\animate.css" />
     <Content Include="Hr\assets\css\bootstrap-datetimepicker.min.css" />
     <Content Include="Hr\assets\css\bootstrap.min.css" />
@@ -7986,6 +7987,13 @@
     </Compile>
     <Compile Include="Admin\ViewPayslips.aspx.designer.cs">
       <DependentUpon>ViewPayslips.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hr\AddEvents.aspx.cs">
+      <DependentUpon>AddEvents.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hr\AddEvents.aspx.designer.cs">
+      <DependentUpon>AddEvents.aspx</DependentUpon>
     </Compile>
     <Compile Include="Hr\hrdashboard.aspx.cs">
       <DependentUpon>hrdashboard.aspx</DependentUpon>

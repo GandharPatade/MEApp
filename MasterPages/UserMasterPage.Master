@@ -1381,7 +1381,8 @@
 										<li>
 											<asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/User/LeaveApplication.aspx">Leave Application</asp:HyperLink></li>
 										<%--<li><a href="attendance-employee.html">Leave Balance</a></li>--%>
-										<li><a href="attendance-employee.html">Leave Calender</a></li>
+										<%--<li><a href="attendance-employee.html">Leave Calender</a></li>--%>
+										<asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/User/LeaveCalander.aspx">Leave Calender</asp:HyperLink>
 										
 									</ul>
 								</li>

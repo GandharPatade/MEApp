@@ -15,84 +15,75 @@ namespace MEApp.User
     {
 
         /// <summary>
-        /// ddlCategory control.
+        /// lblFAQ1Question control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCategory;
+        protected global::System.Web.UI.WebControls.Label lblFAQ1Question;
 
         /// <summary>
-        /// pnlContent control.
+        /// lblFAQ1Answer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlContent;
+        protected global::System.Web.UI.WebControls.Label lblFAQ1Answer;
 
         /// <summary>
-        /// lblHeader control.
+        /// lblFAQ2Question control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblHeader;
+        protected global::System.Web.UI.WebControls.Label lblFAQ2Question;
 
         /// <summary>
-        /// lblQ1 control.
+        /// lblFAQ2Answer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblQ1;
+        protected global::System.Web.UI.WebControls.Label lblFAQ2Answer;
 
         /// <summary>
-        /// lblA1 control.
+        /// lblPolicy1Title control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblA1;
+        protected global::System.Web.UI.WebControls.Label lblPolicy1Title;
 
         /// <summary>
-        /// lblQ2 control.
+        /// lblPolicy1Content control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblQ2;
+        protected global::System.Web.UI.WebControls.Label lblPolicy1Content;
 
         /// <summary>
-        /// lblA2 control.
+        /// lblPolicy2Title control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblA2;
+        protected global::System.Web.UI.WebControls.Label lblPolicy2Title;
 
         /// <summary>
-        /// lblQ3 control.
+        /// lblPolicy2Content control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblQ3;
-
-        /// <summary>
-        /// lblA3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblA3;
+        protected global::System.Web.UI.WebControls.Label lblPolicy2Content;
     }
 }

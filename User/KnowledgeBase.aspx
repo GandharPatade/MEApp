@@ -4,36 +4,30 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
-    <div style="padding:20px;">
-        <h1>Knowledge Base</h1>
-        <p>Access a knowledge base with FAQs and HR policies.</p>
+   <div style="padding:20px;">
+            <h2>FAQs</h2>
 
-        <asp:DropDownList 
-            ID="ddlCategory" 
-            runat="server" 
-            AutoPostBack="true" 
-            OnSelectedIndexChanged="ddlCategory_SelectedIndexChanged">
-            <asp:ListItem Text="Select Category" Value="" />
-            <asp:ListItem Text="FAQs" Value="FAQs" />
-            <asp:ListItem Text="HR Policies" Value="HR Policies" />
-        </asp:DropDownList>
-
-        <br /><br />
-
-        <asp:Panel ID="pnlContent" runat="server" Visible="false">
-            <asp:Label ID="lblHeader" runat="server" Font-Bold="true" Font-Size="Large"></asp:Label>
+            <asp:Label ID="lblFAQ1Question" runat="server" Font-Bold="True" />
+            <br />
+            <asp:Label ID="lblFAQ1Answer" runat="server" />
             <br /><br />
 
-            <asp:Label ID="lblQ1" runat="server" Font-Bold="true"></asp:Label><br />
-            <asp:Label ID="lblA1" runat="server"></asp:Label><br /><br />
+            <asp:Label ID="lblFAQ2Question" runat="server" Font-Bold="True" />
+            <br />
+            <asp:Label ID="lblFAQ2Answer" runat="server" />
+            <br /><br />
 
-            <asp:Label ID="lblQ2" runat="server" Font-Bold="true"></asp:Label><br />
-            <asp:Label ID="lblA2" runat="server"></asp:Label><br /><br />
+            <h2>HR Policies</h2>
 
-            <asp:Label ID="lblQ3" runat="server" Font-Bold="true"></asp:Label><br />
-            <asp:Label ID="lblA3" runat="server"></asp:Label><br /><br />
-        </asp:Panel>
-    </div>
+            <asp:Label ID="lblPolicy1Title" runat="server" Font-Bold="True" />
+            <br />
+            <asp:Label ID="lblPolicy1Content" runat="server" />
+            <br /><br />
+
+            <asp:Label ID="lblPolicy2Title" runat="server" Font-Bold="True" />
+            <br />
+            <asp:Label ID="lblPolicy2Content" runat="server" />
+        </div>
 
 
 
