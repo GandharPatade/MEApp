@@ -39,7 +39,7 @@ namespace MEApp.Admin
             con.Close();
 
             LoadAppraisals();
-
+            con.Open();
             string to = "";
             SqlCommand emailCmd = new SqlCommand($"exec sp_GetEmail '{empCode}'", con);
             emailCmd.ExecuteNonQuery();
