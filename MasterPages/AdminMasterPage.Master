@@ -1500,6 +1500,7 @@
 								<span class="menu-arrow"></span>
 				</a>
 				<ul>
+                    <li><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Admin/PerformancePage.aspx">Performance</asp:HyperLink></li>
 								
 				<li><asp:HyperLink ID="HyperLink14" runat="server" NavigateUrl="../Admin/AppraisalForm.aspx">Appraisal Form</asp:HyperLink></li>
 								
