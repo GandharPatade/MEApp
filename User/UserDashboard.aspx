@@ -80,11 +80,13 @@
 							<div class="card-body">
 								<div class="mb-3">
 									<span class="d-block mb-1 fs-13">Phone Number</span>
-									<p class="text-gray-9">+1 324 3453 545</p>
+									
+									<asp:Label ID="Label3" runat="server" Text=""></asp:Label>
 								</div>
 								<div class="mb-3">
 									<span class="d-block mb-1 fs-13">Email Address</span>
-									<p class="text-gray-9">Steperde124@example.com</p>
+									<asp:Label ID="Label2" runat="server" Text=""></asp:Label>
+
 								</div>
 								<div class="mb-3">
 									<span class="d-block mb-1 fs-13">Report Office</span>

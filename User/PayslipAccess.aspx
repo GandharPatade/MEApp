@@ -54,27 +54,26 @@
 
 
 
-<div class="container mt-4">
-    <h4 class="mb-3">View Payslips For Employee Code <asp:Label ID="Label1" runat="server" Text=""></asp:Label></h4>
-
-    <asp:GridView ID="GridViewPayslips" runat="server" AutoGenerateColumns="false"
-        CssClass="table table-bordered table-striped table-hover"
-        HeaderStyle-CssClass="table-dark" GridLines="None">
-        <Columns>
-            <asp:BoundField DataField="EmployeeCode" HeaderText="Employee Code" />
-            <asp:BoundField DataField="MonthYear" HeaderText="Month" />
-            <asp:BoundField DataField="SalaryAmount" HeaderText="Salary" />
-            <asp:TemplateField HeaderText="Download">
-                <ItemTemplate>
-                    <a href='<%# ResolveUrl(Eval("PayslipFile").ToString()) %>'
-                        class="btn btn-sm btn-primary"
-                        target="_blank">Download
-                    </a>
-                </ItemTemplate>
-            </asp:TemplateField>
-        </Columns>
-    </asp:GridView>
-</div>
+        <h2>View Payslips</h2>
+    <asp:GridView ID="GridViewPayslips" runat="server" AutoGenerateColumns="false" CssClass="table table-striped">
+    <Columns>
+        <asp:BoundField DataField="EmployeeCode" HeaderText="Employee Code" />
+        <asp:BoundField DataField="FinancialYear" HeaderText="Financial Year" />
+        <asp:BoundField DataField="SalaryAmount" HeaderText="SalaryAmount" DataFormatString="{0:C}" />
+        <asp:BoundField DataField="PF" HeaderText="PF" DataFormatString="{0:C}" />
+        <asp:TemplateField HeaderText="Download Payslip">
+            <ItemTemplate>
+                <asp:LinkButton ID="btnDownload" 
+                                runat="server" 
+                                CommandArgument='<%# Eval("EmployeeCode") %>' 
+                                OnClick="btnDownload_Click"
+                                CssClass="btn btn-sm btn-primary">
+                    Download
+                </asp:LinkButton>
+            </ItemTemplate>
+        </asp:TemplateField>
+    </Columns>
+</asp:GridView>
 
 
 </asp:Content>

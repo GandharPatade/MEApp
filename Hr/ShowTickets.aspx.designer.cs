@@ -7,20 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MEApp.User
+namespace MEApp.Hr
 {
 
 
-    public partial class PayslipAccess
+    public partial class ShowTickets
     {
 
         /// <summary>
-        /// GridViewPayslips control.
+        /// gvAllTickets control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewPayslips;
+        protected global::System.Web.UI.WebControls.GridView gvAllTickets;
     }
 }

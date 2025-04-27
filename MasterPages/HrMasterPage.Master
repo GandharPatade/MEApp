@@ -1350,7 +1350,7 @@
 									<ul>
 										<li>
 											
-											<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="../Admin/AdminDashboard.aspx">Admin Dashboard</asp:HyperLink>
+											<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Hr/hrdashboard.aspx">Hr Dashboard</asp:HyperLink>
 										</li>
 										
 
@@ -1360,7 +1360,7 @@
 									</ul>
 								</li>
 								
-								<li class="submenu">
+								<%--<li class="submenu">
 				<a href="javascript:void(0);">
 								<i class="ti ti-users"></i><span>Users</span>
 								<span class="menu-arrow"></span>
@@ -1383,7 +1383,7 @@
 									</a>
 									<ul>
 										<%--<li><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="../Admin/AddEmployee.aspx">Add Employee</asp:HyperLink></li>--%>
-										<li><asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="../Admin/ViewEmployees.aspx">View Employees</asp:HyperLink></li>
+										<%--<li><asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="../Admin/ViewEmployees.aspx">View Employees</asp:HyperLink></li>
 										
 									</ul>
 								</li>
@@ -1399,7 +1399,7 @@
 										
 										
 									</ul>
-								</li>
+								</li>--%>
 
 
 
@@ -1415,9 +1415,21 @@
 										
 									</ul>
 								</li>
-
-
 								<li class="submenu">
+				<a href="javascript:void(0);">
+								<i class="ti ti-cash"></i><span>Feedbacks</span>
+								<span class="menu-arrow"></span>
+				</a>
+				<ul>
+								
+								<li>
+									<asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Hr/ShowFeedbacks.aspx">Show Feedbacks</asp:HyperLink></li>
+								
+				</ul>
+</li>
+
+
+								<%--<li class="submenu">
 									<a href="javascript:void(0);">
 										<i class="ti ti-external-link"></i><span>Projects</span>
 										<span class="menu-arrow"></span>
@@ -1468,7 +1480,7 @@
 										<li><asp:HyperLink ID="HyperLink12" runat="server" NavigateUrl="../Admin/LeaveApprovals.aspx">Leave Approvals </asp:HyperLink></li>
 										<li><asp:HyperLink ID="HyperLink13" runat="server" NavigateUrl="../Admin/LeaveReport.aspx">Leave Report </asp:HyperLink></li>
 									</ul>
-								</li>
+								</li>--%>
 
 
 
@@ -1484,7 +1496,7 @@
 								</li>--%>
 														
 
-								<li class="submenu">
+<%--								<li class="submenu">
 				<a href="javascript:void(0);">
 								<i class="ti ti-file-time"></i><span>Performance Management</span>
 								<span class="menu-arrow"></span>
@@ -1495,7 +1507,7 @@
 								
 								
 				</ul>
-</li>
+</li>--%>
 								
 
 

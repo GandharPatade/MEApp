@@ -65,6 +65,7 @@ namespace MEApp.Account
                 else if (role == "user")
                 {
                     Session["EmpCode"] = dds.Tables[0].Rows[0][1].ToString();
+                    Session["phonenumber"] = dds.Tables[0].Rows[0][3].ToString();
                     Response.Redirect("~/User/UserDashboard.aspx");
                 }
                 else if (role == "hr")

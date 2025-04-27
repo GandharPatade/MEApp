@@ -14,6 +14,8 @@ namespace MEApp.User
             if (!IsPostBack)
             {
                 Label1.Text = Session["FullName"].ToString();
+                Label2.Text = Session["Email12"].ToString();
+                Label3.Text = Session["phonenumber"].ToString();
             }
             
 

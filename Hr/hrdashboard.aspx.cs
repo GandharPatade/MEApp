@@ -11,7 +11,11 @@ namespace MEApp.Hr
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                Label1.Text = Session["FullName"].ToString();
+                Label2.Text = Session["Email12"].ToString();
+            }
         }
     }
 }

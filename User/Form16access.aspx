@@ -52,23 +52,26 @@
 <!-- /Breadcrumb -->
 
 
-    <div class="container mt-5">
-        <h3 class="text-primary mb-3">📄 Form 16 Documents</h3>
-        <asp:GridView ID="gvForm16" runat="server" CssClass="table table-bordered"
-            AutoGenerateColumns="False" OnRowCommand="gvForm16_RowCommand">
-            <Columns>
-                <asp:BoundField DataField="EmployeeCode" HeaderText="Employee Code" />
-                <asp:BoundField DataField="FinancialYear" HeaderText="Financial Year" />
-                <asp:BoundField DataField="UploadedOn" HeaderText="Uploaded On" DataFormatString="{0:yyyy-MM-dd}" />
-                <asp:BoundField DataField="Form16Path" HeaderText="File Path" />
+        <h2>View form16's</h2>
+    <asp:GridView ID="GridViewForm16" runat="server" AutoGenerateColumns="false" CssClass="table table-striped">
+    <Columns>
+        <asp:BoundField DataField="EmployeeCode" HeaderText="Employee Code" />
+        <asp:BoundField DataField="FinancialYear" HeaderText="Financial Year" />
+        <asp:BoundField DataField="Salary" HeaderText="Salary" DataFormatString="{0:C}" />
+        <asp:BoundField DataField="PF" HeaderText="PF" DataFormatString="{0:C}" />
+        <asp:TemplateField HeaderText="Download Form 16">
+            <ItemTemplate>
+                <asp:LinkButton ID="btnDownload" 
+                                runat="server" 
+                                CommandArgument='<%# Eval("EmployeeCode") %>' 
+                                OnClick="btnDownload_Click"
+                                CssClass="btn btn-sm btn-primary">
+                    Download
+                </asp:LinkButton>
+            </ItemTemplate>
+        </asp:TemplateField>
+    </Columns>
+</asp:GridView>
 
-                <asp:TemplateField HeaderText="Download">
-                    <ItemTemplate>
-                        <asp:Button ID="btnDownloadForm16" runat="server" Text="Download" CommandName="DownloadForm16"
-                            CommandArgument='<%# Eval("Form16Path") %>' CssClass="btn btn-primary btn-sm" />
-                    </ItemTemplate>
-                </asp:TemplateField>
-            </Columns>
-        </asp:GridView>
-        </div>
+
 </asp:Content>

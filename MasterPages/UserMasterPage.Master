@@ -1363,9 +1363,9 @@
 										<li>
 											<asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/User/UserUpdateProfile.aspx">Update Profile</asp:HyperLink>
 										</li>
-										<li>
+										<%--<li>
 				<asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/User/UserDocumentAccess.aspx">Document Access</asp:HyperLink>
-</li>
+</li>--%>
 										
 									</ul>
 								</li>
@@ -1382,8 +1382,8 @@
 											<asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/User/LeaveApplication.aspx">Leave Application</asp:HyperLink></li>
 										<%--<li><a href="attendance-employee.html">Leave Balance</a></li>--%>
 										<%--<li><a href="attendance-employee.html">Leave Calender</a></li>--%>
-										<asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/User/LeaveCalander.aspx">Leave Calender</asp:HyperLink>
-										
+										<li><asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/User/LeaveCalander.aspx">Leave Calender</asp:HyperLink>
+										</li>
 									</ul>
 								</li>
 
@@ -1417,13 +1417,17 @@
 									</a>
 									<ul>
 										
-										<li><a href="payslip.html">Appraisal Participation</a></li>
-										<li><a href="payslip.html">Feedback Submition</a></li>
+										<%--<li><a href="payslip.html">Appraisal Participation</a></li>--%>
+										<li>
+											<asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/User/AppraisalParticipation.aspx">Appraisal Participation</asp:HyperLink></li>
+										<%--<li><a href="payslip.html">Feedback Submition</a></li>--%>
+										<li>
+				<asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/User/FeedbackSubmission.aspx">Feedback Submition</asp:HyperLink></li>
 										
 									</ul>
 								</li>
 
-								<li class="submenu">
+								<%--<li class="submenu">
 									<a href="javascript:void(0);">
 										<i class="ti ti-school"></i><span>Notification And Alerts</span>
 										<span class="menu-arrow"></span>
@@ -1434,7 +1438,7 @@
 										
 										
 									</ul>
-								</li>
+								</li>--%>
 
 								<li class="submenu">
 									<a href="javascript:void(0);"><i
@@ -1443,9 +1447,10 @@
 
 									</a>
 									<ul>
-										<li><a href="performance-indicator.html">Training Schedule</a></li>
-										<li><a href="performance-review.html">Development Plans</a></li>
-										<li><a href="performance-review.html">Upload Document</a></li>
+										<%--<li><a href="performance-indicator.html">Training List</a></li>--%>
+										
+										<li><asp:HyperLink ID="HyperLink10" runat="server" NavigateUrl="~/User/trainingschedule.aspx">Training List</asp:HyperLink></li>
+										<%--<li><a href="performance-review.html">Upload Document</a></li>--%>
 										
 									</ul>
 								</li>

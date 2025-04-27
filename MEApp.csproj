@@ -5876,6 +5876,9 @@
     <Content Include="Hr\assets\plugins\twitter-bootstrap-wizard\jquery.bootstrap.wizard.min.js" />
     <Content Include="Hr\assets\plugins\twitter-bootstrap-wizard\prettify.js" />
     <Content Include="Hr\hrdashboard.aspx" />
+    <Content Include="Hr\pulse180.png" />
+    <Content Include="Hr\ShowFeedbacks.aspx" />
+    <Content Include="Hr\ShowTickets.aspx" />
     <Content Include="lib\bootstrap\css\bootstrap-grid.css" />
     <Content Include="lib\bootstrap\css\bootstrap-grid.min.css" />
     <Content Include="lib\bootstrap\css\bootstrap-grid.rtl.css" />
@@ -8001,6 +8004,20 @@
     </Compile>
     <Compile Include="Hr\hrdashboard.aspx.designer.cs">
       <DependentUpon>hrdashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hr\ShowFeedbacks.aspx.cs">
+      <DependentUpon>ShowFeedbacks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hr\ShowFeedbacks.aspx.designer.cs">
+      <DependentUpon>ShowFeedbacks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hr\ShowTickets.aspx.cs">
+      <DependentUpon>ShowTickets.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hr\ShowTickets.aspx.designer.cs">
+      <DependentUpon>ShowTickets.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterPages\AccountMasterPage.Master.cs">
       <DependentUpon>AccountMasterPage.Master</DependentUpon>
