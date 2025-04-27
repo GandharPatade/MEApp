@@ -52,6 +52,7 @@ namespace MEApp.Admin
                 return;
             }
             eventDateTime = EventDateCalendar.SelectedDate;
+            
 
             string eventDescription = EventDescription.Text;
 

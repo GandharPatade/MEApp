@@ -44,7 +44,7 @@ namespace MEApp.Admin
             SqlCommand emailCmd = new SqlCommand($"exec sp_GetEmail '{empCode}'", con);
             emailCmd.ExecuteNonQuery();
 
-            con.Open();
+            //con.Open();
             SqlDataReader reader = emailCmd.ExecuteReader();
             if (reader.Read())
             {
