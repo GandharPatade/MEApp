@@ -87,7 +87,7 @@ namespace MEApp.Admin
                     con.Close();
                 }
 
-                ScriptManager.RegisterStartupScript(this, GetType(), "SuccessAlert", "alert('Form 16 generated and uploaded successfully!');", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "SuccessAlert", "alert('Payslip generated and uploaded successfully!');", true);
             }
             catch (Exception ex)
             {
