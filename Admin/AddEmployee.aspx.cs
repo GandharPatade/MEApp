@@ -47,8 +47,7 @@ namespace MEApp.Admin
             double contact = double.Parse(txtContactNo.Text);
             string dept = txtDepartment.Text;
             string designation =  txtDesignation.Text;
-            try
-            {
+           
                 SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString);
                 SqlCommand cmd = new SqlCommand($"exec sp_AddEmployee '{empcode}', '{name}', '{email}', '{contact}', '{dept}', '{designation}'", con);
              
@@ -59,11 +58,6 @@ namespace MEApp.Admin
                 lblMessage.Text = "Employee added successfully!";
                 ClearFields();
                 LoadUsers();
-            }
-            catch (Exception ex)
-            {
-                Response.Write($"<script>alert('{ex.Message}');</script>");
-            }
         }
 
         private void LoadUsers()

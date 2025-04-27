@@ -6,7 +6,7 @@ using System.Web;
 
 public static class EmailHelper
 {
-    public static void SendEmail(string to, string subject, string body, List<HttpPostedFile> attachments = null)
+    public static void SendEmail(string to, string subject, string body, string attachmentPath = null)
     {
         MailMessage mail = new MailMessage();
         mail.From = new MailAddress("adityaalt218@gmail.com");
@@ -14,15 +14,12 @@ public static class EmailHelper
         mail.Subject = subject;
         mail.Body = body;
 
-        if (attachments != null)
+        if (!string.IsNullOrEmpty(attachmentPath))
         {
-            foreach (HttpPostedFile file in attachments)
+            if (File.Exists(attachmentPath))
             {
-                if (file != null && file.ContentLength > 0)
-                {
-                    string filename = Path.GetFileName(file.FileName);
-                    mail.Attachments.Add(new Attachment(file.InputStream, filename));
-                }
+                string filename = Path.GetFileName(attachmentPath);
+                mail.Attachments.Add(new Attachment(attachmentPath));
             }
         }
 
@@ -31,4 +28,5 @@ public static class EmailHelper
         smtp.EnableSsl = true;
         smtp.Send(mail);
     }
+
 }

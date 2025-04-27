@@ -122,7 +122,7 @@
 
 
     <asp:GridView ID="GridViewEmployees" runat="server" AutoGenerateColumns="False"
-        CssClass="table table-striped table-bordered" DataKeyNames="EmployeeID"
+        CssClass="table table-striped table-bordered" DataKeyNames="EmployeeCode"
         OnRowEditing="GridViewEmployees_RowEditing" 		
         OnRowUpdating="GridViewEmployees_RowUpdating"
         OnRowCancelingEdit="GridViewEmployees_RowCancelingEdit"

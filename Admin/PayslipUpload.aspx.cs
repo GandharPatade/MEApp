@@ -49,10 +49,13 @@ namespace MEApp.Admin
         {
             try
             {
-
                 string empCode = ddlEmpCode.SelectedValue;
                 string financialYear = txtFinancialYear.Text;
-                decimal salary = decimal.Parse(txtSalary.Text);
+                decimal salary;
+                if (!decimal.TryParse(txtSalary.Text, out salary))
+                {
+                    throw new Exception("Invalid salary format. Please enter a valid number.");
+                }
 
                 decimal pf = salary * 0.12m;
 
@@ -77,14 +80,32 @@ namespace MEApp.Admin
 
                 string relativePath = "~/Payslip/" + fileName;
 
-                string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
-                SqlConnection con = new SqlConnection(cs);
-                {
-                    SqlCommand cmd = new SqlCommand($"exec sp_InsertPayslip '{empCode}', '{financialYear}', '{salary}', '{pf}', '{relativePath}'", con);
+                // Database and email operations
+                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString);
+                con.Open();
 
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                    con.Close();
+                // Insert data into database
+                SqlCommand cmd = new SqlCommand($"exec sp_InsertForm16 '{empCode}', '{financialYear}', '{salary}', '{pf}', '{relativePath}'", con);
+                cmd.ExecuteNonQuery();
+
+                // Fetch email and send the email
+                SqlCommand emailCmd = new SqlCommand("SELECT Email FROM EmployeeProfiles WHERE EmployeeCode = @EmployeeCode", con);
+                emailCmd.Parameters.AddWithValue("@EmployeeCode", empCode);
+                SqlDataReader rdr = emailCmd.ExecuteReader();
+                if (rdr.HasRows)
+                {
+                    while (rdr.Read())
+                    {
+                        string email = rdr["Email"].ToString();
+                        if (File.Exists(filePath))
+                        {
+                            EmailHelper.SendEmail(email, "Payslip Generated", "Please find the Payslip attached.", filePath);
+                        }
+                        else
+                        {
+                            throw new Exception("Payslip not found at " + filePath);
+                        }
+                    }
                 }
 
                 ScriptManager.RegisterStartupScript(this, GetType(), "SuccessAlert", "alert('Payslip generated and uploaded successfully!');", true);
@@ -94,6 +115,7 @@ namespace MEApp.Admin
                 Response.Write($"<script>alert('{ex.Message}')</script>");
             }
         }
+
 
         private byte[] GeneratePdfFromHtml(string htmlContent)
         {

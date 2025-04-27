@@ -45,7 +45,7 @@ namespace MEApp.Admin
 
         protected void GridViewEmployees_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            int empID = Convert.ToInt32(GridViewEmployees.DataKeys[e.RowIndex].Value);
+            int empCode = Convert.ToInt32(GridViewEmployees.DataKeys[e.RowIndex].Value);
             GridViewRow row = GridViewEmployees.Rows[e.RowIndex];
 
             string fullName = ((TextBox)row.Cells[1].Controls[0]).Text;
@@ -56,7 +56,7 @@ namespace MEApp.Admin
 
             try
             {
-                string query = $"exec sp_UpdateEmployee '{empID}', '{fullName}', '{email}', '{contact}', '{dept}', '{desig}'";
+                string query = $"exec sp_UpdateEmployee '{empCode}', '{fullName}', '{email}', '{contact}', '{dept}', '{desig}'";
                 SqlCommand cmd = new SqlCommand(query, con);
 
                 con.Open();
@@ -76,10 +76,10 @@ namespace MEApp.Admin
 
         protected void GridViewEmployees_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-            try
+            try 
             {
-                int empID = Convert.ToInt32(GridViewEmployees.DataKeys[e.RowIndex].Value);
-                SqlCommand cmd = new SqlCommand($"EXEC sp_DeleteEmployee '{empID}'", con);
+                int empCode = Convert.ToInt32(GridViewEmployees.DataKeys[e.RowIndex].Value);
+                SqlCommand cmd = new SqlCommand($"EXEC sp_DeleteEmployee '{empCode}'", con);
 
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -88,10 +88,10 @@ namespace MEApp.Admin
                 lblMessage.Text = "Employee deleted.";
                 LoadEmployees();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Response.Write($"<script>alert('{ex.Message}')</script>");
-            }   
+            }
         }
 
     }
