@@ -24,31 +24,22 @@ namespace MEApp.Admin
         protected global::System.Web.UI.WebControls.DropDownList ddlEmpCode;
 
         /// <summary>
-        /// txtMonthYear control.
+        /// txtFinancialYear control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMonthYear;
+        protected global::System.Web.UI.WebControls.TextBox txtFinancialYear;
 
         /// <summary>
-        /// txtAmount control.
+        /// txtSalary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAmount;
-
-        /// <summary>
-        /// fuPayslip control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fuPayslip;
+        protected global::System.Web.UI.WebControls.TextBox txtSalary;
 
         /// <summary>
         /// btnUpload control.

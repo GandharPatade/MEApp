@@ -55,11 +55,9 @@ namespace MEApp.Admin
                 string empCode = ddlEmpCode.SelectedValue;
                 string financialYear = txtFinancialYear.Text;
                 decimal salary = decimal.Parse(txtSalary.Text);
-
                 
                 decimal pf = salary * 0.12m;
 
-               
                 string htmlContent = $@"
             <h1>Form 16</h1>
             <p>Employee Code: {empCode}</p>

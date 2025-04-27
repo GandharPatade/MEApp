@@ -1,4 +1,7 @@
-﻿using System;
+﻿using iTextSharp.text.pdf;
+using iTextSharp.text;
+using iTextSharp.tool.xml;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -39,74 +42,74 @@ namespace MEApp.Admin
             ddlEmpCode.DataTextField = "EmployeeCode";
             ddlEmpCode.DataValueField = "EmployeeCode";
             ddlEmpCode.DataBind();
-            ddlEmpCode.Items.Insert(0, new ListItem("--Select--", ""));
+            ddlEmpCode.Items.Insert(0, new System.Web.UI.WebControls.ListItem("--Select--", ""));
         }
 
         protected void btnUpload_Click(object sender, EventArgs e)
         {
-            if (fuPayslip.HasFile)
+            try
             {
-                string saveDir = Server.MapPath("~/Admin/Payslip/");
-                if (!Directory.Exists(saveDir))
-                {
-                    Directory.CreateDirectory(saveDir);
-                }
 
-                string fileName = Path.GetFileName(fuPayslip.FileName);
-                string savePath = Path.Combine(saveDir, fileName);
-                fuPayslip.SaveAs(savePath);
                 string empCode = ddlEmpCode.SelectedValue;
-                string monthYear = txtMonthYear.Text;
-                string salaryAmount = txtAmount.Text;
+                string financialYear = txtFinancialYear.Text;
+                decimal salary = decimal.Parse(txtSalary.Text);
 
-                SqlCommand cmd = new SqlCommand($"exec sp_InsertPayslip '{empCode}', '{monthYear}','{salaryAmount}', @PayslipFile", con);
-                
-                cmd.Parameters.AddWithValue("@PayslipFile", "Payslip/" + fileName);
+                decimal pf = salary * 0.12m;
 
-                con.Open();
-                cmd.ExecuteNonQuery();
-                con.Close();
+                string htmlContent = $@"
+            <h1>Payslip</h1>
+            <p>Employee Code: {empCode}</p>
+            <p>Financial Year: {financialYear}</p>
+            <p>Salary: ₹{salary:N2}</p>
+            <p>Provident Fund (12%): ₹{pf:N2}</p>
+            <p>Date Generated: {DateTime.Now.ToShortDateString()}</p>
+        ";
 
-                btnUpload.Text = "Payslip uploaded successfully.";
-                btnUpload.Attributes["style"] = "color:black;";
+                byte[] pdfBytes = GeneratePdfFromHtml(htmlContent);
 
-                string to = "";
-                SqlCommand emailCmd = new SqlCommand("SELECT Email FROM EmployeeProfiles WHERE EmployeeCode = @EmpCode", con);
-                emailCmd.Parameters.AddWithValue("@EmpCode", ddlEmpCode.SelectedValue);
+                string fileName = $"Payslip_{empCode}_{financialYear}.pdf";
+                string folderPath = Server.MapPath("~/Payslip/");
+                if (!Directory.Exists(folderPath))
+                    Directory.CreateDirectory(folderPath);
 
-                con.Open();
-                SqlDataReader reader = emailCmd.ExecuteReader();
-                if (reader.Read())
+                string filePath = Path.Combine(folderPath, fileName);
+                File.WriteAllBytes(filePath, pdfBytes);
+
+                string relativePath = "~/Payslip/" + fileName;
+
+                string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
+                SqlConnection con = new SqlConnection(cs);
                 {
-                    to = reader["Email"].ToString();
-                }
-                con.Close();
+                    SqlCommand cmd = new SqlCommand($"exec sp_InsertPayslip '{empCode}', '{financialYear}', '{salary}', '{pf}', '{relativePath}'", con);
 
-                if (!string.IsNullOrEmpty(to))
-                {
-                    string subject = "Your Monthly Payslip";
-                    string body = "Dear Employee, your payslip for this month is attached.";
-
-                    List<HttpPostedFile> files = new List<HttpPostedFile>();
-                    if (fuPayslip.HasFiles)
-                    {
-                        foreach (HttpPostedFile file in fuPayslip.PostedFiles)
-                        {
-                            files.Add(file);
-                        }
-                    }
-
-                    EmailHelper.SendEmail(to, subject, body, files);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
                 }
-                else
-                {
-                    Response.Write("<script>alert('Employee email not found. Please check EmployeeProfiles table.');</script>");
-                }
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "SuccessAlert", "alert('Form 16 generated and uploaded successfully!');", true);
             }
-            else
+            catch (Exception ex)
             {
-                btnUpload.Text = "Please upload a file.";
-                btnUpload.Attributes["style"] = "color:red;";
+                Response.Write($"<script>alert('{ex.Message}')</script>");
+            }
+        }
+
+        private byte[] GeneratePdfFromHtml(string htmlContent)
+        {
+            MemoryStream memoryStream = new MemoryStream();
+            {
+                Document document = new Document(PageSize.A4, 10f, 10f, 10f, 10f);
+                PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+                document.Open();
+
+                StringReader stringReader = new StringReader(htmlContent);
+                {
+                    XMLWorkerHelper.GetInstance().ParseXHtml(writer, document, stringReader);
+                }
+
+                document.Close();
+                return memoryStream.ToArray();
             }
         }
 
