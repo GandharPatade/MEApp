@@ -80,22 +80,46 @@ namespace MEApp.Admin
         }
 
 
+        //private void InsertEventIntoDatabase(string eventName, DateTime eventDate, string eventDescription)
+        //{
+        //    string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
+
+        //    SqlConnection conn = new SqlConnection(connectionString);
+        //    {
+        //        try
+        //        {
+        //            SqlCommand cmd = new SqlCommand($"exec sp_insertEvent '{eventName}', '{eventDate}', '{eventDescription}'", conn);
+        //            {
+        //                conn.Open();
+        //                cmd.ExecuteNonQuery();
+        //                conn.Close();
+        //            }
+        //        }
+        //        catch (Exception ex) 
+        //        {
+        //            Response.Write($"<script>alert('{ex.Message}');</script>");
+        //        }
+        //    }
+        //}
+
         private void InsertEventIntoDatabase(string eventName, DateTime eventDate, string eventDescription)
         {
-            string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
-
-            SqlConnection conn = new SqlConnection(connectionString);
+            string connectionString = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand($"exec sp_insertEvent '{eventName}', '{eventDate}', '{eventDescription}'", conn);
-                    {
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                        conn.Close();
-                    }
+                    SqlCommand cmd = new SqlCommand("sp_insertEvent", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@EventName", eventName);
+                    cmd.Parameters.AddWithValue("@EventDate", eventDate);
+                    cmd.Parameters.AddWithValue("@EventDescription", eventDescription);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
                 }
-                catch (Exception ex) 
+                catch (Exception ex)
                 {
                     Response.Write($"<script>alert('{ex.Message}');</script>");
                 }
