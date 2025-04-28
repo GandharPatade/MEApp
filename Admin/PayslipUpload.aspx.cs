@@ -47,8 +47,8 @@ namespace MEApp.Admin
 
         protected void btnUpload_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 string empCode = ddlEmpCode.SelectedValue;
                 string financialYear = txtFinancialYear.Text;
                 decimal salary;
@@ -85,8 +85,8 @@ namespace MEApp.Admin
                 con.Open();
 
                 // Insert data into database
-                SqlCommand cmd = new SqlCommand($"exec sp_InsertForm16 '{empCode}', '{financialYear}', '{salary}', '{pf}', '{relativePath}'", con);
-                cmd.ExecuteNonQuery();
+                    SqlCommand cmd = new SqlCommand($"exec sp_InsertPayslip '{empCode}', '{financialYear}', '{salary}', '{pf}', '{relativePath}'", con);
+                    cmd.ExecuteNonQuery();
 
                 // Fetch email and send the email
                 SqlCommand emailCmd = new SqlCommand("SELECT Email FROM EmployeeProfiles WHERE EmployeeCode = @EmployeeCode", con);
@@ -109,11 +109,11 @@ namespace MEApp.Admin
                 }
 
                 ScriptManager.RegisterStartupScript(this, GetType(), "SuccessAlert", "alert('Payslip generated and uploaded successfully!');", true);
-            }
-            catch (Exception ex)
-            {
-                Response.Write($"<script>alert('{ex.Message}')</script>");
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    Response.Write($"<script>alert('{ex.Message}')</script>");
+            //}
         }
 
 
