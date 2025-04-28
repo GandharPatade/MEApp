@@ -54,26 +54,25 @@
 
 
 
-        <h2>View Payslips</h2>
-    <asp:GridView ID="GridViewPayslips" runat="server" AutoGenerateColumns="false" CssClass="table table-striped">
+       <h2>View Payslips</h2>
+<asp:GridView ID="GridViewPayslips" runat="server" AutoGenerateColumns="false" CssClass="table table-striped">
     <Columns>
         <asp:BoundField DataField="EmployeeCode" HeaderText="Employee Code" />
         <asp:BoundField DataField="FinancialYear" HeaderText="Financial Year" />
-        <asp:BoundField DataField="SalaryAmount" HeaderText="SalaryAmount" DataFormatString="{0:C}" />
+        <asp:BoundField DataField="SalaryAmount" HeaderText="Salary" DataFormatString="{0:C}" />
         <asp:BoundField DataField="PF" HeaderText="PF" DataFormatString="{0:C}" />
         <asp:TemplateField HeaderText="Download Payslip">
             <ItemTemplate>
-                <asp:LinkButton ID="btnDownload" 
-                                runat="server" 
-                                CommandArgument='<%# Eval("EmployeeCode") %>' 
-                                OnClick="btnDownload_Click"
-                                CssClass="btn btn-sm btn-primary">
-                    Download
+                <asp:LinkButton ID="btnDownload"
+                    runat="server"
+                    CommandArgument='<%# Eval("EmployeeCode") %>'
+                    OnClick="btnDownload_Click"
+                    CssClass="btn btn-sm btn-primary">
+        Download
                 </asp:LinkButton>
             </ItemTemplate>
         </asp:TemplateField>
     </Columns>
 </asp:GridView>
-
 
 </asp:Content>

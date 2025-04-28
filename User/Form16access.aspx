@@ -52,7 +52,7 @@
 <!-- /Breadcrumb -->
 
 
-        <h2>View form16's</h2>
+    <h2>View form16's</h2>
     <asp:GridView ID="GridViewForm16" runat="server" AutoGenerateColumns="false" CssClass="table table-striped">
     <Columns>
         <asp:BoundField DataField="EmployeeCode" HeaderText="Employee Code" />
@@ -72,6 +72,5 @@
         </asp:TemplateField>
     </Columns>
 </asp:GridView>
-
 
 </asp:Content>
