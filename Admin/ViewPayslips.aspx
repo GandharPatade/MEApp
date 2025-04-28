@@ -60,9 +60,9 @@
     <asp:GridView ID="GridViewPayslips" runat="server" AutoGenerateColumns="false" CssClass="table table-striped">
     <Columns>
         <asp:BoundField DataField="EmployeeCode" HeaderText="Employee Code" />
-        <asp:BoundField DataField="FinancialYear" HeaderText="Financial Year" />
+        <asp:BoundField DataField="MonthYear" HeaderText="Month Year" />
         <asp:BoundField DataField="SalaryAmount" HeaderText="SalaryAmount" DataFormatString="{0:C}" />
-        <asp:BoundField DataField="PF" HeaderText="PF" DataFormatString="{0:C}" />
+        <asp:BoundField DataField="PayslipFile" HeaderText="PF" DataFormatString="{0:C}" />
         <asp:TemplateField HeaderText="Download Payslip">
             <ItemTemplate>
                 <asp:LinkButton ID="btnDownload" 
