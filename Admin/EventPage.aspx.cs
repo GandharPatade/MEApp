@@ -177,7 +177,13 @@ namespace MEApp.Admin
                 string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
                 SqlConnection conn = new SqlConnection(cs);
                 {
-                    SqlCommand cmd = new SqlCommand($"exec sp_updateEvent '{eventId}', '{updatedEventName}', '{updatedEventDate}', '{updatedEventDescription}'", conn);
+                    SqlCommand cmd = new SqlCommand("sp_updateEvent", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@EventID", eventId);
+                    cmd.Parameters.AddWithValue("@EventName", updatedEventName);
+                    cmd.Parameters.AddWithValue("@EventDate", updatedEventDate);
+                    cmd.Parameters.AddWithValue("@EventDescription", updatedEventDescription);
+
                     conn.Open();
                     cmd.ExecuteNonQuery();
                 }

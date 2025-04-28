@@ -129,25 +129,35 @@ namespace MEApp.Admin
             string status = statusDropdown.SelectedValue;
 
             string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
-            SqlConnection conn = new SqlConnection(cs);
+            using (SqlConnection conn = new SqlConnection(cs))
             {
                 try
                 {
-                    SqlCommand cmd = new SqlCommand($"exec sp_updateProjects '{projectId}', '{projectName}', '{deadline}', '{description}', '{technology}', '{status}'", conn);
+                    SqlCommand cmd = new SqlCommand("sp_updateProjects", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@ProjectID", projectId);
+                    cmd.Parameters.AddWithValue("@ProjectName", projectName);
+                    cmd.Parameters.AddWithValue("@Deadline", deadline);
+                    cmd.Parameters.AddWithValue("@Description", description);
+                    cmd.Parameters.AddWithValue("@Technology", technology);
+                    cmd.Parameters.AddWithValue("@Status", status);
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
-                    Response.Write("<script>alert ('Update Successful')</script>");
 
+                    Response.Write("<script>alert('Update Successful')</script>");
                 }
-                catch (Exception ex) 
+                catch (Exception ex)
                 {
                     Response.Write($"<script>alert('{ex.Message}')</script>");
                 }
             }
+
             ProjectsGridView.EditIndex = -1;
             BindGrid();
         }
+
 
         protected void ProjectsGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
