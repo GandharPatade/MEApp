@@ -52,9 +52,17 @@ namespace MEApp.Admin
             try
             {
                 string connStr = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
-                SqlConnection conn = new SqlConnection(connStr);
+                using (SqlConnection conn = new SqlConnection(connStr))
                 {
-                    SqlCommand cmd = new SqlCommand($"exec sp_insertProject '{projectName}', '{deadline}', '{description}', '{technology}', '{status}'", conn);
+                    SqlCommand cmd = new SqlCommand("sp_insertProject", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@ProjectName", projectName);
+                    cmd.Parameters.AddWithValue("@Deadline", deadline);
+                    cmd.Parameters.AddWithValue("@Description", description);
+                    cmd.Parameters.AddWithValue("@Technology", technology);
+                    cmd.Parameters.AddWithValue("@Status", status);
+
                     conn.Open();
                     cmd.ExecuteNonQuery();
                 }
@@ -71,8 +79,10 @@ namespace MEApp.Admin
             {
                 Response.Write("<script>alert('Error: " + ex.Message + "');</script>");
             }
+
             BindGrid();
         }
+
 
         protected void ProjectsGridView_RowEditing(object sender, GridViewEditEventArgs e)
         {
