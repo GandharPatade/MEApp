@@ -16,6 +16,8 @@ namespace MEApp.Hr
         {
             if (!IsPostBack)
             {
+                //gvAllTickets.RowCommand += gvAllTickets_RowCommand;
+
                 LoadAllTickets();
             }
         }
@@ -37,5 +39,35 @@ namespace MEApp.Hr
                 gvAllTickets.DataBind();
             }
         }
+
+
+
+        protected void gvAllTickets_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "DeleteTicket")
+            {
+                int ticketId = Convert.ToInt32(e.CommandArgument);
+                DeleteTicket(ticketId);
+                LoadAllTickets(); // Refresh grid after deletion
+            }
+        }
+
+        private void DeleteTicket(int ticketId)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand("DELETE FROM Tickets WHERE TicketID = @TicketID", con);
+                cmd.Parameters.AddWithValue("@TicketID", ticketId);
+
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+        }
+
+
+
     }
 }

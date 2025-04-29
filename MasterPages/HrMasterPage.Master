@@ -1401,6 +1401,19 @@
 									</ul>
 								</li>--%>
 
+								<li class="submenu">
+				<a href="javascript:void(0);">
+								<i class="ti ti-cash"></i><span>Leaves</span>
+								<span class="menu-arrow"></span>
+				</a>
+				<ul>
+								
+								<li>
+									<asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Hr/LeaveApprovals.aspx">Leave Approvals</asp:HyperLink></li>
+								
+				</ul>
+</li>
+
 
 
 								<li class="submenu">
@@ -1415,6 +1428,25 @@
 										
 									</ul>
 								</li>
+
+
+								<li class="submenu">
+				<a href="javascript:void(0);">
+								<i class="ti ti-cash"></i><span>Show Tickets</span>
+								<span class="menu-arrow"></span>
+				</a>
+				<ul>
+								
+								<li>
+									<asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Hr/ShowTickets.aspx">Show Tickets</asp:HyperLink></li>
+								
+				</ul>
+</li>
+
+
+
+
+
 								<li class="submenu">
 				<a href="javascript:void(0);">
 								<i class="ti ti-cash"></i><span>Feedbacks</span>

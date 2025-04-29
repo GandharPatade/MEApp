@@ -9,7 +9,7 @@
         </div>
         <div class="card-body">
 
-            <asp:GridView ID="gvAllTickets" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-striped text-center">
+            <asp:GridView ID="gvAllTickets" runat="server" AutoGenerateColumns="false" CssClass="table table-bordered table-striped text-center" OnRowCommand="gvAllTickets_RowCommand">
                 <Columns>
                     <asp:BoundField DataField="TicketID" HeaderText="Ticket ID" />
                     <asp:BoundField DataField="Title" HeaderText="Title" />
@@ -22,6 +22,14 @@
                             <asp:Image ID="imgTicket" runat="server" ImageUrl='<%# Eval("ImagePath") %>' Width="100px" Height="100px" />
                         </ItemTemplate>
                     </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Action">
+    <ItemTemplate>
+        <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="btn btn-danger btn-sm"
+            CommandName="DeleteTicket" CommandArgument='<%# Eval("TicketID") %>' 
+            OnClientClick="return confirm('Are you sure you want to delete this ticket?');" />
+    </ItemTemplate>
+</asp:TemplateField>
+
                 </Columns>
             </asp:GridView>
 

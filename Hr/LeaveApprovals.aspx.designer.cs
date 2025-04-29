@@ -7,20 +7,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MEApp.User
+namespace MEApp.Hr
 {
 
 
-    public partial class PayslipAccess
+    public partial class LeaveApprovals
     {
 
         /// <summary>
-        /// gvPayslips control.
+        /// GvLeaveRequest control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvPayslips;
+        protected global::System.Web.UI.WebControls.GridView GvLeaveRequest;
+
+        /// <summary>
+        /// lblMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMessage;
     }
 }

@@ -5876,6 +5876,7 @@
     <Content Include="Hr\assets\plugins\twitter-bootstrap-wizard\jquery.bootstrap.wizard.min.js" />
     <Content Include="Hr\assets\plugins\twitter-bootstrap-wizard\prettify.js" />
     <Content Include="Hr\hrdashboard.aspx" />
+    <Content Include="Hr\LeaveApprovals.aspx" />
     <Content Include="Hr\pulse180.png" />
     <Content Include="Hr\ShowFeedbacks.aspx" />
     <Content Include="Hr\ShowTickets.aspx" />
@@ -8004,6 +8005,13 @@
     </Compile>
     <Compile Include="Hr\hrdashboard.aspx.designer.cs">
       <DependentUpon>hrdashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hr\LeaveApprovals.aspx.cs">
+      <DependentUpon>LeaveApprovals.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hr\LeaveApprovals.aspx.designer.cs">
+      <DependentUpon>LeaveApprovals.aspx</DependentUpon>
     </Compile>
     <Compile Include="Hr\ShowFeedbacks.aspx.cs">
       <DependentUpon>ShowFeedbacks.aspx</DependentUpon>

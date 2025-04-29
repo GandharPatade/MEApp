@@ -16,30 +16,59 @@ namespace MEApp.User
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+
+
             if (!IsPostBack)
             {
+                Calendar1.VisibleDate = DateTime.Today;
                 LoadEvents();
             }
         }
 
 
+        //private void LoadEvents()
+        //{
+        //    string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
+        //    using (SqlConnection conn = new SqlConnection(cs))
+        //    {
+        //        string query = "EXEC fetchEvnt";
+        //        SqlCommand cmd = new SqlCommand(query, conn);
+        //        conn.Open();
+        //        SqlDataReader reader = cmd.ExecuteReader();
+
+        //        while (reader.Read())
+        //        {
+        //            DateTime date = Convert.ToDateTime(reader["Date"]);
+        //            string title = reader["Title"].ToString();
+        //            string status = reader["Status"].ToString();
+
+        //            if (status == "Active")
+        //            {
+        //                events[date] = title;
+        //            }
+        //        }
+        //    }
+        //}
+
         private void LoadEvents()
         {
+            events.Clear();  // <-- important
+
             string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
             using (SqlConnection conn = new SqlConnection(cs))
             {
-                string query = "EXEC fetchEvnt";
+                string query = "EXEC sp_getUpcomingEvents";
                 SqlCommand cmd = new SqlCommand(query, conn);
                 conn.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    DateTime date = Convert.ToDateTime(reader["Date"]);
-                    string title = reader["Title"].ToString();
-                    string status = reader["Status"].ToString();
+                    DateTime date = Convert.ToDateTime(reader["EventDate"]).Date;
+                    string title = reader["EventName"].ToString();
 
-                    if (status == "Active")
+                    if (!events.ContainsKey(date))
                     {
                         events[date] = title;
                     }
@@ -47,13 +76,37 @@ namespace MEApp.User
             }
         }
 
+
+
+
+        //protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
+        //{
+        //    if (events.ContainsKey(e.Day.Date))
+        //    {
+        //        e.Cell.BackColor = System.Drawing.Color.LightGreen;
+        //        e.Cell.Controls.Add(new Literal { Text = "<br/>" + events[e.Day.Date] });
+        //    }
+        //}
+
+
         protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
         {
-            if (events.ContainsKey(e.Day.Date))
+            DateTime currentDate = e.Day.Date;
+
+            if (events.ContainsKey(currentDate))
             {
                 e.Cell.BackColor = System.Drawing.Color.LightGreen;
-                e.Cell.Controls.Add(new Literal { Text = "<br/>" + events[e.Day.Date] });
+                e.Cell.Controls.Add(new Literal { Text = "<br/>" + events[currentDate] });
             }
         }
+
+        protected void Calendar1_VisibleMonthChanged(object sender, MonthChangedEventArgs e)
+        {
+            Calendar1.VisibleDate = e.NewDate;
+            LoadEvents(); 
+        }
+
+
+
     }
 }

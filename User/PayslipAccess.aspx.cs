@@ -12,83 +12,49 @@ namespace MEApp.User
 {
     public partial class PayslipAccess : System.Web.UI.Page
     {
-        SqlConnection con;
-
         protected void Page_Load(object sender, EventArgs e)
         {
-            string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
-            con = new SqlConnection(cs);
-
             if (!IsPostBack)
             {
-                BindPayslips();
+                LoadPayslips();
             }
         }
 
-        private void BindPayslips()
+        private void LoadPayslips()
         {
-            //if (Session["Role"] == null || Session["empCode"] == null)
-            //{
-            //    Response.Redirect("~/Login.aspx"); 
-            //    return;
-            //}
-            SqlCommand cmd;
+            string empCode = Session["EmpCode"] as string;
 
-            string role = Session["Role"].ToString();
-            //string empCode = Session["empCode"].ToString();
-
-            if (role == "Admin")
+            if (string.IsNullOrEmpty(empCode))
             {
-                cmd = new SqlCommand("exec sp_GetAllPayslips", con);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                con.Open();
-                da.Fill(dt);
-                con.Close();
-
-                GridViewPayslips.DataSource = dt;
-                GridViewPayslips.DataBind();
+                
+                Response.Redirect("~/Account/LogIn.aspx"); 
+                return;
             }
-            //else
-            //{
-            //    cmd = new SqlCommand($"exec sp_GetPayslipsByEmp '{empCode}'", con);
-            //}
-        }
-
-        protected void btnDownload_Click(object sender, EventArgs e)
-        {
-            LinkButton btn = (LinkButton)sender;
-            string employeeCode = btn.CommandArgument;
 
             string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
-            SqlConnection con = new SqlConnection(cs);
+            using (SqlConnection con = new SqlConnection(cs))
             {
-                con.Open();
-                SqlCommand cmd = new SqlCommand($"exec sp_GetPayslipPath '{employeeCode}'", con);
+                string query = @"
+                    SELECT 
+                        PayslipID, 
+                        EmployeeCode, 
+                        FinancialYear, 
+                        SalaryAmount AS Salary, 
+                        PF, 
+                        PayslipPath 
+                    FROM Payslips 
+                    WHERE EmployeeCode = @EmpCode
+                    ORDER BY PayslipID DESC";
 
-                object result = cmd.ExecuteScalar();
+                SqlCommand cmd = new SqlCommand(query, con);
+                cmd.Parameters.AddWithValue("@EmpCode", empCode);
 
-                if (result != null)
-                {
-                    string filePath = result.ToString();
-                    string fullFilePath = Server.MapPath(filePath);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
 
-                    if (System.IO.File.Exists(fullFilePath))
-                    {
-                        Response.ContentType = "application/pdf";
-                        Response.AppendHeader("Content-Disposition", "attachment; filename=" + System.IO.Path.GetFileName(fullFilePath));
-                        Response.TransmitFile(fullFilePath);
-                        Response.End();
-                    }
-                    else
-                    {
-                        Response.Write("<script>alert('File not found!');</script>");
-                    }
-                }
-                else
-                {
-                    Response.Write("<script>alert('No file path available!');</script>");
-                }
+                gvPayslips.DataSource = dt;
+                gvPayslips.DataBind();
             }
         }
     }

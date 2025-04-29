@@ -53,21 +53,21 @@
 
 
     <h2>View form16's</h2>
-    <asp:GridView ID="GridViewForm16" runat="server" AutoGenerateColumns="false" CssClass="table table-striped">
+    <asp:GridView ID="GridViewForm16" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered">
     <Columns>
-        <asp:BoundField DataField="EmployeeCode" HeaderText="Employee Code" />
         <asp:BoundField DataField="FinancialYear" HeaderText="Financial Year" />
         <asp:BoundField DataField="Salary" HeaderText="Salary" DataFormatString="{0:C}" />
         <asp:BoundField DataField="PF" HeaderText="PF" DataFormatString="{0:C}" />
-        <asp:TemplateField HeaderText="Download Form 16">
+        <asp:BoundField DataField="CreatedAt" HeaderText="Created At" DataFormatString="{0:dd-MM-yyyy}" />
+        <asp:TemplateField HeaderText="Download">
             <ItemTemplate>
-                <asp:LinkButton ID="btnDownload" 
-                                runat="server" 
-                                CommandArgument='<%# Eval("EmployeeCode") %>' 
-                                OnClick="btnDownload_Click"
-                                CssClass="btn btn-sm btn-primary">
-                    Download
-                </asp:LinkButton>
+                <asp:LinkButton 
+                    ID="btnDownload" 
+                    runat="server" 
+                    Text="Download" 
+                    CssClass="btn btn-primary btn-sm" 
+                    CommandArgument='<%# Eval("Form16Path") %>' 
+                    OnClick="btnDownload_Click" />
             </ItemTemplate>
         </asp:TemplateField>
     </Columns>

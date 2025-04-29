@@ -55,21 +55,20 @@
 
 
        <h2>View Payslips</h2>
-<asp:GridView ID="GridViewPayslips" runat="server" AutoGenerateColumns="false" CssClass="table table-striped">
+ <asp:GridView ID="gvPayslips" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered"
+    EmptyDataText="No payslips found." DataKeyNames="PayslipID">
     <Columns>
         <asp:BoundField DataField="EmployeeCode" HeaderText="Employee Code" />
         <asp:BoundField DataField="FinancialYear" HeaderText="Financial Year" />
-        <asp:BoundField DataField="SalaryAmount" HeaderText="Salary" DataFormatString="{0:C}" />
+        <asp:BoundField DataField="Salary" HeaderText="Salary" DataFormatString="{0:C}" />
         <asp:BoundField DataField="PF" HeaderText="PF" DataFormatString="{0:C}" />
-        <asp:TemplateField HeaderText="Download Payslip">
+        <asp:TemplateField HeaderText="Download">
             <ItemTemplate>
-                <asp:LinkButton ID="btnDownload"
-                    runat="server"
-                    CommandArgument='<%# Eval("EmployeeCode") %>'
-                    OnClick="btnDownload_Click"
-                    CssClass="btn btn-sm btn-primary">
-        Download
-                </asp:LinkButton>
+                <asp:HyperLink ID="hlDownload" runat="server" 
+                               NavigateUrl='<%# ResolveUrl(Eval("PayslipPath").ToString()) %>' 
+                               Target="_blank" 
+                               Text="Download" 
+                               CssClass="btn btn-sm btn-primary" />
             </ItemTemplate>
         </asp:TemplateField>
     </Columns>
