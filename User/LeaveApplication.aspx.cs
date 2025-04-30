@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
+using System.Reflection.Emit;
 
 namespace MEApp.User
 {
@@ -27,6 +28,20 @@ namespace MEApp.User
 
                 //GridView1.DataSource = ds;
                 //GridView1.DataBind();
+                string email = Session["Email12"].ToString();
+
+                SqlConnection conn = new SqlConnection(connStr);
+                SqlCommand cmd = new SqlCommand($"Select EmployeeCode from EmployeeProfiles where Email = '{email}'", conn);
+
+                conn.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                if (rdr.Read()) 
+                {
+                    txtEmpCode.Text = rdr["EmployeeCode"].ToString();
+                }
+                rdr.Close();
+                
 
                 LoadLeaveRequests();
             }

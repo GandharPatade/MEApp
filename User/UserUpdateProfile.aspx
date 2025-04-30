@@ -59,7 +59,7 @@
 
             <div class="mb-3">
                 <label for="txtEmployeeCode" class="form-label">Employee Code</label>
-                <asp:TextBox ID="txtEmployeeCode" runat="server" CssClass="form-control" />
+                <asp:TextBox ID="txtEmployeeCode" runat="server" CssClass="form-control" ReadOnly="True" />
             </div>
 
             <div class="mb-3">

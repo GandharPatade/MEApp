@@ -26,7 +26,7 @@ namespace MEApp.User
 
         public void LoadEmployee(string email)
         {
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString))
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString);
             {
                 string query = "SELECT * FROM EmployeeProfiles WHERE Email = @Email";
                 SqlCommand cmd = new SqlCommand(query, con);

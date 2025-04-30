@@ -13,7 +13,7 @@
             <!-- Employee Code -->
             <div class="mb-3">
                 <label for="txtEmpCode" class="form-label">Employee Code:</label>
-                <asp:TextBox ID="txtEmpCode" runat="server" CssClass="form-control" Width="200px"></asp:TextBox>
+                <asp:TextBox ID="txtEmpCode" runat="server" CssClass="form-control" Width="200px" ReadOnly="true"></asp:TextBox>
             </div>
 
             <!-- Leave Type -->
