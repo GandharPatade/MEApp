@@ -4,7 +4,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
 
-     <div class="container py-5">
+
+          <div class="container py-5">
         <div class="card shadow border-primary">
             <div class="card-header bg-primary text-white">
                 <h4 class="mb-0">Employee Attendance Report</h4>
@@ -33,9 +34,38 @@
                     </Columns>
                 </asp:GridView>
 
+
+
+
+
+                <asp:ScriptManager ID="ScriptManager1" runat="server" />
+<asp:UpdatePanel ID="upSummary" runat="server" UpdateMode="Conditional">
+    <ContentTemplate>
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <label class="form-label fw-bold">Select Employee to View Monthly Summary:</label>
+                <asp:DropDownList ID="ddlEmployeeSummary" runat="server" CssClass="form-control"
+                    AutoPostBack="true" OnSelectedIndexChanged="ddlEmployeeSummary_SelectedIndexChanged" />
+            </div>
+            <div class="col-md-6 d-flex align-items-end">
+                <asp:Label ID="lblSummary" runat="server" CssClass="fw-bold text-success" Visible="false"></asp:Label>
+
+            </div>
+        </div>
+    </ContentTemplate>
+</asp:UpdatePanel>
+
+
+
+
+
+
             </div>
         </div>
     </div>
+
+
+
 
 
 

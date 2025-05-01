@@ -17,16 +17,135 @@ namespace MEApp.Hr
             if (!IsPostBack)
             {
                 calDate.SelectedDate = DateTime.Today;
+                LoadEmployeeDropdown();
                 LoadAttendance(calDate.SelectedDate);
             }
         }
 
 
 
+        private void LoadEmployeeDropdown()
+        {
+            string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("SELECT EmployeeCode, FullName FROM EmployeeProfiles", conn);
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                ddlEmployeeSummary.Items.Clear();
+                ddlEmployeeSummary.Items.Add(new ListItem("-- Select Employee --", "0"));
+                while (reader.Read())
+                {
+                    ddlEmployeeSummary.Items.Add(new ListItem(reader["FullName"].ToString(), reader["EmployeeCode"].ToString()));
+                }
+            }
+        }
+
+        protected void ddlEmployeeSummary_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateSummary();
+        }
+
+
+        //private void UpdateSummary()
+        //{
+        //    int userId = Convert.ToInt32(ddlEmployeeSummary.SelectedValue);
+        //    if (userId == 0) return;
+
+        //    DateTime selectedDate = calDate.SelectedDate == DateTime.MinValue ? DateTime.Today : calDate.SelectedDate;
+        //    int month = selectedDate.Month;
+        //    int year = selectedDate.Year;
+
+        //    string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
+        //    using (SqlConnection conn = new SqlConnection(cs))
+        //    {
+        //        SqlCommand cmd = new SqlCommand(@"SELECT Status FROM AttendanceRecords
+        //                                  WHERE UserID = @UserID AND MONTH([Date]) = @Month AND YEAR([Date]) = @Year", conn);
+        //        cmd.Parameters.AddWithValue("@UserID", userId);
+        //        cmd.Parameters.AddWithValue("@Month", month);
+        //        cmd.Parameters.AddWithValue("@Year", year);
+
+        //        conn.Open();
+        //        SqlDataReader reader = cmd.ExecuteReader();
+        //        int present = 0, absent = 0;
+        //        while (reader.Read())
+        //        {
+        //            string status = reader["Status"].ToString();
+        //            if (status == "Present") present++;
+        //            else if (status == "Absent") absent++;
+        //        }
+        //        lblSummary.Text = $"Selected Employee Monthly Summary: Present: {present} | Absent: {absent}";
+        //    }
+        //}
+
+
+        private void UpdateSummary()
+        {
+            lblSummary.Visible = false; // Hide label by default when changing month
+
+            int userId = Convert.ToInt32(ddlEmployeeSummary.SelectedValue);
+            if (userId == 0) return;
+
+            DateTime selectedDate = calDate.SelectedDate == DateTime.MinValue ? DateTime.Today : calDate.SelectedDate;
+            int month = selectedDate.Month;
+            int year = selectedDate.Year;
+
+            string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                SqlCommand cmd = new SqlCommand("sp_GetMonthlyAttendanceSummary", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@UserID", userId);
+                cmd.Parameters.AddWithValue("@Month", month);
+                cmd.Parameters.AddWithValue("@Year", year);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    // Handle DBNull and set default to 0 if needed
+                    int present = reader["PresentCount"] != DBNull.Value ? Convert.ToInt32(reader["PresentCount"]) : 0;
+                    int absent = reader["AbsentCount"] != DBNull.Value ? Convert.ToInt32(reader["AbsentCount"]) : 0;
+
+                    if (present == 0 && absent == 0)
+                    {
+                        lblSummary.Visible = false; // No data — hide label
+                    }
+                    else
+                    {
+                        lblSummary.Text = $"Selected Employee Monthly Summary: Present: {present} | Absent: {absent}";
+                        lblSummary.Visible = true; // Data exists — show label
+                    }
+                }
+                else
+                {
+                    lblSummary.Visible = false; // In case there is no data at all for the selected month
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
         protected void calDate_SelectionChanged(object sender, EventArgs e)
         {
             LoadAttendance(calDate.SelectedDate);
+
+            // Only update summary if an employee is selected
+            if (ddlEmployeeSummary.SelectedValue != "0")
+            {
+                UpdateSummary();
+            }
         }
+
 
 
 
@@ -136,5 +255,6 @@ namespace MEApp.Hr
             gvAttendance.PageIndex = e.NewPageIndex;
             LoadAttendance(calDate.SelectedDate);
         }
+
     }
 }
