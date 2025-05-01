@@ -1351,8 +1351,7 @@
 										<li>
 											
 											<asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Hr/hrdashboard.aspx">Hr Dashboard</asp:HyperLink>
-										</li>
-										
+										</li>								
 
 
 										
@@ -1400,6 +1399,23 @@
 										
 									</ul>
 								</li>--%>
+
+
+																<li class="submenu">
+				<a href="javascript:void(0);">
+								<i class="ti ti-cash"></i><span>Attendance Tracker</span>
+								<span class="menu-arrow"></span>
+				</a>
+				<ul>
+								
+								<li>
+									<asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Hr/Attendance Tracker.aspx">Attendance Tracker</asp:HyperLink></li>
+								
+				</ul>
+</li>
+
+
+
 
 								<li class="submenu">
 				<a href="javascript:void(0);">

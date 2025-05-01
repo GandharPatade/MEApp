@@ -5875,6 +5875,7 @@
     <Content Include="Hr\assets\plugins\twitter-bootstrap-wizard\form-wizard.js" />
     <Content Include="Hr\assets\plugins\twitter-bootstrap-wizard\jquery.bootstrap.wizard.min.js" />
     <Content Include="Hr\assets\plugins\twitter-bootstrap-wizard\prettify.js" />
+    <Content Include="Hr\Attendance Tracker.aspx" />
     <Content Include="Hr\hrdashboard.aspx" />
     <Content Include="Hr\LeaveApprovals.aspx" />
     <Content Include="Hr\pulse180.png" />
@@ -7832,6 +7833,7 @@
     <Content Include="User\assets\plugins\twitter-bootstrap-wizard\form-wizard.js" />
     <Content Include="User\assets\plugins\twitter-bootstrap-wizard\jquery.bootstrap.wizard.min.js" />
     <Content Include="User\assets\plugins\twitter-bootstrap-wizard\prettify.js" />
+    <Content Include="User\checkincheckout.aspx" />
     <Content Include="User\Developmentplans.aspx" />
     <Content Include="User\FeedbackSubmission.aspx" />
     <Content Include="User\Form16access.aspx" />
@@ -7999,6 +8001,13 @@
     <Compile Include="Hr\AddEvents.aspx.designer.cs">
       <DependentUpon>AddEvents.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Hr\Attendance Tracker.aspx.cs">
+      <DependentUpon>Attendance Tracker.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hr\Attendance Tracker.aspx.designer.cs">
+      <DependentUpon>Attendance Tracker.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Hr\hrdashboard.aspx.cs">
       <DependentUpon>hrdashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -8062,6 +8071,13 @@
     </Compile>
     <Compile Include="User\AppraisalParticipation.aspx.designer.cs">
       <DependentUpon>AppraisalParticipation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User\checkincheckout.aspx.cs">
+      <DependentUpon>checkincheckout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User\checkincheckout.aspx.designer.cs">
+      <DependentUpon>checkincheckout.aspx</DependentUpon>
     </Compile>
     <Compile Include="User\Developmentplans.aspx.cs">
       <DependentUpon>Developmentplans.aspx</DependentUpon>

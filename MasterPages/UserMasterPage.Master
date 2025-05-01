@@ -1352,6 +1352,21 @@
 
 									</ul>
 								</li>
+
+
+								<li class="submenu">
+				<a href="javascript:void(0);">
+								<i class="ti ti-users"></i><span>Punch In / Punch Out</span>
+								<span class="menu-arrow"></span>
+				</a>
+				<ul>
+								<li>
+									<asp:HyperLink ID="HyperLink12" runat="server" NavigateUrl="~/User/checkincheckout.aspx">Clock In / Clock Out</asp:HyperLink>
+								</li>
+								
+								
+				</ul>
+</li>
 								
 
 								<li class="submenu">
@@ -1363,9 +1378,7 @@
 										<li>
 											<asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/User/UserUpdateProfile.aspx">Update Profile</asp:HyperLink>
 										</li>
-										<%--<li>
-				<asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/User/UserDocumentAccess.aspx">Document Access</asp:HyperLink>
-</li>--%>
+										
 										
 									</ul>
 								</li>
