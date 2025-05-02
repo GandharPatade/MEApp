@@ -1387,7 +1387,15 @@
                                                     <asp:HyperLink ID="HyperLink13" runat="server" NavigateUrl="../Admin/AddDepartment.aspx">Add Department</asp:HyperLink>
                                                 </li>
                                                 <li>
-                                                    <asp:HyperLink ID="HyperLink14" runat="server" NavigateUrl="../Admin/AddDesignation.aspx">Add Designation
+                                                    <asp:HyperLink ID="HyperLink14" runat="server" NavigateUrl="../Admin/ViewDepartment.aspx">View Department</asp:HyperLink>
+                                                </li>
+
+                                                <li>
+                                                    <asp:HyperLink ID="HyperLink20" runat="server" NavigateUrl="../Admin/AddDesignation.aspx">Add Designation
+                                                    </asp:HyperLink>
+                                                </li>
+                                                <li>
+                                                    <asp:HyperLink ID="HyperLink19" runat="server" NavigateUrl="../Admin/ViewDesignation.aspx">View Designation
                                                     </asp:HyperLink>
                                                 </li>
                                             </ul>

@@ -11,52 +11,52 @@ namespace MEApp.Admin
 {
 
 
-    public partial class AddDepartment
+    public partial class AddDesignation
     {
 
         /// <summary>
-        /// lblDepartmentName control.
+        /// lblDesignation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDepartmentName;
+        protected global::System.Web.UI.WebControls.Label lblDesignation;
 
         /// <summary>
-        /// txtDepartmentName control.
+        /// txtDesignation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDepartmentName;
+        protected global::System.Web.UI.WebControls.TextBox txtDesignation;
 
         /// <summary>
-        /// rfvDepartmentName control.
+        /// rfvDesignation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDepartmentName;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDesignation;
 
         /// <summary>
-        /// DropDownList1 control.
+        /// DropDownList2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
 
         /// <summary>
-        /// btnAddDepartment control.
+        /// btnAddDesignation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddDepartment;
+        protected global::System.Web.UI.WebControls.Button btnAddDesignation;
     }
 }

@@ -9,9 +9,9 @@ using System.Web.UI.WebControls;
 
 namespace MEApp.Admin
 {
-    public partial class AddDepartment : System.Web.UI.Page
+    public partial class AddDesignation : System.Web.UI.Page
     {
-        string cs =ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
+        string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserID"] == null || Session["Role"] == null || Session["Role"].ToString() != "Admin")
@@ -20,23 +20,23 @@ namespace MEApp.Admin
             }
         }
 
-        protected void btnAddDepartment_Click(object sender, EventArgs e)
+        protected void btnAddDesignation_Click(object sender, EventArgs e)
         {
-            string departmentName = txtDepartmentName.Text.Trim();
-            
-            string status = DropDownList1.SelectedValue;
-            
-            if (string.IsNullOrEmpty(departmentName))
+            string designationName= txtDesignation.Text.Trim();
+
+            string status = DropDownList2.SelectedValue;
+
+            if (string.IsNullOrEmpty(designationName))
                 return;
 
 
             SqlConnection conn = new SqlConnection(cs);
             {
-                string query = "INSERT INTO Department (DepartmentName, Status) VALUES (@DepartmentName, @Status)";
+                string query = "INSERT INTO Designation (DesignationName, Status) VALUES (@DesignationName, @Status)";
 
                 SqlCommand cmd = new SqlCommand(query, conn);
                 {
-                    cmd.Parameters.AddWithValue("@DepartmentName", departmentName);
+                    cmd.Parameters.AddWithValue("@DesignationName", designationName);
                     cmd.Parameters.AddWithValue("@Status", status);
 
                     try
@@ -46,8 +46,8 @@ namespace MEApp.Admin
 
                         if (rowsAffected > 0)
                         {
-                            txtDepartmentName.Text = "";
-                            Response.Write("<script>alert('Department added successfully.');</script>");
+                            txtDesignation.Text = "";
+                            Response.Write("<script>alert('Designation added successfully.');</script>");
                         }
                     }
                     catch (Exception ex)
@@ -57,6 +57,5 @@ namespace MEApp.Admin
                 }
             }
         }
-
     }
 }

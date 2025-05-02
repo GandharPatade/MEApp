@@ -3947,6 +3947,8 @@
     <Content Include="Admin\UploadForm16.aspx" />
     <Content Include="Admin\UserList.aspx" />
     <Content Include="Admin\UserRegister.aspx" />
+    <Content Include="Admin\ViewDepartment.aspx" />
+    <Content Include="Admin\ViewDesignation.aspx" />
     <Content Include="Admin\ViewEmployees.aspx" />
     <Content Include="Admin\ViewForm16.aspx" />
     <Content Include="Admin\ViewPayslips.aspx" />
@@ -7988,6 +7990,20 @@
     </Compile>
     <Compile Include="Admin\UserRegister.aspx.designer.cs">
       <DependentUpon>UserRegister.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ViewDepartment.aspx.cs">
+      <DependentUpon>ViewDepartment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ViewDepartment.aspx.designer.cs">
+      <DependentUpon>ViewDepartment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ViewDesignation.aspx.cs">
+      <DependentUpon>ViewDesignation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ViewDesignation.aspx.designer.cs">
+      <DependentUpon>ViewDesignation.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\ViewEmployees.aspx.cs">
       <DependentUpon>ViewEmployees.aspx</DependentUpon>

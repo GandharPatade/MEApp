@@ -9,19 +9,16 @@
         <asp:TextBox ID="txtDepartmentName" runat="server"></asp:TextBox>
         <asp:RequiredFieldValidator ID="rfvDepartmentName" runat="server" ControlToValidate="txtDepartmentName" ErrorMessage="Department Name is required." ForeColor="Red"></asp:RequiredFieldValidator>
 
-        <asp:Label Text="lblDesigntion" runat="server" Text="Designation"></asp:Label>
-        <asp:TextBox ID="txtDesignation" runat="server"></asp:TextBox>
-        <asp:RequiredFieldValidator ID="rfvDesignation" runat="server" ControlToValidate="txtDesignation" ErrorMessage="Designation is required." ForeColor="Red"></asp:RequiredFieldValidator>
+        <div>
+            <asp:DropDownList ID="DropDownList1" runat="server">
+                <asp:ListItem Value="Active">Active</asp:ListItem>
+                <asp:ListItem Value="Inactive">Inactive</asp:ListItem>
+            </asp:DropDownList>
+        </div>
     </div>
 
     <div>
         <asp:Button ID="btnAddDepartment" runat="server" Text="Add Department" OnClick="btnAddDepartment_Click" />
     </div>
 
-    <div>
-        <asp:DropDownList ID="DropDownList1" runat="server">
-            <asp:ListItem Value="Active">Active</asp:ListItem>
-            <asp:ListItem Value="Inactive">Inactive</asp:ListItem>
-        </asp:DropDownList>
-    </div>
 </asp:Content>

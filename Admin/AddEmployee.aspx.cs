@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -17,14 +18,9 @@ namespace MEApp.Admin
         {
             if (!IsPostBack)
             {
-                string name = Session["fullname"].ToString();
-                string email = Session["email"].ToString();
-
-                txtEmail.Text = email;
-                txtFullName.Text = name;
-
                 LoadUsers();
-
+                LoadDepartments();
+                LoadDesignations();
                 //string naam = Request.QueryString["name"];
                 //string email12 = Request.QueryString["email"];
 
@@ -35,30 +31,40 @@ namespace MEApp.Admin
             {
                 Response.Redirect("~/Account/Login.aspx");
             }
-        }
-
-        protected void btnAddEmployee_Click(object sender, EventArgs e)
-        {
             string name = Session["fullname"].ToString();
             string email = Session["email"].ToString();
             txtEmail.Text = email;
             txtFullName.Text = name;
-            string empcode = txtEmployeeCode.Text;
-            double contact = double.Parse(txtContactNo.Text);
-            string dept = txtDepartment.Text;
-            string designation =  txtDesignation.Text;
-           
-                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString);
-                SqlCommand cmd = new SqlCommand($"exec sp_AddEmployee '{empcode}', '{name}', '{email}', '{contact}', '{dept}', '{designation}'", con);
-             
-                con.Open();
-                cmd.ExecuteNonQuery();
-                con.Close();
-
-                lblMessage.Text = "Employee added successfully!";
-                ClearFields();
-                LoadUsers();
         }
+
+        protected void btnAddEmployee_Click(object sender, EventArgs e)
+        {
+            string empcode = txtEmployeeCode.Text;
+            string name = txtFullName.Text;
+            string email = txtEmail.Text;
+            string contact = txtContactNo.Text;
+
+            string departmentName = ddlDepartment.SelectedItem.Text;  // Fetching department name
+            string designationName = ddlDesignation.SelectedItem.Text;  // Fetching designation name
+
+            string insertQuery = "INSERT INTO EmployeeProfiles (EmployeeCode, FullName, Email, ContactNo, Department, Designation) " +
+                                 "VALUES (@EmployeeCode, @FullName, @Email, @ContactNo, @Department, @Designation)";
+
+            SqlCommand cmd = new SqlCommand(insertQuery, conn);
+            cmd.Parameters.AddWithValue("@EmployeeCode", empcode);
+            cmd.Parameters.AddWithValue("@FullName", name);
+            cmd.Parameters.AddWithValue("@Email", email);
+            cmd.Parameters.AddWithValue("@ContactNo", contact);
+            cmd.Parameters.AddWithValue("@Department", departmentName);
+            cmd.Parameters.AddWithValue("@Designation", designationName);
+
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            LoadUsers();
+        }
+
+
 
         private void LoadUsers()
         {
@@ -72,14 +78,37 @@ namespace MEApp.Admin
             conn.Close();
         }
 
+        private void LoadDepartments()
+        {
+            string query = "SELECT DepartmentID, DepartmentName FROM Department WHERE Status = 'Active'";
+            SqlDataAdapter da = new SqlDataAdapter(query, conn);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            ddlDepartment.DataSource = dt;
+            ddlDepartment.DataTextField = "DepartmentName";
+            ddlDepartment.DataValueField = "DepartmentID";
+            ddlDepartment.DataBind();
+        }
+
+        private void LoadDesignations()
+        {
+            string query = "SELECT DesignationID, DesignationName FROM Designation WHERE Status = 'Active'";
+            SqlDataAdapter da = new SqlDataAdapter(query, conn);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            ddlDesignation.DataSource = dt;
+            ddlDesignation.DataTextField = "DesignationName";
+            ddlDesignation.DataValueField = "DesignationID";
+            ddlDesignation.DataBind();
+        }
+
+
         private void ClearFields()
         {
             txtEmployeeCode.Text = "";
             txtFullName.Text = "";
             txtEmail.Text = "";
             txtContactNo.Text = "";
-            txtDepartment.Text = "";
-            txtDesignation.Text = "";
         }
     }
 }
