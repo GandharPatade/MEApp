@@ -1379,14 +1379,31 @@
 
                                         <li class="submenu">
                                             <a href="javascript:void(0);">
+                                                <i class="ti ti-users"></i><span>Department</span>
+                                                <span class="menu-arrow"></span>
+                                            </a>
+                                            <ul>
+                                                <li>
+                                                    <asp:HyperLink ID="HyperLink13" runat="server" NavigateUrl="../Admin/AddDepartment.aspx">Add Department</asp:HyperLink>
+                                                </li>
+                                                <li>
+                                                    <asp:HyperLink ID="HyperLink14" runat="server" NavigateUrl="../Admin/AddDesignation.aspx">Add Designation
+                                                    </asp:HyperLink>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+
+                                        <li class="submenu">
+                                            <a href="javascript:void(0);">
                                                 <i class="ti ti-users"></i><span>Employee</span>
                                                 <span class="menu-arrow"></span>
                                             </a>
                                             <ul>
                                                 <%--<li><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="../Admin/AddEmployee.aspx">Add Employee</asp:HyperLink></li>--%>
                                                 <li>
-                                                    <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="../Admin/ViewEmployees.aspx">View Employees</asp:HyperLink></li>
-
+                                                    <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="../Admin/ViewEmployees.aspx">View Employees</asp:HyperLink>
+                                                </li>
                                             </ul>
                                         </li>
 
@@ -1494,20 +1511,22 @@
                                         </li>
 
 
-								<li class="submenu">
-				<a href="javascript:void(0);">
-								<i class="ti ti-file-time"></i><span>Performance Management</span>
-								<span class="menu-arrow"></span>
-				</a>
-				<ul>
-                    <li><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Admin/PerformancePage.aspx">Performance</asp:HyperLink></li>
-								
-				<li><asp:HyperLink ID="HyperLink14" runat="server" NavigateUrl="../Admin/AppraisalForm.aspx">Appraisal Form</asp:HyperLink></li>
-								
-								
-				</ul>
-</li>
-								
+                                        <li class="submenu">
+                                            <a href="javascript:void(0);">
+                                                <i class="ti ti-file-time"></i><span>Performance Management</span>
+                                                <span class="menu-arrow"></span>
+                                            </a>
+                                            <ul>
+                                                <li>
+                                                    <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Admin/PerformancePage.aspx">Performance</asp:HyperLink></li>
+
+                                                <li>
+                                                    <asp:HyperLink ID="HyperLink18" runat="server" NavigateUrl="../Admin/AppraisalForm.aspx">Appraisal Form</asp:HyperLink></li>
+
+
+                                            </ul>
+                                        </li>
+
 
 
 

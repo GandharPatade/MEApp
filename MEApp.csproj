@@ -2002,6 +2002,8 @@
     <Content Include="Account\assets\plugins\twitter-bootstrap-wizard\prettify.js" />
     <Content Include="Account\LogIn.aspx" />
     <Content Include="Account\pulse180.png" />
+    <Content Include="Admin\AddDepartment.aspx" />
+    <Content Include="Admin\AddDesignation.aspx" />
     <Content Include="Admin\AddDocument.aspx" />
     <Content Include="Admin\AddEmployee.aspx" />
     <Content Include="Admin\AdminDashboard.aspx" />
@@ -7859,6 +7861,20 @@
     </Compile>
     <Compile Include="Account\LogIn.aspx.designer.cs">
       <DependentUpon>LogIn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AddDepartment.aspx.cs">
+      <DependentUpon>AddDepartment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AddDepartment.aspx.designer.cs">
+      <DependentUpon>AddDepartment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\AddDesignation.aspx.cs">
+      <DependentUpon>AddDesignation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\AddDesignation.aspx.designer.cs">
+      <DependentUpon>AddDesignation.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\AddDocument.aspx.cs">
       <DependentUpon>AddDocument.aspx</DependentUpon>
