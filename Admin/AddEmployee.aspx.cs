@@ -44,11 +44,14 @@ namespace MEApp.Admin
             string email = txtEmail.Text;
             string contact = txtContactNo.Text;
 
-            string departmentName = ddlDepartment.SelectedItem.Text;  // Fetching department name
-            string designationName = ddlDesignation.SelectedItem.Text;  // Fetching designation name
+            string departmentName = ddlDepartment.SelectedItem.Text;  
+            string designationName = ddlDesignation.SelectedItem.Text;
 
-            string insertQuery = "INSERT INTO EmployeeProfiles (EmployeeCode, FullName, Email, ContactNo, Department, Designation) " +
-                                 "VALUES (@EmployeeCode, @FullName, @Email, @ContactNo, @Department, @Designation)";
+            string departmentID = ddlDepartment.SelectedValue;
+            string designationID = ddlDesignation.SelectedValue;
+
+            string insertQuery = "INSERT INTO EmployeeProfiles (EmployeeCode, FullName, Email, ContactNo, Department, Designation, DepartmentID, DesignationID) " +
+                                 "VALUES (@EmployeeCode, @FullName, @Email, @ContactNo, @Department, @Designation, @DepartmentID, @DesignationID)";
 
             SqlCommand cmd = new SqlCommand(insertQuery, conn);
             cmd.Parameters.AddWithValue("@EmployeeCode", empcode);
@@ -57,6 +60,8 @@ namespace MEApp.Admin
             cmd.Parameters.AddWithValue("@ContactNo", contact);
             cmd.Parameters.AddWithValue("@Department", departmentName);
             cmd.Parameters.AddWithValue("@Designation", designationName);
+            cmd.Parameters.AddWithValue("@DepartmentID", departmentID);
+            cmd.Parameters.AddWithValue("@DesignationID", designationID);
 
             conn.Open();
             cmd.ExecuteNonQuery();

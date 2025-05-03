@@ -81,17 +81,27 @@ namespace MEApp.Admin
             DropDownList ddlDept = (DropDownList)row.FindControl("ddlDepartment");
             DropDownList ddlDes = (DropDownList)row.FindControl("ddlDesignation");
 
-            int departmentID = 0;
-            int designationID = 0;
+            int departmentID;
+            int designationID;
 
-            if (ddlDept != null && !string.IsNullOrEmpty(ddlDept.SelectedValue))
+            if (ddlDes != null && int.TryParse(ddlDes.SelectedValue, out designationID) && designationID > 0)
             {
-                int.TryParse(ddlDept.SelectedValue, out departmentID);
+                // valid
+            }
+            else
+            {
+                lblMessage.Text = "Please select a valid designation.";
+                return;
             }
 
-            if (ddlDes != null && !string.IsNullOrEmpty(ddlDes.SelectedValue))
+            if (ddlDept != null && int.TryParse(ddlDept.SelectedValue, out departmentID) && departmentID > 0)
             {
-                int.TryParse(ddlDes.SelectedValue, out designationID);
+                // valid
+            }
+            else
+            {
+                lblMessage.Text = "Please select a valid department.";
+                return;
             }
 
             string updateQuery = "UPDATE EmployeeProfiles SET FullName = @FullName, Email = @Email, ContactNo = @ContactNo, DepartmentID = @DepartmentID, DesignationID = @DesignationID WHERE EmployeeCode = @EmployeeCode";
@@ -113,6 +123,7 @@ namespace MEApp.Admin
 
             LoadEmployees(selectedStatus);
         }
+
 
         protected void GridViewEmployees_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
@@ -153,10 +164,11 @@ namespace MEApp.Admin
 
             ddlDepartment.Items.Insert(0, new ListItem("--Select Department--", ""));
 
-            if (!string.IsNullOrEmpty(selectedValue))
+            if (!string.IsNullOrEmpty(selectedValue) && ddlDepartment.Items.FindByValue(selectedValue) != null)
             {
                 ddlDepartment.SelectedValue = selectedValue;
             }
+
         }
 
         protected void LoadDesignations(DropDownList ddlDesignation, string selectedValue)
@@ -173,11 +185,84 @@ namespace MEApp.Admin
             ddlDesignation.DataValueField = "DesignationID";
             ddlDesignation.DataBind();
 
-            ddlDesignation.Items.Insert(0, new ListItem("-- Select Designation --", ""));
-            if (!string.IsNullOrEmpty(selectedValue))
+            if (!string.IsNullOrEmpty(selectedValue) && ddlDesignation.Items.FindByValue(selectedValue) != null)
             {
                 ddlDesignation.SelectedValue = selectedValue;
             }
+
         }
+
+        protected void GridViewEmployees_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow && (e.Row.RowState & DataControlRowState.Edit) > 0)
+            {
+                DropDownList ddlDept = (DropDownList)e.Row.FindControl("ddlDepartment");
+                DropDownList ddlDes = (DropDownList)e.Row.FindControl("ddlDesignation");
+
+                HiddenField hfDeptID = (HiddenField)e.Row.FindControl("hfDepartmentID");
+                HiddenField hfDesID = (HiddenField)e.Row.FindControl("hfDesignationID");
+
+                int currentDeptID = int.Parse(hfDeptID.Value);
+                int currentDesID = int.Parse(hfDesID.Value);
+
+                // Bind Department dropdown
+                ddlDept.DataSource = GetActiveDepartments(); // your method to get active depts
+                ddlDept.DataTextField = "DepartmentName";
+                ddlDept.DataValueField = "DepartmentID";
+                ddlDept.DataBind();
+
+                // Add current (possibly inactive) item if missing
+                if (ddlDept.Items.FindByValue(currentDeptID.ToString()) == null)
+                {
+                    ddlDept.Items.Add(new ListItem("Inactive - ID: " + currentDeptID, currentDeptID.ToString()));
+                }
+
+                ddlDept.SelectedValue = currentDeptID.ToString();
+
+                // Bind Designation dropdown
+                ddlDes.DataSource = GetActiveDesignations(); // your method to get active designations
+                ddlDes.DataTextField = "DesignationName";
+                ddlDes.DataValueField = "DesignationID";
+                ddlDes.DataBind();
+
+                // Add current (possibly inactive) item if missing
+                if (ddlDes.Items.FindByValue(currentDesID.ToString()) == null)
+                {
+                    ddlDes.Items.Add(new ListItem("Inactive - ID: " + currentDesID, currentDesID.ToString()));
+                }
+
+                ddlDes.SelectedValue = currentDesID.ToString();
+            }
+        }
+
+        private DataTable GetActiveDepartments()
+        {
+            string query = "SELECT DepartmentID, DepartmentName FROM Department WHERE Status = 'Active'";
+            using (SqlCommand cmd = new SqlCommand(query, con))
+            {
+                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+        }
+
+        private DataTable GetActiveDesignations()
+        {
+            string query = "SELECT DesignationID, DesignationName FROM Designation WHERE Status = 'Active'";
+            using (SqlCommand cmd = new SqlCommand(query, con))
+            {
+                using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                {
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+                    return dt;
+                }
+            }
+        }
+
+
     }
 }

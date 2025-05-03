@@ -127,12 +127,13 @@
         <asp:ListItem Text="Inactive" Value="Inactive" />
     </asp:DropDownList>
 
-    <asp:Button ID="Button1" runat="server" Text="Filter" OnClick="btnFilter_Click"/>
+    <asp:Button ID="Button1" runat="server" Text="Filter" OnClick="btnFilter_Click" />
 
     <asp:GridView ID="GridViewEmployees" runat="server" AutoGenerateColumns="False"
         CssClass="table table-striped table-bordered" DataKeyNames="EmployeeCode,DepartmentID,DesignationID"
         OnRowEditing="GridViewEmployees_RowEditing"
         OnRowUpdating="GridViewEmployees_RowUpdating"
+        OnRowDataBound="GridViewEmployees_RowDataBound"
         OnRowCancelingEdit="GridViewEmployees_RowCancelingEdit"
         OnRowDeleting="GridViewEmployees_RowDeleting"
         UseAccessibleHeader="true" HeaderStyle-CssClass="table-header" GridLines="None">
@@ -147,22 +148,25 @@
             <asp:BoundField DataField="ContactNo" HeaderText="Contact No" />
 
             <asp:TemplateField HeaderText="Department">
+                <EditItemTemplate>
+                    <asp:DropDownList ID="ddlDepartment" runat="server"></asp:DropDownList>
+                    <asp:HiddenField ID="hfDepartmentID" runat="server" Value='<%# Bind("DepartmentID") %>' />
+                </EditItemTemplate>
                 <ItemTemplate>
                     <%# Eval("DepartmentName") %>
                 </ItemTemplate>
-                <EditItemTemplate>
-                    <asp:DropDownList ID="ddlDepartment" runat="server" />
-                </EditItemTemplate>
             </asp:TemplateField>
 
             <asp:TemplateField HeaderText="Designation">
+                <EditItemTemplate>
+                    <asp:DropDownList ID="ddlDesignation" runat="server"></asp:DropDownList>
+                    <asp:HiddenField ID="hfDesignationID" runat="server" Value='<%# Bind("DesignationID") %>' />
+                </EditItemTemplate>
                 <ItemTemplate>
                     <%# Eval("DesignationName") %>
                 </ItemTemplate>
-                <EditItemTemplate>
-                    <asp:DropDownList ID="ddlDesignation" runat="server" />
-                </EditItemTemplate>
             </asp:TemplateField>
+
 
             <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />
         </Columns>

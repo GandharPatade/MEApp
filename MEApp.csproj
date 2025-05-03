@@ -3949,6 +3949,7 @@
     <Content Include="Admin\UserRegister.aspx" />
     <Content Include="Admin\ViewDepartment.aspx" />
     <Content Include="Admin\ViewDesignation.aspx" />
+    <Content Include="Admin\ViewEmp.aspx" />
     <Content Include="Admin\ViewEmployees.aspx" />
     <Content Include="Admin\ViewForm16.aspx" />
     <Content Include="Admin\ViewPayslips.aspx" />
@@ -8004,6 +8005,13 @@
     </Compile>
     <Compile Include="Admin\ViewDesignation.aspx.designer.cs">
       <DependentUpon>ViewDesignation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ViewEmp.aspx.cs">
+      <DependentUpon>ViewEmp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ViewEmp.aspx.designer.cs">
+      <DependentUpon>ViewEmp.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\ViewEmployees.aspx.cs">
       <DependentUpon>ViewEmployees.aspx</DependentUpon>

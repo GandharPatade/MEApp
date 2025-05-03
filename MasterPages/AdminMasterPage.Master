@@ -1410,7 +1410,7 @@
                                             <ul>
                                                 <%--<li><asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="../Admin/AddEmployee.aspx">Add Employee</asp:HyperLink></li>--%>
                                                 <li>
-                                                    <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="../Admin/ViewEmployees.aspx">View Employees</asp:HyperLink>
+                                                    <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="../Admin/ViewEmp.aspx">View Employees</asp:HyperLink>
                                                 </li>
                                             </ul>
                                         </li>
