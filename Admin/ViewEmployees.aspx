@@ -118,7 +118,16 @@
         </div>
     </div>
     <!-- /Breadcrumb -->
+    <asp:Label ID="status" runat="server" CssClass="text-success mt-3 d-block">Status</asp:Label>
+    <asp:DropDownList
+        ID="DropDownList1"
+        runat="server"
+        OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+        <asp:ListItem Text="Active" Value="Active" Selected="True" />
+        <asp:ListItem Text="Inactive" Value="Inactive" />
+    </asp:DropDownList>
 
+    <asp:Button ID="Button1" runat="server" Text="Filter" OnClick="btnFilter_Click"/>
 
     <asp:GridView ID="GridViewEmployees" runat="server" AutoGenerateColumns="False"
         CssClass="table table-striped table-bordered" DataKeyNames="EmployeeCode,DepartmentID,DesignationID"

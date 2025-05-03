@@ -12,25 +12,37 @@ namespace MEApp.Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            {
-                LoadEmployees();
-            }
+            LoadEmployees("Active");
         }
 
-        private void LoadEmployees()
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SqlDataAdapter da = new SqlDataAdapter("EXEC sp_GetAllEmployees", con);
+            string selectedStatus = DropDownList1.SelectedValue;
+            LoadEmployees(selectedStatus);
+        }
+
+        private void LoadEmployees(string status)
+        {
+            SqlDataAdapter da = new SqlDataAdapter($"EXEC sp_GetAllEmployees '{status}'", con);
             DataTable dt = new DataTable();
             da.Fill(dt);
             GridViewEmployees.DataSource = dt;
             GridViewEmployees.DataBind();
         }
 
+        protected void btnFilter_Click(object sender, EventArgs e)
+        {
+            string selectedStatus = DropDownList1.SelectedValue;
+            LoadEmployees(selectedStatus);
+        }
+
+
         protected void GridViewEmployees_RowEditing(object sender, GridViewEditEventArgs e)
         {
             GridViewEmployees.EditIndex = e.NewEditIndex;
-            LoadEmployees();
+            string selectedStatus = DropDownList1.SelectedValue;
+
+            LoadEmployees(selectedStatus);
 
             // Get department and designation IDs from the data key
             object deptIdObj = GridViewEmployees.DataKeys[e.NewEditIndex]["DepartmentID"];
@@ -51,7 +63,9 @@ namespace MEApp.Admin
         protected void GridViewEmployees_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             GridViewEmployees.EditIndex = -1;
-            LoadEmployees();
+            string selectedStatus = DropDownList1.SelectedValue;
+
+            LoadEmployees(selectedStatus);
         }
 
         protected void GridViewEmployees_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -95,7 +109,9 @@ namespace MEApp.Admin
             con.Close();
 
             GridViewEmployees.EditIndex = -1;
-            LoadEmployees();
+            string selectedStatus = DropDownList1.SelectedValue;
+
+            LoadEmployees(selectedStatus);
         }
 
         protected void GridViewEmployees_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -111,7 +127,9 @@ namespace MEApp.Admin
                 con.Close();
 
                 lblMessage.Text = "Employee deleted.";
-                LoadEmployees();
+                string selectedStatus = DropDownList1.SelectedValue;
+
+                LoadEmployees(selectedStatus);
             }
             catch (Exception ex)
             {
