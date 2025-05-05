@@ -51,22 +51,22 @@ namespace MEApp.User
         protected global::System.Web.UI.WebControls.TextBox txtContactNo;
 
         /// <summary>
-        /// txtDepartment control.
+        /// dropdowndepartment control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDepartment;
+        protected global::System.Web.UI.WebControls.DropDownList dropdowndepartment;
 
         /// <summary>
-        /// txtDesignation control.
+        /// dropdowndesignation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDesignation;
+        protected global::System.Web.UI.WebControls.DropDownList dropdowndesignation;
 
         /// <summary>
         /// btnUpdate control.

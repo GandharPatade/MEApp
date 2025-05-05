@@ -16,7 +16,9 @@ namespace MEApp.User
         {
             if (!IsPostBack)
             {
+                txtRaisedBy.Text = Session["EmpCode"].ToString();
                 PopulateSupportStaffDropdown();
+
             }
 
         }

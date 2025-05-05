@@ -44,6 +44,10 @@ namespace MEApp.Account
             DataSet dds = new DataSet();
             dda.Fill(dds);
 
+            SqlCommand nmnm = new SqlCommand("select * from Tickets inner join [Users] on Tickets.AssignedTo = [Users].FullName where Email='"+txtEmail.Text+"'", conn);
+            SqlDataAdapter gghghgh = new SqlDataAdapter(nmnm);
+            DataSet ccjc = new DataSet();
+            gghghgh.Fill(ccjc);
 
 
             SqlDataReader dr = cmd.ExecuteReader();
@@ -71,6 +75,12 @@ namespace MEApp.Account
                 else if (role == "hr")
                 {
                     Response.Redirect("~/Hr/hrdashboard.aspx");
+                }
+                else if (role == "support")
+                {
+                    Session["supportemail"] = ccjc.Tables[0].Rows[0][9].ToString();
+                    Session["assignto"] = ccjc.Tables[0].Rows[0][4].ToString();
+                    Response.Redirect("~/SupportStaff/showticket.aspx");
                 }
                 else
                 {
