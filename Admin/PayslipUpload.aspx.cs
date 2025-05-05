@@ -23,6 +23,7 @@ namespace MEApp.Admin
             string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
             con = new SqlConnection(cs);
 
+            BindPayslips();
             if (!IsPostBack)
             {
                 LoadEmployees();
@@ -45,70 +46,133 @@ namespace MEApp.Admin
             ddlEmpCode.Items.Insert(0, new System.Web.UI.WebControls.ListItem("--Select--", ""));
         }
 
+        private void BindPayslips()
+        {
+            //if (Session["Role"] == null || Session["empCode"] == null)
+            //{
+            //    Response.Redirect("~/Login.aspx"); 
+            //    return;
+            //}
+            SqlCommand cmd;
+
+            string role = Session["Role"].ToString();
+            //string empCode = Session["empCode"].ToString();
+
+            if (role == "Admin")
+            {
+                cmd = new SqlCommand("select EmployeeCode, FullName, Email, Department, Designation, ContactNo from EmployeeProfiles", con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                con.Open();
+                da.Fill(dt);
+                con.Close();
+
+                GridViewPayslips.DataSource = dt;
+                GridViewPayslips.DataBind();
+            }
+            //else
+            //{
+            //    cmd = new SqlCommand($"exec sp_GetPayslipsByEmp '{empCode}'", con);
+            //}
+        }
+
+        private int GetPresentDays(string empCode, int month, int year)
+        {
+            int presentDays = 0;
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString))
+            {
+                SqlCommand cmd = new SqlCommand("sp_GetMonthlyAttendanceSummaryByEmpCode", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@EmployeeCode", empCode);
+                cmd.Parameters.AddWithValue("@Month", month);
+                cmd.Parameters.AddWithValue("@Year", year);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    presentDays = reader["PresentCount"] != DBNull.Value ? Convert.ToInt32(reader["PresentCount"]) : 0;
+                }
+            }
+            return presentDays;
+        }
+
+
         protected void btnUpload_Click(object sender, EventArgs e)
         {
             //try
             //{
-                string empCode = ddlEmpCode.SelectedValue;
-                string financialYear = txtFinancialYear.Text;
-                decimal salary;
-                if (!decimal.TryParse(txtSalary.Text, out salary))
-                {
-                    throw new Exception("Invalid salary format. Please enter a valid number.");
-                }
+            string empCode = ddlEmpCode.SelectedValue;
+            string financialYear = txtFinancialYear.Text;
+            decimal salary;
+            if (!decimal.TryParse(txtSalary.Text, out salary))
+            {
+                throw new Exception("Invalid salary format. Please enter a valid number.");
+            }
 
-                decimal pf = salary * 0.12m;
+            DateTime today = DateTime.Today;
+            int month = today.Month;
+            int year = today.Year;
+            int workingDays = 26;
+            int presentDays = GetPresentDays(empCode, month, year);
 
-                string htmlContent = $@"
+            decimal perDaySalary = salary / workingDays;
+            decimal earnedSalary = perDaySalary * presentDays;
+            decimal pf = earnedSalary * 0.12m;
+
+
+            string htmlContent = $@"
             <h1>Payslip</h1>
             <p>Employee Code: {empCode}</p>
             <p>Financial Year: {financialYear}</p>
-            <p>Salary: ₹{salary:N2}</p>
+            <p>Total Salary (for full month): ₹{salary:N2}</p>
+            <p>Days Present: {presentDays} / {workingDays}</p>
+            <p>Salary Earned: ₹{earnedSalary:N2}</p>
             <p>Provident Fund (12%): ₹{pf:N2}</p>
             <p>Date Generated: {DateTime.Now.ToShortDateString()}</p>
         ";
 
-                byte[] pdfBytes = GeneratePdfFromHtml(htmlContent);
+            byte[] pdfBytes = GeneratePdfFromHtml(htmlContent);
 
-                string fileName = $"Payslip_{empCode}_{financialYear}.pdf";
-                string folderPath = Server.MapPath("~/Payslip/");
-                if (!Directory.Exists(folderPath))
-                    Directory.CreateDirectory(folderPath);
+            string fileName = $"Payslip_{empCode}_{financialYear}.pdf";
+            string folderPath = Server.MapPath("~/Payslip/");
+            if (!Directory.Exists(folderPath))
+                Directory.CreateDirectory(folderPath);
 
-                string filePath = Path.Combine(folderPath, fileName);
-                File.WriteAllBytes(filePath, pdfBytes);
+            string filePath = Path.Combine(folderPath, fileName);
+            File.WriteAllBytes(filePath, pdfBytes);
 
-                string relativePath = "~/Payslip/" + fileName;
+            string relativePath = "~/Payslip/" + fileName;
 
-                // Database and email operations
-                SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString);
-                con.Open();
+            // Database and email operations
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString);
+            con.Open();
 
-                // Insert data into database
-                    SqlCommand cmd = new SqlCommand($"exec sp_InsertPayslip '{empCode}', '{financialYear}', '{salary}', '{pf}', '{relativePath}'", con);
-                    cmd.ExecuteNonQuery();
+            // Insert data into database
+            SqlCommand cmd = new SqlCommand($"exec sp_InsertPayslip '{empCode}', '{financialYear}', '{salary}', '{pf}', '{relativePath}'", con);
+            cmd.ExecuteNonQuery();
 
-                // Fetch email and send the email
-                SqlCommand emailCmd = new SqlCommand("SELECT Email FROM EmployeeProfiles WHERE EmployeeCode = @EmployeeCode", con);
-                emailCmd.Parameters.AddWithValue("@EmployeeCode", empCode);
-                SqlDataReader rdr = emailCmd.ExecuteReader();
-                if (rdr.HasRows)
+            // Fetch email and send the email
+            SqlCommand emailCmd = new SqlCommand("SELECT Email FROM EmployeeProfiles WHERE EmployeeCode = @EmployeeCode", con);
+            emailCmd.Parameters.AddWithValue("@EmployeeCode", empCode);
+            SqlDataReader rdr = emailCmd.ExecuteReader();
+            if (rdr.HasRows)
+            {
+                while (rdr.Read())
                 {
-                    while (rdr.Read())
+                    string email = rdr["Email"].ToString();
+                    if (File.Exists(filePath))
                     {
-                        string email = rdr["Email"].ToString();
-                        if (File.Exists(filePath))
-                        {
-                            EmailHelper.SendEmail(email, "Payslip Generated", "Please find the Payslip attached.", filePath);
-                        }
-                        else
-                        {
-                            throw new Exception("Payslip not found at " + filePath);
-                        }
+                        EmailHelper.SendEmail(email, "Payslip Generated", "Please find the Payslip attached.", filePath);
+                    }
+                    else
+                    {
+                        throw new Exception("Payslip not found at " + filePath);
                     }
                 }
+            }
 
-                ScriptManager.RegisterStartupScript(this, GetType(), "SuccessAlert", "alert('Payslip generated and uploaded successfully!');", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "SuccessAlert", "alert('Payslip generated and uploaded successfully!');", true);
             //}
             //catch (Exception ex)
             //{

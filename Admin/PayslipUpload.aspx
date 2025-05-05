@@ -76,5 +76,8 @@
         Text="Generate Payslip"
         OnClick="btnUpload_Click"
         OnClientClick="return confirm('Are you sure you want to generate Payslip?');" />
+
+    <asp:GridView ID="GridViewPayslips" runat="server" CssClass="table table-bordered table-striped mt-4">
+    </asp:GridView>
 </asp:Content>
 
