@@ -198,6 +198,7 @@ namespace MEApp.User
 
                 //GridView1.DataSource = ds;
                 //GridView1.DataBind();
+                txtEmpCode.Text = Session["EmpCode"].ToString();
                 string email = Session["Email12"].ToString();
 
                 SqlConnection conn = new SqlConnection(connStr);
@@ -345,7 +346,7 @@ namespace MEApp.User
 
         private void ClearForm()
         {
-            txtEmpCode.Text = "";
+            //txtEmpCode.Text = "";
             DropDownList1.SelectedIndex = 0;
             TextBox1.Text = "";
             TextBox2.Text = "";
