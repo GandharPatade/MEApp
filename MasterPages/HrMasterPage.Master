@@ -1432,7 +1432,7 @@
 
 
 
-								<li class="submenu">
+								<%--<li class="submenu">
 									<a href="javascript:void(0);">
 										<i class="ti ti-cash"></i><span>Events</span>
 										<span class="menu-arrow"></span>
@@ -1443,7 +1443,7 @@
 											<asp:HyperLink ID="HyperLink15" runat="server" NavigateUrl="~/Hr/AddEvents.aspx">Add Event</asp:HyperLink></li>
 										
 									</ul>
-								</li>
+								</li>--%>
 
 
 								<li class="submenu">
