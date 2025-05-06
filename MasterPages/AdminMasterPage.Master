@@ -1499,6 +1499,9 @@
                                                 <li>
                                                     <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="../Admin/LeavePolicy.aspx">Add Leave Policy </asp:HyperLink></li>
                                                 <li>
+                                                <li>
+                                                    <asp:HyperLink ID="HyperLink21" runat="server" NavigateUrl="../Admin/LeaveCalendar.aspx">Leave Calendar</asp:HyperLink></li>
+                                                <li>
                                                     <asp:HyperLink ID="HyperLink12" runat="server" NavigateUrl="../Admin/LeaveApprovals.aspx">Leave Approvals </asp:HyperLink></li>
                                                 <%--<li>
                                                     <asp:HyperLink ID="HyperLink13" runat="server" NavigateUrl="../Admin/LeaveReport.aspx">Leave Report </asp:HyperLink></li>--%>

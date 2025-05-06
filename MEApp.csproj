@@ -3936,6 +3936,7 @@
     <Content Include="Admin\assets\plugins\twitter-bootstrap-wizard\prettify.js" />
     <Content Include="Admin\EventPage.aspx" />
     <Content Include="Admin\LeaveApprovals.aspx" />
+    <Content Include="Admin\LeaveCalendar.aspx" />
     <Content Include="Admin\LeavePolicy.aspx" />
     <Content Include="Admin\LeaveReport.aspx" />
     <Content Include="Admin\PayslipUpload.aspx" />
@@ -9849,6 +9850,13 @@
     </Compile>
     <Compile Include="Admin\LeaveApprovals.aspx.designer.cs">
       <DependentUpon>LeaveApprovals.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\LeaveCalendar.aspx.cs">
+      <DependentUpon>LeaveCalendar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\LeaveCalendar.aspx.designer.cs">
+      <DependentUpon>LeaveCalendar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\LeavePolicy.aspx.cs">
       <DependentUpon>LeavePolicy.aspx</DependentUpon>

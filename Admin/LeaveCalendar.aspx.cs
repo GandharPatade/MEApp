@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace MEApp.Admin
+{
+    public partial class LeaveCalendar : System.Web.UI.Page
+    {
+        private Dictionary<DateTime, string> events = new Dictionary<DateTime, string>();
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                Calendar1.VisibleDate = DateTime.Today;
+                LoadEvents();
+            }
+        }
+
+        private void LoadEvents()
+        {
+            events.Clear();  // <-- important
+
+            string cs = ConfigurationManager.ConnectionStrings["MEApp"].ConnectionString;
+            using (SqlConnection conn = new SqlConnection(cs))
+            {
+                string query = "EXEC sp_getUpcomingEvents";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    DateTime date = Convert.ToDateTime(reader["EventDate"]).Date;
+                    string title = reader["EventName"].ToString();
+
+                    if (!events.ContainsKey(date))
+                    {
+                        events[date] = title;
+                    }
+                }
+            }
+        }
+
+        protected void Calendar1_DayRender(object sender, DayRenderEventArgs e)
+        {
+            DateTime currentDate = e.Day.Date;
+
+            if (events.ContainsKey(currentDate))
+            {
+                e.Cell.BackColor = System.Drawing.Color.LightGreen;
+                e.Cell.Controls.Add(new Literal { Text = "<br/>" + events[currentDate] });
+            }
+        }
+
+        protected void Calendar1_VisibleMonthChanged(object sender, MonthChangedEventArgs e)
+        {
+            Calendar1.VisibleDate = e.NewDate;
+            LoadEvents();
+        }
+
+
+    }
+}
