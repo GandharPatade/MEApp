@@ -16,6 +16,17 @@ namespace MEApp.SupportStaff
         {
             if (!IsPostBack)
             {
+                if (Session["suportfullname"] != null)
+                {
+                    Label1.Text = Session["suportfullname"].ToString();
+
+                }
+                else
+                {
+
+                    Response.Redirect("../Account/LogIn.aspx");
+
+                }
                 //gvAllTickets.RowCommand += gvAllTickets_RowCommand;
 
                 LoadAllTickets();

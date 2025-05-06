@@ -80,6 +80,7 @@ namespace MEApp.Account
                 {
                     Session["supportemail"] = ccjc.Tables[0].Rows[0][9].ToString();
                     Session["assignto"] = ccjc.Tables[0].Rows[0][4].ToString();
+                    Session["suportfullname"] = ccjc.Tables[0].Rows[0][8].ToString();
                     Response.Redirect("~/SupportStaff/showticket.aspx");
                 }
                 else
